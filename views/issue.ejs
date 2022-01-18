@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%-include ('layout/header'); %>
+    <%-include ('./styles/issue/issueCss'); %>
+</head>
+
+<body onload="loaddata()">
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <%-include ('./components/issue/issueHeader') %>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <%-include ('layout/menu'); %>
+      </div>
+
+
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <%-include ('./components/issue/issueInfomation') %>
+          <div
+            style="height: 610px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;">
+            <%-include ('./components/issue/search') %>
+              <div class="page-content" style=" margin-top: 1%;">
+                <div class="tableFixHead">
+                  <%-include ('./components/issue/table'); %>
+                </div>
+              </div>
+              <div class="w3-container">
+                <div id="id01" class="w3-modal">
+                  <div style="width: 800px; height: 150px ;border: solid 3px blueviolet;" class="w3-modal-content">
+                    <div style="width: 100%; height: 100%;" class="w3-container">
+                      <span style="font-size: 25px;margin-right: 5px;"
+                        onclick="document.getElementById('id01').style.display='none'"
+                        class="w3-button w3-display-topright"
+                        style="font-size: 35px; margin-top: 10px;margin-right: 10px;">&times;</span>
+                      <div class="modal-header">
+                        <h5 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Tải file excel</h5>
+                      </div>
+                      <div class="col-auto">
+                        <p class="modal-title" style="color: #7c4abe;font-weight: bold;">Thời gian</p>
+                      </div>
+                      <div class="col-autoo"><input aria-required="true"
+                          style=" width:200px; min-height: 10px;margin: auto; " type="date" id="day1"
+                          class="form-control"></div>
+                      <div class="col-autoo"><input aria-required="true"
+                          style=" width:200px; min-height: 10px;margin: auto;  " type="date" id="day2"
+                          class="form-control"></div>
+                      <a href="" id="adownload" download style="display: none;">
+                        <button id="btdownload" class="btn-box"
+                          style="margin-left: 10px; background-color: rgb(255, 0, 0);border: solid rgb(255, 255, 255);width: 110px;text-align: left;"><i
+                            class="fa fa-download"></i> Xuất excel</button></a>
+                      </a>
+                      <button id="dowloadex1" class="btn col-auto" style="margin-top: 20px;"><i
+                          class="fa fa-download"></i> Xuất excel</button></a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </main>
+      <%-include ('./scripts/issue/issueScript'); %>
+</body>
+
+</html>

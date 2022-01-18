@@ -1,0 +1,332 @@
+<script>
+         
+    function loaddata(){
+        document.getElementById("linkissue").style.backgroundColor="#4c4c4c";
+      loadpart_log();
+      // listid();
+      // listmc();
+      // position();
+    }
+   
+    function change_time(time){
+      // return (new Date(time)).toLocaleString("en-US", { hour12: false },{timeZone: "Asia/Bangkok"});
+      return (new Date(time)).toLocaleString('sv-SE');
+      
+    }
+
+    function loadpart_log(){
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("get", '/part_log/loading_dataa', true);
+      event.preventDefault(); //prevent default action 
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var jsonObject = JSON.parse(this.responseText);
+        var trHTML = '';
+        var i;
+        for (i = 0; i < jsonObject.length; i++) {
+          var id = jsonObject[i].Id;
+          var ipart = jsonObject[i].idpart;
+          var fm_staff = jsonObject[i].fm_staff;
+          var mc_code = jsonObject[i].ty_req;
+          var wo = jsonObject[i].wo;
+          var user_issue = jsonObject[i].user_issue;
+          var time_issue = jsonObject[i].time_issue;
+          var qty1 = jsonObject[i].qty_req;
+          var qty2 = jsonObject[i].qty_issue;
+          var note = jsonObject[i].note;
+          var time_req = jsonObject[i].time_req;
+          var status= jsonObject[i].status;
+          var name= jsonObject[i].namepart;
+          var keyy= jsonObject[i].keyy;
+          if (time_req=="Invalid Date") { time_req ="";} else {time_req=change_time(time_req).replace(/[-:]/g, "");}
+          if (time_issue=="Invalid Date") { time_issue ="";} else {time_issue=change_time(time_issue).replace(/[-:]/g, "");}
+          trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + ipart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + fm_staff + '</td><td style="text-align: center;">' + wo + '</td><td style="text-align: center;">' + qty1 + '</td><td style="text-align: center;">' + time_req + '</td><td style="text-align: center;">' + status + '</td><td style="text-align: center;">' + user_issue + '</td><td style="text-align: center;">' + qty2 + '</td><td style="text-align: center;">' + time_issue + '</td><td style="text-align: center;">' + note + '</td><td style="text-align: center; display: none;">' + keyy + '</td></tr>';
+        }
+      }
+      $('#tablea tbody').html(trHTML);
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      xmlhttp.send();       
+    }
+
+    document.getElementById('dowloadex').addEventListener('click',function(){
+      document.getElementById('id01').style.display='block';
+    })
+ 
+    // document.getElementById('btn_req').addEventListener('click', function() {
+    //   console.log("hi");
+    //   var xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open("post", '/part_log/insertreq', true);
+    //   event.preventDefault(); //prevent default action 
+    //   var name= document.getElementById("listipart").value;
+    //   var idpart=document.getElementById("idpart").value;
+    //   var work_req= document.getElementById("work_order").value;
+    //   var qty_req= document.getElementById("qty_req").value;
+    //   var note= document.getElementById("note").value;
+    //   var depart_req=   document.getElementById("depart_req").value;
+    //   // document.getElementById("time").value=tableRow.childNodes[6].innerText;
+    //   if (isNaN(qty_req)) {
+    //     alert("Nhập lại số lượng");
+    //     return
+    //   }
+    //   // send data jason
+    //   xmlhttp.setRequestHeader("Content-type", "application/json");
+    //     data = {
+    //       name: name,
+    //       //stt: stt,
+    //       idpart: idpart,
+    //       work_req:work_req,
+    //       qty_req: qty_req,
+    //       note: note,
+    //       depart_req: depart_req
+
+    //   };
+
+    //   xmlhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //       var data = this.responseText;
+    //       if (data == "ok") {
+    //         loaddata()
+    //         alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+    //         txt();
+    //       } else {
+    //         alert("Có lỗi rồi!!!");
+    //       }
+    //       }
+    //     };
+    //     console.log(data);
+    //     xmlhttp.send(JSON.stringify(data));
+    //   })
+  
+    function detail_ticket() {
+          var table = document.getElementById("tablea");
+          event.stopImmediatePropagation;
+          if (table) {
+              for (var i = 2; i < table.rows.length; i++) {
+                  table.rows[i].ondblclick = function(e) {
+                      tableText(this);
+                      console.log("hi");
+                  }
+              }
+          }
+    }
+
+    function tableText(tableRow) {
+      // document.getElementById("id").value=tableRow.childNodes[0].innerText;
+      document.getElementById("keyy").value=tableRow.childNodes[12].innerText;
+      document.getElementById("idpart").value=tableRow.childNodes[1].innerText;
+      document.getElementById("listipart").value=tableRow.childNodes[2].innerText;
+      document.getElementById("work_order").value=tableRow.childNodes[4].innerText;
+      document.getElementById("qty_req").value=tableRow.childNodes[5].innerText;
+      document.getElementById("note").value=tableRow.childNodes[11].innerText;
+      document.getElementById("time").value;
+      var time =tableRow.childNodes[6].innerText;
+      
+      document.getElementById("time").value=time.substr(0, 4)+"-"+time.substr(4, 2)+"-"+time.substr(6, 2)+" "+time.substr(9, 2)+":"+time.substr(11, 2)+":"+time.substr(13, 2);
+      document.getElementById("qty_issue").value=tableRow.childNodes[9].innerText;
+      document.getElementById("depart_req").value=tableRow.childNodes[0].innerText;
+      var a= tableRow.childNodes[0].innerText;
+      detectqtyy();
+    }
+  
+    document.getElementById('btn_issue').addEventListener('click', function() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/part_log/insertissue', true);
+      event.preventDefault(); //prevent default action 
+
+      var keyy = document.getElementById("keyy").value;
+      var qty_issue= document.getElementById("qty_issue").value;
+      var qty_req= document.getElementById("qty_req").value;
+      var note= document.getElementById("note").value;
+      var idpart= document.getElementById("idpart").value;
+     // var listmc=document.getElementById("listmc").value;
+      var time=document.getElementById("time").value;
+     // var id=document.getElementById("id").value;
+      var qty_inhere=document.getElementById("qty_inhere").innerHTML;
+      var idreq= document.getElementById("depart_req").value;
+      // console.log(qty_inhere);
+      // console.log(qty_issue);
+      // console.log(qty_issue+">"+ qty_inhere);
+      // console.log("------------------------------")
+      if (Number(qty_issue) > Number(qty_req))
+      {
+        alert("Số lượng cấp phát lớn hơn số lượng yêu cầu!!!");
+        return
+      }
+      if (Number(qty_issue) > Number(qty_inhere))
+      {
+        alert("Số lượng trong kho không đủ cho yêu cầu này!!!");
+            return
+      }
+      if (isNaN(qty_issue)) {
+            alert("Nhập lại số lượng!!!");
+            return
+       }
+        
+      // send data jason
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          qty_issue:qty_issue,
+          idpart:idpart,
+        //  listmc:listmc,
+          time: time,
+          note:note,
+          // id:id
+          idreq:idreq,
+          keyy: keyy
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          if (data == "ok") {
+              loaddata()
+              alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+              txt();
+          } else {
+              alert("Có lỗi rồi!!!");
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));
+    })  
+  
+    function searchstatus(){
+      var input,input2, filter, table, tr, th, i, y, txtValue, txtValuee;
+      input = document.getElementById("status").value;
+      input2 = document.getElementById("date").value;
+      console.log(input2);
+      // document.getElementById("demo").innerHTML = document.getElementById("position").innerHTML;
+      table = document.getElementById("tablea");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[7];
+        td2 = tr[i].getElementsByTagName("td")[6];
+        // console.log(td);
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          txtValuee = td2.textContent || td2.innerText;
+          txtValuee  = txtValuee.substr(0, 10);
+          console.log(txtValue);
+          if (input == txtValue && input2 == txtValuee ) {
+            tr[i].style.display = "";
+          } else if( input == txtValue && input2 == ""){
+            tr[i].style.display = "";
+          } else if (input == "Trạng thái" && input2 == txtValuee){
+            tr[i].style.display = "";
+          }  else if (input == "Trạng thái" && input2 == ""){
+            tr[i].style.display = "";
+          } else  {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+    document.getElementById('dowloadex1').addEventListener('click', function() {
+        var date1=document.getElementById('day1').value;
+        var date2=document.getElementById('day2').value;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/part_log/download_excel_File', true);
+        event.preventDefault(); 
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+          date1: date1,
+          //stt: stt,
+          date2: date2
+
+
+        };
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          console.log(data);
+          document.getElementById("adownload").href=data;
+          document.getElementById("btdownload").click();     
+        }
+        }
+        xmlhttp.send(JSON.stringify(data));    
+      })
+
+    function  detectqty(){
+      // console.log("hi")
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/part_log/loadinf', true);
+      //event.preventDefault(); //prevent default action 
+
+      var listipart= document.getElementById("listipart").value;
+      console.log(listipart);
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          listipart:listipart
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);
+          if (data.length>0){
+          // console.log(data[0].QTY);
+          var data1=data[0].Qty;
+          var data2=data[0].Id;
+            document.getElementById("qty_inhere").innerHTML =data1 ;
+            document.getElementById("idpart").value =data2 ;
+          }
+          else{
+            document.getElementById("qty_inhere").innerHTML ="--";
+            document.getElementById("idpart").value ="" ;
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));
+    }
+
+    function detectqtyy(){
+      // console.log("hi")
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/part_log/loadqtyy', true);
+      //event.preventDefault(); //prevent default action 
+      // send data jason
+      var a= document.getElementById("idpart").value;
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          listipart:a
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);
+          if (data.length>0){
+          // console.log(data[0].QTY);
+          var data1=data[0].Qty;
+          var data2=data[0].Name;
+           document.getElementById("qty_inhere").innerHTML =data1 ;
+           document.getElementById("listipart").value=data2;
+          }
+          else{
+            document.getElementById("qty_inhere").innerHTML ="--";
+            document.getElementById("listipart").value="";
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));
+    }
+ 
+    function txt(){
+      document.getElementById("listipart").value="";
+      document.getElementById("idpart").value="";
+      document.getElementById("work_order").value="";
+      document.getElementById("qty_req").value="";
+      document.getElementById("note").value="";
+      document.getElementById("qty_inhere").innerHTML="--";
+      document.getElementById("qty_issue").value="";
+      document.getElementById("depart_req").value="";
+    }
+
+    function myFunction(){
+      
+    }
+    
+    document.getElementById('btrefresh').addEventListener('click', function() {
+          loaddata();
+          document.getElementById("status").value="Trạng thái";
+        txt();
+      })
+</script> 

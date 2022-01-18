@@ -1,0 +1,736 @@
+<script>
+      
+    function FolderChoose()
+    {
+    window.open ("file://c:/");
+    }
+
+    function change_time(time){
+      return (new Date(time)).toLocaleString("en-US", {timeZone: "Asia/Bangkok"});
+    //  return (new Date(time)).toLocaleString('sv-SE');
+    }
+      
+    function loaddata(){
+    document.getElementById("linkmachine").style.backgroundColor="#4c4c4c";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("get", '/machine/loading_data', true);
+    event.preventDefault(); //prevent default action 
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var jsonObject = JSON.parse(this.responseText);
+        var trHTML = '';
+        var i;
+        for (i = 0; i < jsonObject.length; i++) {
+          var codenew = jsonObject[i].mc_code;
+          var machine = jsonObject[i].machine;
+          var codeold = jsonObject[i].code_old;
+          var plant = jsonObject[i].plant;
+          var pos = jsonObject[i].sub_pos;
+          var model = jsonObject[i].Model;
+          var seri = jsonObject[i].SerialN;
+          var start = jsonObject[i].start;
+          var finish = jsonObject[i].finish;
+          var status = jsonObject[i].status;
+          var timeupdate = jsonObject[i].timeupdate;
+          var image = jsonObject[i].image;
+          var sys = jsonObject[i].system;
+          var timeupdatee= change_time(timeupdate)
+          var user = jsonObject[i].user;
+          var des = jsonObject[i].des;
+          trHTML += '<tr ><td style="text-align: center;">' + codenew + '</td><td style="text-align: center;">' + codeold + '</td><td style="text-align: center;">' + machine + '</td><td style="text-align: center; "><img src="'+image+'" width="100" height="75" style="border-radius: 5px/5px;"></td><td style="text-align: center;">' + pos + '</td><td style="text-align: center;">' + status + '</td><td style="text-align: center;">' + model + '</td><td style="text-align: center;">' + des + '</td><td style="text-align: center;">' + start + '</td></tr>';
+         }
+      }
+      // console.log(trHTML);
+      $('#tablea tbody').html(trHTML);
+    }
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.send();       
+  }
+  
+    document.getElementById('informac').addEventListener('click', function() {
+        document.getElementById('informacc').style.display = 'block';  
+        document.getElementById('informaint').style.display = 'none';    
+        document.getElementById('inforope').style.display = 'none'; 
+        document.getElementById('btcopy').style.display = 'block';   
+    })
+    
+    document.getElementById('maitmac').addEventListener('click', function() {
+        document.getElementById('informacc').style.display = 'none'; 
+        document.getElementById('informaint').style.display = 'block'; 
+        document.getElementById('inforope').style.display = 'none'; 
+        document.getElementById('btcopy').style.display = 'none'; 
+        var xmlhttp = new XMLHttpRequest();
+       xmlhttp.open("post", '/mc_in_u/loadmaint', true);
+      //event.preventDefault(); //prevent default action 
+
+      var name = document.getElementById('codeold').value;
+ 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          name: name
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);            
+          var trHTML = '';
+          var i;
+          if (data.length>0){
+            for (i = 0; i < data.length; i++) {
+              var stt=i+1;
+              var cy = data[i].Cycle;
+              var date = data[i].Date;
+              var staff = data[i].Staff;
+              var sta = data[i].Status;
+
+              trHTML += '<tr ><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + cy + '</td><td style="text-align: center;">' + date + '</td><td style="text-align: center;">' + staff + '</td><td style="text-align: center;">' + sta + '</td></tr>';
+          }
+        }
+        // console.log(trHTML);
+        $('#tablemaint tbody').html(trHTML);
+            // var type1= data[0].cylcle1;
+            // var list1= data[0].listtime1;
+            // var type2= data[0].cylcle2;
+            // var list2= data[0].listtime2;
+            // var type3= data[0].cylcle3;
+            // var list3= data[0].listtime3;
+            // var count1=(list1.match(/&/g) || []).length +1
+            // var count2=(list2.match(/&/g) || []).length +1
+            // var count3=(list3.match(/&/g) || []).length +1
+            // var count=Math.max.apply(null,[count1,count2,count3])
+            // console.log(count)
+            // var a=0;b=0;c=0;stt=0;
+
+            // while (true){
+            //     var stt= stt+1;
+            //     var l1=list1.substr(a,10)
+            //     var l2=list2.substr(b,10)
+            //     var l3=list3.substr(c,10)
+            //     if (l1=='' && l2=='' && l3=='') {break;}
+            //     if (l1==''){l1="2222-31-31"}
+            //     if (l2==''){l2="2222-31-31"}
+            //     if (l3==''){l3="2222-31-31"}
+            //     var m=min(l1,l2,l3)
+            //     if (m==l1){
+            //     trHTML += '<tr><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + type1 + '</td><td style="text-align: center;">' + l1 + '</td></tr>';
+            //     a=a+11;}
+            //     else if(m==l2){
+            //     trHTML += '<tr><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + type2 + '</td><td style="text-align: center;">' + l2 + '</td></tr>';
+            //     b=b+11;}
+            //     else if(m==l3){
+            //     trHTML += '<tr><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + type3 + '</td><td style="text-align: center;">' + l3 + '</td></tr>';
+            //     c=c+11;}
+            //     $('#tablemaint tbody').html(trHTML);
+            // }
+          // }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));                      
+    })
+
+    function min(a,b,c){
+      var min=a;
+      if (min>b) min=b;
+      if (min>c) min=c;
+      return min
+    }
+
+    document.getElementById('operamac').addEventListener('click', function() {
+        document.getElementById('informacc').style.display = 'none'; 
+        document.getElementById('informaint').style.display = 'none'; 
+        document.getElementById('inforope').style.display = 'block';     
+        document.getElementById('btcopy').style.display = 'none'; 
+        
+        var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/mc_in_u/loadopera', true);
+      //event.preventDefault(); //prevent default action 
+
+      var name = document.getElementById('codeold').value;
+ 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          name: name
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);            
+          var trHTML = '';
+          var i;
+          if (data.length>0){
+            for (i = 0; i < data.length; i++) {
+            var stt= i+1;
+            var req= data[i].req;
+            var staff= data[i].FM_staff;
+            var solution= data[i].solution;
+            var note= data[i].note;
+            var time= change_time(data[i].time_confirm);
+            trHTML += '<tr ><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + req + '</td><td style="text-align: center;">' + time + '</td><td style="text-align: center;">' + staff + '</td><td style="text-align: center;">' + solution + '</td><td style="text-align: center;">' + note + '</td></tr>';
+            }
+
+            $('#tableope tbody').html(trHTML);
+            
+           
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));     
+
+    })
+    
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]); 
+    };
+
+    function detail_ticket() {
+        var table = document.getElementById("tablea");
+        document.getElementById('file').value="";
+        event.stopImmediatePropagation;
+        if (table) {
+            table.rows[0].ondblclick = function(e) {
+                tableaddText(this);
+            };
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].ondblclick = function(e) {
+                    tableText(this);
+                }
+            }
+        }
+    }
+
+    function tableText(tableRow) {
+      document.getElementById('informacc').style.display = 'block'; 
+      document.getElementById('informaint').style.display = 'none'; 
+      document.getElementById('inforope').style.display = 'none';    
+      document.getElementById("namebox").innerHTML = "Thông tin máy";
+      document.getElementById('id01').style.display = 'block';
+      document.getElementById('boxnormal').style.display = 'block';
+      document.getElementById('boxadd').style.display = 'none';
+      document.getElementById('codeneww').style.display = 'none';
+      document.getElementById('namemach').style.display = 'block';
+      document.getElementById('bar').style.display = 'block';  
+      // document.getElementById('macsche').style.display = 'none';       
+      document.getElementById('btcopy').style.display = 'block';
+      document.getElementById('boxnormall').style.display = 'block';
+
+      var x= tableRow.childNodes[3].innerHTML;
+      console.log(x);
+      var imgsrc = x.slice(10, x.length -58);
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/mc_in_u/loadif', true);
+      //event.preventDefault(); //prevent default action 
+
+      var name = tableRow.childNodes[0].innerText
+ 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          name: name
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);
+          if (data.length>0){
+          console.log(data[0].finish);
+          var finish=data[0].finish;
+          var timeupdate= data[0].timeupdate;
+          var user= data[0].user;
+          var des= data[0].des;
+          var seri = data[0].serialN;
+          var plant = data[0].plant;
+          console.log(plant);
+            document.getElementById("finish").value =finish ;
+            timeupdate= change_time(timeupdate)
+         
+            document.getElementById("timeupdate").innerHTML = timeupdate;
+            document.getElementById("userupdate").innerHTML =user ;
+            document.getElementById("des").value=des ;
+            document.getElementById("seri").value=seri ;
+            document.getElementById("plant").value =plant;
+           
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));     
+
+      document.getElementById("namemac").value = tableRow.childNodes[2].innerText;
+      document.getElementById("codenew").value = tableRow.childNodes[0].innerText;
+      document.getElementById("codeold").value =tableRow.childNodes[1].innerText;
+      // document.getElementById("plant").value = tableRow.childNodes[4].innerText;
+      document.getElementById("pos").value = tableRow.childNodes[4].innerText;
+      document.getElementById("start").value = tableRow.childNodes[8].innerText;
+      document.getElementById("status").value = tableRow.childNodes[5].innerText;
+      document.getElementById("model").value = tableRow.childNodes[6].innerText;
+      document.getElementById("system").value = tableRow.childNodes[7].innerText;
+      document.getElementById("output").setAttribute("src", imgsrc);
+
+    }
+
+    document.getElementById('btsave').addEventListener('click', function() {
+
+      console.log("hisave");
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/machine/update', true);
+      event.preventDefault(); //prevent default action 
+    
+      var name=document.getElementById("namemac").value;
+      var codenew= document.getElementById("codenew").value;
+      var codeold=document.getElementById("codeold").value;
+      var plant=document.getElementById("plant").value;
+      var pos=document.getElementById("pos").value;
+      var start=document.getElementById("start").value;
+      var finish=document.getElementById("finish").value;
+      var model=document.getElementById("model").value;
+      var seri= document.getElementById("seri").value;
+      var status= document.getElementById("status").value;
+      var system= document.getElementById("system").value;
+      var des= document.getElementById("des").value;
+
+      var form = document.getElementById('upload_form');
+      if (document.getElementById('file').value != "") {
+        console.log("hi");
+        console.log(document.getElementById('file').value);
+        event.preventDefault();
+        var xsend = new XMLHttpRequest();
+        var fileInput = document.getElementById('file');
+        var file;
+                          
+        file = fileInput.files[0];
+        var newFileName = codeold+".jpg";
+        var formData = new FormData();
+        formData.append('file', file, newFileName);
+        if (file != null) {
+        xsend.open('POST', '/machine/imgupload', true);
+        xsend.send(formData);
+               
+        }
+      }
+      console.log(finish);
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+        system:system,
+        name : name,
+        codenew : codenew,
+        codeold : codeold,
+        plant : plant,
+        pos : pos,
+        start : start,
+        finish : finish,
+        model :model,
+        seri :seri,
+        image: newFileName,
+        status: status,
+        des: des
+      };
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = this.responseText;
+        if (data == "ok") {
+          loaddata()
+          alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+            } else {
+                alert("Có lỗi rồi!!!");
+            }
+                document.getElementById('id01').style.display = 'none';
+            }
+        }
+        // console.log(data);
+        xmlhttp.send(JSON.stringify(data));
+    })
+
+    document.getElementById('btadd').addEventListener('click', function() {
+        document.getElementById("namebox").innerHTML ="Thông tin máy";
+        document.getElementById('id01').style.display = 'block';
+        document.getElementById('boxnormal').style.display = 'none';
+        document.getElementById('boxnormall').style.display = 'none';
+        document.getElementById('boxadd').style.display = 'block';
+        document.getElementById('informaint').style.display = 'none'; 
+        document.getElementById('inforope').style.display = 'none'; 
+        document.getElementById('bar').style.display = 'none';  
+        document.getElementById('codeneww').style.display = 'block';
+        // document.getElementById('macsche').style.display = 'block';
+        
+
+        document.getElementById("timeupdate").innerHTML = "*(Nhập đầy đủ tên thiết bị, tên cũ, vị trí, số seri)";
+        document.getElementById("userupdate").innerHTML ="";
+        document.getElementById("namemac").value = "";
+        document.getElementById("codenew").value = "";
+        document.getElementById("codeold").value ="";
+        document.getElementById("plant").value = "";
+        document.getElementById("pos").value = "";
+        document.getElementById("start").value = "";
+        document.getElementById("finish").value = "";
+        document.getElementById("model").value = "";
+        document.getElementById("seri").value = "";
+        document.getElementById("status").value = "";
+        document.getElementById("des").value = "";
+        document.getElementById("system").value = "";
+        document.getElementById("output").setAttribute("src", "./public/img_spare/noimg.png");
+    })
+
+    document.getElementById('btsavee').addEventListener('click', function() {
+        var name=document.getElementById("namemac").value;
+        var codenew= document.getElementById("codenew").value;
+        var codeold=document.getElementById("codeold").value;
+        var plant=document.getElementById("plant").value;
+        var pos=document.getElementById("pos").value;
+        var start=document.getElementById("start").value;
+        var finish=document.getElementById("finish").value;
+        var model=document.getElementById("model").value;
+        var seri= document.getElementById("seri").value;
+        var status= document.getElementById("status").value;
+        var des= document.getElementById("des").value;
+      if( codeold =="" || codenew==""|| pos=="" || seri==""){  alert("Vui lòng nhập đầy đủ thông tin!!!"); return}
+      else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/machine/insert', true);
+        event.preventDefault(); //prevent default action 
+               
+        var name=document.getElementById("namemac").value;
+        var codenew= document.getElementById("codenew").value;
+        var codeold=document.getElementById("codeold").value;
+        var plant=document.getElementById("plant").value;
+        var pos=document.getElementById("pos").value;
+        var start=document.getElementById("start").value;
+        var finish=document.getElementById("finish").value;
+        var model=document.getElementById("model").value;
+        var seri= document.getElementById("seri").value;
+        var status= document.getElementById("status").value;
+        var des= document.getElementById("des").value;
+
+        var staff= document.getElementById("staff").value;
+        var cy1=document.getElementById("cy1").value;
+        var cy2=document.getElementById("cy2").value;
+        var cy3=document.getElementById("cy3").value;
+        var notee=document.getElementById("notee").value;
+        var priority=document.getElementById("priority").value;
+        var date1=document.getElementById("date1").value;
+        var date2=document.getElementById("date2").value;
+        var date3=document.getElementById("date3").value;
+        var system= document.getElementById("system").value;
+
+        // console.log(name);
+        // save image 
+        var form = document.getElementById('upload_form');
+        if (document.getElementById('file').value != "") {
+            console.log("hi");
+            console.log(document.getElementById('file').value);
+            event.preventDefault();
+            var xsend = new XMLHttpRequest();
+            var fileInput = document.getElementById('file');
+            var file;
+                          
+            file = fileInput.files[0];
+            var newFileName = codeold+".jpg";
+            var formData = new FormData();
+            formData.append('file', file, newFileName);
+            if (file != null) {
+            xsend.open('POST', '/machine/imgupload', true);
+            xsend.send(formData);
+               
+           }
+        }
+     
+        // send data jason
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+          system:system,
+            name : name,
+            codenew : codenew,
+            codeold : codeold,
+            plant : plant,
+            pos : pos,
+            start : start,
+            finish : finish,
+            model :model,
+            seri :seri,
+            image: newFileName, 
+            status: status,
+            des:des, 
+            staff: staff,
+            cy1:cy1,
+            cy2:cy2,
+            cy3:cy3,
+            date1:date1,
+            date2:date2,
+            date3:date3,
+            priority:priority,
+            notee: notee
+        };
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            if (data == "code_old") {
+              alert("TÊN MÁY CŨ ĐÃ TỒN TẠI, VUI LÒNG ĐỔI TÊN LẠI!!!");
+              return
+            }
+            if (data == "okk") {
+                loaddata()
+                alert("ĐÃ CẬP NHẬT THÀNH CÔNG MÁY MỚI");
+            } else if (data == "ok") {
+                loaddata()
+                alert("ĐÃ CẬP NHẬT THÀNH CÔNG MÁY VÀ LỊCH BẢO DƯỠNG MỚI");
+            } else {
+                alert("Có lỗi rồi!!!");
+            }
+                document.getElementById('id01').style.display = 'none';
+            }
+        }
+        // console.log(data);
+        xmlhttp.send(JSON.stringify(data));
+      }
+    })
+
+    document.getElementById('btdelete').addEventListener('click', function() {
+        var r = confirm("Bạn có chắc muốn xóa không???");
+        if (r == true) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/machine/delete', true);
+            event.preventDefault(); //prevent default action 
+        
+            var name=document.getElementById("namemac").value;
+            var codeold=document.getElementById("codeold").value;
+    
+            // send data jason
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                codeold: codeold,
+                name : name      
+            };
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                if (data == "ok") {
+                    loaddata()
+                    alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+                } else {
+                    alert("Có lỗi rồi!!!");
+                }
+                    document.getElementById('id01').style.display = 'none';
+                }
+            }
+            // console.log(data);
+            xmlhttp.send(JSON.stringify(data));
+        }
+        else {
+            return
+        }
+    })
+
+    function searchplant(){
+        var input,input2, filter, table, tr, th, i, y, txtValue, txtValuee;
+        input = document.getElementById("plantt").value;
+        table = document.getElementById("tablea");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (input == txtValue) {
+                tr[i].style.display = "";
+            } else if ( input=="Tất cả"){
+                tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+        }
+    }
+
+    // document.getElementById('btsearch').addEventListener('click', function() {
+    //     console.log("hi");
+    //     var name, name1, plant, plant1,status, status1, tr, th, i, y, txtValue, txtValuee;
+    //     name = document.getElementById("searchname").value.toUpperCase();
+    //     plant = document.getElementById("plantt").value.toUpperCase();
+    //     status = document.getElementById("searchstatus").value.toUpperCase();
+    //     tr = document.getElementById("tablea").getElementsByTagName("tr");
+    //     if (status == "") status=" ";
+    //     if (name == "") name=" ";
+    //     for (i = 0; i < tr.length; i++) {
+    //         name1 = tr[i].getElementsByTagName("td")[1];
+    //         plant1 = tr[i].getElementsByTagName("td")[4];
+    //         status1 = tr[i].getElementsByTagName("td")[6];
+    //         if (name1 || plant1) {
+    //             name1 = name1.textContent || name1.innerText;
+    //             plant1 = plant1.textContent || plant1.innerText;
+    //             status1 = status1.textContent || status1.innerText;
+    //             if ((name1.toUpperCase().indexOf(name) > -1) || (plant1.toUpperCase().indexOf(plant) > -1) || (status1.toUpperCase().indexOf(status) > -1)) {
+    //                 tr[i].style.display = "";
+    //             } else {
+    //                 tr[i].style.display = "none";
+    //             }
+    //         }
+    //     }
+    // })
+    
+    document.getElementById('btrefresh').addEventListener('click', function() {
+        loaddata();
+        document.getElementById("searchname").value="";
+      document.getElementById("searchtypeq").value="";
+      document.getElementById("searchpos").value=""; 
+    })
+
+    document.getElementById('btcopy').addEventListener('click', function() {
+        document.getElementById("namebox").innerHTML ="Thông tin máy";
+        document.getElementById("timeupdate").innerHTML = "*(Nhập đầy đủ tên thiết bị, tên cũ, vị trí, số seri)";
+        document.getElementById("userupdate").innerHTML ="";
+        document.getElementById('id01').style.display = 'block';
+        document.getElementById('boxnormal').style.display = 'none';
+        document.getElementById('boxnormall').style.display = 'none';
+        document.getElementById('boxadd').style.display = 'block';
+        document.getElementById('bar').style.display = 'none'; 
+        document.getElementById('codeneww').style.display = 'block';
+        // document.getElementById('macsche').style.display = 'block';
+        document.getElementById("output").setAttribute("src", "./public/img_spare/noimg.png");
+        // FolderChoose();
+    })
+    
+    document.getElementById('macdie').addEventListener('click', function() {
+        document.getElementById('id02').style.display = 'block';   
+        loaddataa();   
+    })
+    
+    function loaddataa(){
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("get", '/machine/loading_datadie', true);
+      event.preventDefault(); //prevent default action 
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var jsonObject = JSON.parse(this.responseText);
+          var trHTML = '';
+          var i;
+          for (i = 0; i < jsonObject.length; i++) {
+            var codenew = jsonObject[i].mc_code;
+            var machine = jsonObject[i].machine;
+            var codeold = jsonObject[i].code_old;
+            var plant = jsonObject[i].plant;
+            var pos = jsonObject[i].sub_pos;
+            var model = jsonObject[i].Model;
+            var seri = jsonObject[i].SerialN;
+            var start = jsonObject[i].start;
+            var finish = jsonObject[i].finish;
+            var status = jsonObject[i].status;
+            var timeupdate = jsonObject[i].timeupdate;
+            var image = jsonObject[i].image;
+            var timeupdatee= change_time(timeupdate)
+            var user = jsonObject[i].user;
+            trHTML += '<tr ><td style="text-align: center;">' + codenew + '</td><td style="text-align: center;">' + codeold + '</td><td style="text-align: center;">' + machine + '</td><td style="text-align: center; "><img src="'+image+'" width="100" height="75" style="border-radius: 5px/5px;"></td><td style="text-align: center;">' + plant + '</td><td style="text-align: center;">' + pos + '</td><td style="text-align: center;">' + status + '</td><td style="text-align: center;">' + model + '</td><td style="text-align: center;">' + seri + '</td><td style="text-align: center;">' + start + '</td><td style="text-align: center;">' + finish + '</td><td style="text-align: center;">' + timeupdatee + '</td><td style="text-align: center;">' + user + '</td></tr>';
+          }
+        }
+        console.log(trHTML);
+        $('#tableb tbody').html(trHTML);
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      xmlhttp.send();       
+   }
+    
+    document.getElementById('uploadex').addEventListener('click', function() {
+        document.getElementById('id03').style.display = 'block';   
+    })
+    
+    var formm=document.getElementById('upload_formm');
+
+    formm.addEventListener('submit', e=>{e.preventDefault(); return false;})
+
+    document.getElementById('submit').addEventListener('click', function() {
+      document.getElementById("loadd").style.display='block';
+      var form = document.getElementById('upload_formm');
+      if (document.getElementById('filee').value != '') {
+      event.preventDefault();
+      var xsend = new XMLHttpRequest();
+      var fileInput = document.getElementById('filee');
+      var file;
+      file = fileInput.files[0];
+      console.log(file['name']);
+      var formData = new FormData();
+      formData.append('filee', file);
+      if (file != null) {
+      xsend.open('POST', '/mac/Upload_excel_File', true);
+      xsend.send(formData);
+
+      xsend.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          if (data == "finishupmac") {
+            alert("Tải file lên thành công!!!");   
+            document.getElementById("filee").value="";
+            document.getElementById("id03").style.display="none";
+            loaddata();
+          }
+        }
+      }
+      }
+      } else {
+        alert("Không có tệp nào được chọn!!!")
+        
+        }   
+    })
+
+    document.getElementById('dowloadex').addEventListener('click', function() {
+      //alert("Yêu cầu đang được xử lý");  
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/mac/download_excel_File', true);
+      event.preventDefault(); 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = this.responseText;
+        console.log(data);
+        document.getElementById("adownload").href=data;
+        document.getElementById("btdownload").click();     
+      }
+      }
+      xmlhttp.send();    
+    })
+
+    document.getElementById('btsearch').addEventListener('click', function() {
+      var name= document.getElementById("searchname").value;
+      var type= document.getElementById("searchtypeq").value;
+      var pos= document.getElementById("searchpos").value;
+      name='%'+name+'%';
+      if (name =="") {name='%';}
+      if (type =="") {type='%';}
+      if (pos =="") {pos='%';}
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/machine/search', true);
+      //event.preventDefault(); //prevent default action 
+ 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+          name: name,
+          type:type,
+          pos:pos
+      };
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        var jsonObject = JSON.parse(this.responseText);
+        var trHTML = '';
+        var i;
+        for (i = 0; i < jsonObject.length; i++) {
+          var codenew = jsonObject[i].mc_code;
+          var machine = jsonObject[i].machine;
+          var codeold = jsonObject[i].code_old;
+          var plant = jsonObject[i].plant;
+          var pos = jsonObject[i].sub_pos;
+          var model = jsonObject[i].Model;
+          var seri = jsonObject[i].SerialN;
+          var start = jsonObject[i].start;
+          var finish = jsonObject[i].finish;
+          var status = jsonObject[i].status;
+          var timeupdate = jsonObject[i].timeupdate;
+          var image = jsonObject[i].image;
+          var sys = jsonObject[i].system;
+          var timeupdatee= change_time(timeupdate)
+          var user = jsonObject[i].user;
+          var des = jsonObject[i].des;
+          trHTML += '<tr ><td style="text-align: center;">' + codenew + '</td><td style="text-align: center;">' + codeold + '</td><td style="text-align: center;">' + machine + '</td><td style="text-align: center; "><img src="'+image+'" width="100" height="75" style="border-radius: 5px/5px;"></td><td style="text-align: center;">' + pos + '</td><td style="text-align: center;">' + status + '</td><td style="text-align: center;">' + model + '</td><td style="text-align: center;">' + des + '</td><td style="text-align: center;">' + start + '</td></tr>';
+         }
+      }
+      // console.log(trHTML);
+      $('#tablea tbody').html(trHTML);
+      }
+      xmlhttp.send(JSON.stringify(data));    
+     
+    })
+
+</script> 

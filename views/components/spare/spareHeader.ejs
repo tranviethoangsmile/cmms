@@ -1,0 +1,24 @@
+<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" >
+    <div class="mdl-layout__header-row">
+      <div style="background-color: #263238;width: 239px;height: 65px;margin-left: -40px;"><h2 style="color: #b9e407;font-weight: bold; margin-left: 60px; font-family: cursive;">CMMS</h2></div>
+      <div style="background-color: #ffffff;width: 3px;height: 65px;background-color: #b9e407;"></div>
+      
+      <!-- <span style="border-left: thick solid #ff0000;"> </span> -->
+      <span class="mdl-layout-title" style="margin-left: 30px;">QUẢN LÝ VẬT TƯ</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+      </div>
+      <span><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation" style="height: 10px; font-size: 30px;">account_circle</i></span>
+      <span><id="user" style="font-size: 20px;"><%=user %></span>
+
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+      <i class="material-icons">more_vert</i>
+      </button>
+
+      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn" style="align-items: center;">
+        <li class="mdl-menu__item"  id="position" ><%=note %></li>
+        <a href="/logout" style="margin-left: 5px;" >
+          <button  class="btn-box" style="color: black; background-color: rgb(255, 255, 255);border: solid rgb(255, 255, 255);width: 230px;text-align: left;" >Đăng xuất</button></a>
+        </ul>
+    </div>
+  </header>

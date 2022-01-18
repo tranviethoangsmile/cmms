@@ -1,0 +1,1460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- day picker -->
+    <!-- Include jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>CMMS</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css"> -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen)>.mdl-layout__header {
+          margin-left: 240px;
+          width: calc(100% - 240px);
+          margin-left: 0px !important;
+          /* margin-left: 100px !important; */
+          width: 100%;
+        }
+       .autocomplete {
+          position: fixed;
+          display: inline-block;
+        }
+        input {
+          border: 1px solid transparent;
+          background-color: #ffffff;
+          padding: 10px;
+          font-size: 16px;
+        }
+        input[type=text] {
+          background-color: #ffffff;
+          width: 100%;
+        }
+        input[type=submit] {
+          background-color: DodgerBlue;
+          color: #fff;
+        }
+        .autocomplete-items {
+          position: absolute !important;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          top: 100%;
+          left: 0;
+          right: 0;
+          max-height: 185px;
+          overflow-y: auto;
+        }
+        .autocomplete-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff;
+          border-bottom: 1px solid #d4d4d4;
+          text-align: center;
+          max-height: 200px;
+        }
+        .autocomplete-items div:hover {
+          background-color: #e9e9e9;
+        }
+        .autocomplete-active {
+
+          background-color: DodgerBlue !important;
+          color: #ffffff;
+          max-height: 200px;
+        }
+        .autocompletee {
+          position: fixed;
+          display: inline-block;
+        }
+    
+        .autocompletee-items {
+          position: absolute !important;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          top: 100%;
+          left: 0;
+          right: 0;
+          max-height: 100px;
+          overflow-y: auto;
+        }
+        .autocompletee-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff;
+          border-bottom: 1px solid #d4d4d4;
+          text-align: center;
+          max-height: 200px;
+        }
+        .autocompletee-items div:hover {
+          background-color: #e9e9e9;
+        }
+        .autocompletee-active {
+
+          background-color: DodgerBlue !important;
+          color: #ffffff;
+          max-height: 200px;
+        }
+        .dropbtn {
+          background-color: #3498DB;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+        }
+        .dropbtn:hover, .dropbtn:focus {
+          background-color: white;
+          color: #3498DB;
+          border-top: solid 1px #3498DB;
+          border-left: solid 1px #3498DB;
+          border-right: solid 1px #3498DB;
+        }
+        .btn {
+              background-color: DodgerBlue;
+              border: none;
+              color: white;
+              padding: 8px 16px;
+              margin-top:18px;
+              cursor: pointer;
+              border-radius: 3px/3px;
+          }
+          .btn:hover {
+              background-color: RoyalBlue;
+          }
+          .form1{
+              height: 200px;
+          }
+          
+          .col-10 {
+          float: left;
+          width: 10%;
+          margin-top: 32px;
+          }
+
+          .col-90 {
+          float: left;
+          width: 90%;
+          margin-top: 26px;
+          }
+          .col-901 {
+          float: left;
+          width: 100%;
+          margin-top: 26px;
+          }
+          .col-auto{
+              float: left;
+              min-width: 50px;
+              margin-left: 30px;
+              margin-top: 26px;
+          }
+          .col-aut1{
+              min-width:800px;
+              margin-left: 30px;
+              margin-top: 26px;
+              clear: left;
+          }
+          .col-autoo{
+              float: left;
+              margin-left: 10px;
+              min-width: 50px;
+              margin-top: 20px;
+              margin-left: 30px;
+          }
+          .col-autoo1{
+              float: left;
+              margin-left: 10px;
+              min-width: 10px;
+              margin-top: 20px;
+              margin-left: 30px;
+          }
+          .container{
+              height: 200px;
+              width: 300px;
+              position: relative;
+              margin-top: 15px;
+              }
+              .container .wrapper{
+              position: relative;
+              height: 200px;
+              width: 300;
+              border-radius: 5px;
+              background: #fff;
+              border: 2px dashed #c2cdda;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              }
+              .wrapper.active{
+              border: none;
+              }
+              .wrapper .image{
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              }
+              .wrapper img{
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+              }
+              .container #custom-btn{
+              text-align: center;
+              margin-top: -15px;
+              display: block;
+              width: 100%;
+              height: 20px;
+              border: none;
+              outline: none;
+              border-radius: 5px;
+              color: #fff;
+              font-size: 18px;
+              font-weight: 500;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              cursor: pointer;
+              background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+              }
+        #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+        }
+        .left {
+          float: left;
+          width: 15%;
+          /* margin-top: 5px; */
+          
+          border: solid 1px rgb(255, 255, 255);
+        }
+        .right {
+          float: left;
+          width: 85%;
+          /* margin-top: 5px; */
+          border: solid 1px rgb(248, 248, 248);
+        }
+        html, body {
+          font-family: 'Roboto', 'Helvetica', sans-serif;
+        }
+        .demo-avatar {
+          width: 48px;
+          height: 48px;
+          border-radius: 24px;
+        }
+        .demo-layout .mdl-layout__header .mdl-layout__drawer-button {
+          color: rgba(0, 0, 0, 0.54);
+        }
+        .mdl-layout__drawer .avatar {
+          margin-bottom: 16px;
+        }
+        .demo-drawer {
+          border: none;
+          width: 250px;/* width: 250px; đổi */
+        }
+        .demo-drawer .mdl-menu__container {
+          z-index: -1;
+        }
+        .demo-drawer .demo-navigation {
+          z-index: -2;
+        }
+        /* END iOS Safari specific workaround */
+        .demo-drawer .mdl-menu .mdl-menu__item {
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+        .demo-drawer-header {
+          box-sizing: border-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-justify-content: flex-end;
+              -ms-flex-pack: end;
+                  justify-content: flex-end;
+          padding: 16px;
+          height: 151px;
+        }
+        .demo-avatar-dropdown {
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          position: relative;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          width: 100%;
+        }
+
+        .demo-navigation {
+          -webkit-flex-grow: 1;
+              -ms-flex-positive: 1;
+                  flex-grow: 1;
+        }
+        .demo-layout .demo-navigation .mdl-navigation__link {
+          display: -webkit-flex !important;
+          display: -ms-flexbox !important;
+          display: flex !important;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          color: rgba(255, 255, 255, 0.56);
+          font-weight: 500;
+        }
+        .demo-layout .demo-navigation .mdl-navigation__link:hover {
+          background-color: #00BCD4;
+          color: #37474F;
+        }
+        .demo-navigation .mdl-navigation__link .material-icons {
+          font-size: 24px;
+          color: rgba(255, 255, 255, 0.56);
+          margin-right: 32px;
+          margin-left: -15px;
+        }
+
+        .demo-content {
+          max-width: 1080px;
+        }
+
+        .demo-charts {
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+        .demo-chart:nth-child(1) {
+          color: #ACEC00;
+        }
+        .demo-chart:nth-child(2) {
+          color: #00BBD6;
+        }
+        .demo-chart:nth-child(3) {
+          color: #BA65C9;
+        }
+        .demo-chart:nth-child(4) {
+          color: #EF3C79;
+        }
+        .demo-graphs {
+          padding: 16px 32px;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-align-items: stretch;
+              -ms-flex-align: stretch;
+                  align-items: stretch;
+        }
+        _:-ms-input-placeholder, :root .demo-graphs {
+          min-height: 664px;
+        }
+        _:-ms-input-placeholder, :root .demo-graph {
+          max-height: 300px;
+        }
+        /* TODO end */
+        .demo-graph:nth-child(1) {
+          color: #00b9d8;
+        }
+        .demo-graph:nth-child(2) {
+          color: #d9006e;
+        }
+
+        .demo-cards {
+          -webkit-align-items: flex-start;
+              -ms-flex-align: start;
+                  align-items: flex-start;
+          -webkit-align-content: flex-start;
+              -ms-flex-line-pack: start;
+                  align-content: flex-start;
+        }
+        .demo-cards .demo-separator {
+          height: 32px;
+        }
+        .demo-cards .mdl-card__title.mdl-card__title {
+          color: white;
+          font-size: 24px;
+          font-weight: 400;
+        }
+        .demo-cards ul {
+          padding: 0;
+        }
+        .demo-cards h3 {
+          font-size: 1em;
+        }
+        .demo-updates .mdl-card__title {
+          min-height: 200px;
+          background-image: url('images/dog.png');
+          background-position: 90% 100%;
+          background-repeat: no-repeat;
+        }
+        .demo-cards .mdl-card__actions a {
+          color: #00BCD4;
+          text-decoration: none;
+        }
+
+        .demo-options h3 {
+          margin: 0;
+        }
+        .demo-options .mdl-checkbox__box-outline {
+          border-color: rgba(255, 255, 255, 0.89);
+        }
+        .demo-options ul {
+          margin: 0;
+          list-style-type: none;
+        }
+        .demo-options li {
+          margin: 4px 0;
+        }
+        .demo-options .material-icons {
+          color: rgba(255, 255, 255, 0.89);
+        }
+        .demo-options .mdl-card__actions {
+          height: 64px;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          box-sizing: border-box;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+          .progress {
+          height: 20px;
+          margin-bottom: 10px;
+          width: 200px !important;
+        }
+        .mdl-layout--fixed-tabs .mdl-layout__tab {
+          float: none;
+          -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+          padding: 0;
+          COLOR: #7c4abe;
+          BACKGROUND-COLOR: white;
+      }
+      .mdl-layout.is-upgraded .mdl-layout__tab.is-active {
+          color: rgb(255,255,255);
+          BACKGROUND-COLOR: #1e90ff;
+      }
+      .mdl-layout__header-row{
+        padding: 0 0 0 0;
+      }
+      html, body {
+          overflow-y: hidden;
+          /* background-color: RED; */
+      }
+      .mdl-layout__header-row {
+          padding: 0 0 0 0;
+          BACKGROUND-COLOR: #263238;
+      }
+    </style>
+  </head>
+  <body onload="loaddata()">
+    <!-- <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" > -->
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" >
+        <div class="mdl-layout__header-row">
+          <div style="background-color: #263238;width: 239px;height: 65px;margin-left: -40px;"><h2 style="color: yellow;font-weight: bold; margin-left: 80px; font-family: cursive;">CMMS</h2></div>
+          <div style="background-color: #ffffff;width: 3px;height: 65px;background-color: yellow;"></div>
+          
+          <!-- <span style="border-left: thick solid #ff0000;"> </span> -->
+          <span class="mdl-layout-title" style="margin-left: 30px;color: yellow;">YÊU CẦU CÔNG VIỆC</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+          </div>
+          <span><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation" style="height: 10px; font-size: 30px;color: yellow !important;">account_circle</i></span>
+          <span><id="user" style="font-size: 20px;color: yellow;"><%=user %></span>
+
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+          <i class="material-icons" style="color: yellow;">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn" style="align-items: center;">
+            <li class="mdl-menu__item"  id="position" ><%=note %></li>
+            <a href="/logout" style="margin-left: 5px;" >
+              <button  class="btn-box" style="color: black; background-color: rgb(255, 255, 255);border: solid rgb(255, 255, 255);width: 230px;text-align: left;" >Đăng xuất</button></a>
+            </ul>
+        </div>
+      </header>
+      <style>
+        .alert {
+            right: 0px;
+            padding: 20px;
+            background-color: rgb(43, 46, 226);
+            color: rgb(255, 255, 255);
+            position: absolute;
+            z-index: 1000;
+            margin-top: 0px;
+            width: 500px;
+            height: 70px;
+            margin-right: -500px;
+        }
+        
+        .alert.show {
+            animation-name: example;
+            animation-duration: 4s;
+            /* animation-iteration-count: inherit; */
+        }
+        /* .alert.show {
+            animation: show_slide 10s ease forwards;
+        }
+         */
+        
+        .alert.hidden {
+            display: none;
+        }
+        
+        @keyframes example {
+            0% {
+                right: 0px;
+                top: 0px;
+            }
+            40% {
+                right: 500px;
+                top: 0px;
+            }
+            60% {
+                right: 500px;
+                top: 0px;
+            }
+            100% {
+                right: 0px;
+                top: 0px;
+            }
+        }
+        
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .closebtn:hover {
+            color: black;
+        }
+      </style>
+      <div class="alert hidden" id="alertok">
+            <!-- <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> -->
+            <strong id="contenalert"></strong>
+      </div>    
+      <main  style="height: 500px !important; overflow-y: hidden !important;">
+        <div  class="col-50" style="height: 90px;margin-top: 5px;"><div style="box-shadow: 1px 1px 1px 1px #AAA;height: 100%;width: 99%;margin: auto; background-color: rgb(255, 255, 255); border: solid 2px rgb(189, 189, 189) ;" >           
+          <div  style=" height: 80px; background-color: rgb(255, 255, 255); margin-top: 3px; margin-left: 0px; border: solid 1px rgb(255, 255, 255) ;" >
+            <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">Mã yêu cầu</p></div>
+            <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;text-align: center; margin: auto; " type="text" id="searchname" class="form-control"></div>
+            <!-- <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">Mức độ ưu tiên</p></div>
+            <!-- <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;text-align: center; margin: auto; margin-left: 20px; " type="text" id="searchstatus" class="form-control"></div> -->
+            <!-- <div ><select id="levereqq" style="color: rgb(0, 0, 0);width: 80px !important;" class="form-control col-autoo">
+              <option ></option>
+              <option >1</option> 
+              <option >2</option> --> 
+              <!-- <option> -->
+                <!-- <input class="col-md-6 form-control" type="date" id="date1" name="birthday"  style="float: right;margin-right: 20px; width: 180px;margin-left: 15px;" onchange="searchstatus()"> -->
+                <!-- <input class="col-md-6 form-control" type="date" id="date1" name="birthday"  style="float: right;margin-right: 20px; width: 180px;margin-left: 15px;" onchange="searchstatus()"> -->
+              <!-- </option>         -->
+            </select> 
+            <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">Thời gian</p></div>
+            <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;margin: auto; " type="date" id="day1" class="form-control"></div>
+            <!-- <div class="col-autoo">:</div> -->
+            <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;margin: auto;  " type="date" id="day2" class="form-control"></div>
+            <!-- <input class="form-control" type="date" id="date1" name="birthday"  style="float: right;width: 180px;"> -->
+            <!-- <input class="col-autoo form-control" type="date" id="date1" name="birthday"  style="float: right;width: 180px;"> -->
+            <button class="btn" style="margin-left: 20px;" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button>
+            <button class="btn" id="btsearch"><i class="fa fa-search" ></i> Tìm kiếm</button>
+            <button class="btn" style=" background-color: #c3fe3a; margin-left: 20px;" id="btadd"><i class="fa fa-plus"></i> Thêm</button>
+          </div>
+        </div>
+          <!-- <div  style="height: 1720px; background-color: rgb(255, 255, 255); margin-top: 5px; margin-left: 0px; border: solid 1px rgb(255, 255, 255) ;" >
+              
+          </div> -->
+          <div  style="height: 720px; background-color: rgb(255, 255, 255); margin-top: 5px; margin-left: 0px; border: solid 1px rgb(255, 255, 255) ;" >
+            <div  class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs"> 
+              <header class="mdl-layout__header" style="min-height: 0px;width: 99.75%;">
+                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">YÊU CẦU CÔNG VIỆC</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">YÊU CẦU VẬT TƯ</a>
+                </div>
+              </header>
+              <div class="mdl-layout__content">
+                <section style="height: 700px; margin-top: 10PX;width: 99.75%;" class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                  <style>
+                    .tablea {
+                        margin-top: 0px !important;
+                        font-family: Arial, Helvetica, sans-serif;
+                        border-collapse: collapse;
+                        border-radius: 15px;
+                        /* border: 1px solid #ffffff; */
+                        overflow: scroll !important;
+                    }
+                    
+                    #tableb td {
+                        border-bottom: 1px solid #ffffff ;
+                        border-top: 1px solid #ffffff;
+                        text-align: left;
+                        /* border: 1px solid #ffffff; */
+                        height: 30px !important;    
+                        text-align: center !important;                                                     
+                    }
+                    
+
+                    .tablea td {
+                        text-align: left;
+                        border-bottom: 1px solid #ffffff ;
+                        border-top: 1px solid #ffffff;
+                        height: 80px !important;    
+                        text-align: center !important;                                                     
+                    }
+                    
+                    .tablea th {
+                        height: 600px;
+                        padding-top: 12px;
+                        padding-bottom: 12px;
+                        text-align: center;
+                        background-color: #7c4abe;
+                        color: white;
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        border: 1px solid #ffffff;
+                        height: 25px !important;
+                        min-width: 120px;
+
+                    }
+                    
+                    .tablea tr:nth-child(even) {
+                        background-color: #f2f2f2;
+                    }
+                    
+                    .tablea tr:hover {
+                        background-color: #ddd !important;
+                    }
+                    #tableb th {
+                        height: 600px;
+                        padding-top: 12px;
+                        padding-bottom: 12px;
+                        text-align: center;
+                        background-color: #ffffff;
+                        color: #7c4abe;
+                        border: solid 1px rgb(218, 218, 218);
+                    }
+                    
+                    .tableFixHead {
+                        overflow-y: auto;
+                        height: 670px;
+                    }
+                    .tableFixHead thead:not([scope=row]) {
+                        position: sticky;
+                        top: 0;
+                    }
+                    .tableFixHeadd {
+                        overflow-y: auto;
+                        height:150px;
+                    }
+                    .tableFixHeadd thead:not([scope=row]) {
+                        position: sticky;
+                        top: 1;
+                    }
+                    .tablea {
+                        border-collapse: collapse;
+                        width: 100%;
+                    }
+                  </style>  
+                  <div class="tableFixHead">
+                    <div class="page-content" style=" margin-top: 0px;margin-left: 0px;">
+                      <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
+                        <table id="tablese" class="tablea" style="width:99%; margin: auto;"  onclick="detail_ticketse()">
+                          <thead>
+                            <tr>
+                              <th style="text-align: center;width: 50px;" rowspan="2">MÃ YÊU CẦU</th>
+                              <th style="text-align: center;" colspan="4">YÊU CẦU</th>
+                              <th style="text-align: center;width: 360px;"" colspan="3">PHẢN HỒI</th>
+                              <th style="text-align: center;width: 360px;"" colspan="3">THỰC HIỆN</th>
+                              <th style="text-align: center;width: 100px;" rowspan="2">HOÀN THÀNH</th>                      
+                              <th style="text-align: center;width: 50px;" rowspan="2">ÐÁNH GIÁ</th>
+                            </tr>
+                            <tr>
+                              <th style="text-align: center;width: 150px;">BỘ PHẬN</th>
+                              <th style="text-align: center;">NỘI DUNG</th> 
+                              <th style="text-align: center;width: 100px;">NGƯỜI YÊU CẦU</th>                           
+                              <th style="text-align: center;width: 100px;">THỜI GIAN</th>
+                              <th style="text-align: center;width: 130px;">NỘI DUNG</th>
+                              <th style="text-align: center;width: 130px;">NGƯỜI PHẢN HỒI</th>
+                              <th style="text-align: center;width: 100px;">THỜI GIAN</th>
+                              <th style="text-align: center;width: 130px;">NHÂN VIÊN</th>
+                              <th style="text-align: center;width: 100px;">NGÀY CAM KẾT</th>
+                              <th style="text-align: center;width: 130px;">THỜI GIAN CAM KẾT</th>
+                            </tr>
+                          </thead>
+                        <tbody style="text-align: left;" >
+                      </tbody>
+                      </table>
+                      </div>
+                    </div> 
+                </section>
+                <section style="height: 200px;margin-top: 10PX;width: 99.75%;" class="mdl-layout__tab-panel" id="fixed-tab-3">
+
+                  <div class="tableFixHead">
+                    <div class="page-content" style=" margin-top: 0px;margin-left: 0px;">
+                      <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
+                      <table id="tableissue" class="tablea" style="width:99%; margin: auto;" onclick="detail_ticketissue()">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;width: 150px;" rowspan="2">MÃ YÊU CẦU</th>
+                                <th style="text-align: center;width: 150px;" rowspan="2">MÃ PHỤ TÙNG</th>
+                                <th style="text-align: center;width: 500px;" rowspan="2">TÊN PHỤ TÙNG</th>
+                                <th style="text-align: center;width: 650px; " colspan="3">YÊU CẦU CẤP</th>
+                                <th style="text-align: center;width: 80px;" rowspan="2">TRẠNG THÁI</th>
+                                <th style="text-align: center;width: 350px;" colspan="3">PHÁT PHỤ TÙNG</th>
+                                <th style="text-align: center;width: 150px;" rowspan="2">GHI CHÚ</th>
+                            </tr>
+                            <tr>
+                                <!-- <th style="text-align: center;width: 100px;">MÃ CÔNG VIỆC</th> -->
+                                <th style="text-align: center;width: 100px;">NGƯỜI YÊU CẦU</th>
+                                <!-- <th style="text-align: center;width: 200Px;">CÔNG VIỆC</th> -->
+                                <th style="text-align: center;width: 50px;">SL</th>
+                                <th style="text-align: center;width: 220px;">THỜI GIAN</th>
+                                <th style="text-align: center;width: 100px;">NGƯỜI CẤP</th>
+                                <th style="text-align: center;width: 50px;">SL</th>
+                                <th style="text-align: center;width: 220px;">THỜI GIAN</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: left;">
+                        </tbody>
+                      </table>
+                    </div>
+                </div> 
+                </section>
+              </div>
+            </div>   
+            </div>     
+          </div>
+          <div class="w3-container" style="position: absolute !important;z-index: 9999;">
+            <div id="id01" class="w3-modal" style="width: 100%; height: 100%;">
+                <div style="width: 1300px; border: solid 3px blueviolet;" class="w3-modal-content">
+                    <div style="width: 100%; height: 100%;" class="w3-container">
+                        <span style="font-size: 25px;margin-right: 5px;" onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                        <div class="modal-header">
+                            <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;" id="title" ></h3>
+                            <!-- <h4 class="modal-title" style="color: #7c4abe ; font-weight: bold;" >Thêm yêu cầu</h4> -->
+                        </div>
+                        <!-- <h4 class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mã:</h4> -->
+                        
+                        <fieldset style="margin-top: 20px;">
+                          <legend>Thông tin người yêu cầu</legend>
+                          <div style="margin-top: -30px;">
+                            <input  aria-required="true" style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="idreq" class="form-control col-90">                                      
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Bộ phận yêu cầu</p>
+                            <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="departreq" class="form-control col-90" value=<%=depart %>>                                 
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 75px;">Người yêu cầu</p>
+                            <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="staffreq" class="form-control col-90">   
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Email</p>
+                            <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="emailreq" class="form-control col-90" value=<%=mail %>>                                     
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 75px;">SDT</p>
+                            <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="pnum" class="form-control col-90">                                                                         
+                          </div>
+                        </fieldset>
+                        <fieldset id="wo_bar" style="margin-top: 25px;">
+                          <legend>Thông tin yêu cầu</legend>
+                          <div style="margin-top: -30px;">
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Loại yêu cầu</p>
+                            <!-- <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="typereq" class="form-control col-90">                                       -->
+                            <!-- <div ><datalist list="typeq" id="typereq" style="color: rgb(0, 0, 0);width: 1010px;" class="form-control col-90"><datalist style="max-height: 100px !important;overflow-y: auto!important" id="typeq"></datalist>
+                              <option >Bảo dưỡng định kỳ</option>
+                              <option >Bảo trì yêu cầu</option> 
+                              <option >Dịch vụ yêu cầu</option> 
+                            </datalist>    
+                            </div>   -->
+                            <div ><select  aria-required="true" style=" width:1010px; min-height: 10px;text-align: left;" type="text" id="typereq" class="form-control col-90" onchange="woissue()" >
+                              <option >Sửa chữa</option> 
+                              <option >Dịch vụ</option>     
+                              <option >--------------------</option>                
+                              <option >Yêu cầu vật tư</option>    
+                            </select></div>
+                            <!-- <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 75px;">Loại thiết bị</p> -->
+                            <!-- <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="typeeq" class="form-control col-90">   -->
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nội dung</p>
+                            <textarea  aria-required="true" style=" width:1010px; min-height: 100px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="contentreq" class="form-control col-90"> </textarea>                                                                          
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mức độ</p>
+                            <div ><select id="levereq" style="color: rgb(0, 0, 0);width: 140px;" class="form-control col-90">
+                              <option >1</option>
+                              <option >2</option>
+                            </select>          
+                            </div>
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Địa điểm</p>
+                            <input  aria-required="true" style=" width:700px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="placereq" class="form-control col-90">                                                                          
+                            <!-- <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Người xử lý</p> -->
+                            <!-- <input  aria-required="true" style=" width:300px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="procer" class="form-control col-90">                                       -->
+                            <div id="boxtimereq"style="display: none;">
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày bắt đầu</p>
+                            <input class="col-autoo form-control" type="text" id="timereq" name="birthday"  style="width: 1010px;margin-left: 0px; "  >
+                            </div>
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày hoàn thành</p>
+                            <input class="col-autoo form-control" type="date" id="timeendreq" name="birthday"  style="width: 1010px;margin-left: 0px;" >
+                            <input  aria-required="true" style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="hideeq" class="form-control col-90">       
+                            <input  aria-required="true" style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="hidedate" class="form-control col-90">          
+                            <input  aria-required="true" style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="hidecycle" class="form-control col-90">                                                                                                                                
+                          </div>
+                        </fieldset>
+                        <fieldset id="issue_bar" style="margin-top: 25px;">
+                          <legend>Thông tin yêu cầu</legend>
+                          <div style="margin-top: -30px;">
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mã phụ tùng</p>
+                              <input aria-required="true" style=" width:530px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="idpart" class="form-control col-90">
+                              <datalist style="height: 10px !important;overflow-y: auto!important;margin: auto;" id="listnamesp">
+                              <!-- <%-nameesp%> -->
+                                  </datalist>
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Số lượng trong kho</p>
+                              <input aria-required="true" style=" width:50px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="qty_inhere" class="form-control col-90" readonly>
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Số lượng yêu cầu</p>
+                              <input aria-required="true" style=" width:50px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="qty_req" class="form-control col-90">
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Tên phụ tùng</p>
+                              <input list="listnamesp" aria-required="true" style=" width:1000px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; " type="text" id="listipart" class="form-control col-90">
+                              <!-- <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mã công việc</p>
+                              <input aria-required="true" style=" width:285px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;" type="text" id="idwork" class="form-control col-90"> -->
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ghi chú</p>
+                              <input aria-required="true" style=" width:530px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="note" class="form-control col-90">
+                              <button class="btn col-10" style=" background-color: #9d6fda; margin-left: 50px;margin-top: 25px;" id="btspare"><i class="fa fa-plus"></i> Thêm</button>
+                              <p style="float: left;font-style: italic;font-size: 15px;margin-top: 30px; margin-left: 20px;">(Kích đúp vào dòng muốn xóa)</p>
+                              <div class="tableFixHeadd col-901">
+                                  <div class="page-content" style=" margin-top:0px;">
+                                      <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
+                                      <table id="tableb" class="tablea" style="width:100%; margin: auto;" onclick="detail_ticket1()">
+                                          <thead>
+                                              <tr>
+                                                  <th style="text-align: center;width: 200px;">Mã phụ tùng</th>
+                                                  <th style="text-align: center;width: 400px;">Tên phụ tùng</th>
+                                                  <th style="text-align: center;width: 50px;">Số lượng</th>
+                                                  <th style="text-align: center;width: 300px;">Trạng thái</th>
+                                                  <th style="text-align: center;width: 300px;">Ghi chú</th>
+                                              </tr>
+
+                                          </thead>
+                                          <tbody style="text-align: left;">
+                                          </tbody>
+                                          </thead>
+                                      </table>
+
+                                  </div>
+                              </div>
+                          </div>
+                        </fieldset>
+                        <div class="modal-footer" style="margin-top: 20px; width: 98%;margin-left: 10px;">
+                          <p style="float: left;font-style: italic;font-size: 15px;" id="ps">(*Vui lòng điền đầy đủ các thông tin trên)</p>
+                          <div id="boxedit" style="margin-top: -20px;">
+                              <!-- <button class="btn" id="btdelete"><i class="fa fa-times"></i> Xóa</button> -->
+                              <!-- <button class="btn" id="btsavee"><i class="fa fa-save"></i> Lưu</button> -->
+                              <!-- <button class="btn" id="btdistri"><i class="fa fa-calendar-plus-o"></i> Giao việc</button> -->
+                          </div>
+                          <!-- <div id="boxadd" style="margin-top: -20px;"> -->
+                          <button class="btn" id="btsave" style="float: right;margin-top: 0px;"><i class="fa fa-save"></i> Thêm</button>
+                          <button class="btn" id="btsavee" style="float: right;margin-top: 0px;"><i class="fa fa-save"></i> Thêm</button>
+                          <!-- </div> -->
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="w3-container" >
+            <div id="id02" class="w3-modal">
+                <div style=" width: 1300px; min-height: 700px ;margin-top: 0px; border: solid 3px blueviolet;" class="w3-modal-content">
+                    <div style="width: 100%; height: 100%;" class="w3-container">
+                        <span style="font-size: 25px;margin-right: 5px;" onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                          <div class="modal-header">
+                          <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;" >Đánh giá công việc</h3>
+                          </div style="border-box: solid 1px red">
+                          <fieldset style="margin-top: 20px;">
+                            <legend>Thông tin liên quan</legend>
+                            <div style="margin-top: -30px;">
+                              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">ID</p>
+                            <input  aria-required="true" style=" width:420px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="idreqq" class="form-control col-90">                                      
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Người thực hiện</p>
+                            <!-- <input  aria-required="true" style=" width:420px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="staffwork" class="form-control col-90">                                       -->
+                            <input list="listname" aria-required="true" style=" width:420px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; " type="text" id="staffwork" class="form-control col-90" ><datalist style="height: 10px !important;overflow-y: auto!important" id="listname"><%-namee%></datalist>
+                    
+                            <!-- <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="leverec" class="form-control col-90">     -->
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nguyên nhân</p>
+                            <textarea  aria-required="true" style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="reason" class="form-control col-90"> </textarea> 
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Giải pháp</p>
+                            <textarea  aria-required="true" style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="solution" class="form-control col-90"> </textarea>                 
+                            </div>
+                          </fieldset>
+                          <fieldset style="margin-top: 20px;">
+                            <legend>Đánh giá</legend>
+                            <div style="margin-top: -30px;">
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Tiến độ</p>
+                            <div ><select id="rec_progress" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90" >
+                              <option >Chưa đánh giá</option>
+                              <option >Đúng hạn</option>    
+                              <option >Quá hạn</option>     
+                              </select>          
+                            </div>    
+                            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Chất lượng</p>
+                            <div ><select id="quality" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90" >
+                              <option > </option>
+                              <option >Rất hài lòng</option>
+                              <option >Hài lòng</option>    
+                              <option >Bình thường</option>   
+                              <option >Thất vọng</option>  
+                              <option >Rất thất vọng</option>       
+                              </select>          
+                             </div>
+                             <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nhận xét</p>
+                             <textarea  aria-required="true" style=" width:1015px; min-height: 50px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="comment" class="form-control col-90"> </textarea>                 
+                            </div>
+                          </fieldset>
+                          <div class="modal-footer" style="margin-top: 20px; width: 98%;margin-left: 10px;">  
+                            <div id="boxadd" style="margin-top: -20px;">
+                              <button class="btn" id="btsave1"><i class="fa fa-save"></i> Lưu</button>
+                            </div>  
+                          </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+         
+      </main>
+    <script>
+      function alert_ok(name) {
+            document.getElementById('contenalert').innerHTML = name;
+            $('.alert').removeClass('hidden');
+            $('.alert').addClass('show');
+            setTimeout(function() {
+                $('.alert').removeClass('show');
+                $('.alert').addClass('hidden');
+            }, 5500)
+        }
+
+      function change_time(time){
+        return (new Date(time)).toLocaleString("en-US", {timeZone: "Asia/Bangkok"});
+      }
+     
+      function change_time2(time){
+        return (new Date(time)).toLocaleString('en-GB', {timeZone: "Asia/Bangkok"});
+      }
+      
+      function change_time3(time){
+        return (new Date(time)).toLocaleDateString('en-US');
+
+      } 
+      
+      function loaddata(){
+        loaddatase();
+        loadpartlog();
+      }
+
+      function loaddatase(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("get", '/work_oder/loading_dataSEerp', true);
+        event.preventDefault(); //prevent default action 
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var jsonObject = JSON.parse(this.responseText);
+          var trHTML = '';
+          var i;
+          for (i = 0; i < jsonObject.length; i++) {
+            var id_req = jsonObject[i].id;
+            var dept_req = jsonObject[i].depart_req;
+            var type_req = jsonObject[i].type_req;
+            var req = jsonObject[i].req;
+            var user_req = jsonObject[i].user_req;
+            var time_req = jsonObject[i].time_req;
+            if (time_req=="Invalid Date") { time_req =""} else (time_req=change_time(time_req))
+            var time_rec = jsonObject[i].time_rec;
+            if (time_rec=="Invalid Date") { time_rec =""} else (time_rec=change_time(time_rec))
+            var rec_type = jsonObject[i].status_work;
+            var user_rec = jsonObject[i].user_rec;
+            var FM_staff = jsonObject[i].FM_staff;
+            var time_exe = jsonObject[i].time_exe;
+            if (time_exe=="Invalid Date") { time_exe =""} else (time_exe=change_time(time_exe))
+            var time_commit =jsonObject[i].time_commit;
+            if (time_commit=="Invalid Date") { time_commit =""} else (time_commit=change_time(time_commit))
+            var time_confirm = jsonObject[i].time_confirm;
+            if (time_confirm=="Invalid Date") { time_confirm =""} else (time_confirm=change_time(time_confirm))
+            var score = jsonObject[i].quality;
+            var timeendreq=change_time3(jsonObject[i].timeend_req);
+
+            trHTML += '<tr ><td style="text-align: center;">' + id_req + '</td><td style="text-align: center;">' + dept_req + '</td><td style="text-align: center;">' + req + '</td><td style="text-align: center;">' + user_req + '</td><td style="text-align: center;">' + timeendreq + '</td><td style="text-align: center;">' + rec_type + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + time_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;">' + time_exe+ '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + time_confirm + '</td><td style="text-align: center;">' + score + '</td></tr>';
+          }
+        }
+        $('#tablese tbody').html(trHTML);
+        }
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.send();       
+      }
+
+      document.getElementById('btadd').addEventListener('click', function() {
+        document.getElementById('title').innerHTML = "Thêm yêu cầu";
+        document.getElementById('id01').style.display = 'block';
+        document.getElementById('boxadd').style.display = 'block';
+        document.getElementById('boxedit').style.display = 'none';
+        document.getElementById('btsavee').style.display = 'none';
+        document.getElementById('issue_bar').style.display = 'none';
+        document.getElementById('btsave').style.display = 'block';
+        document.getElementById('wo_bar').style.display = 'block';
+        document.getElementById("staffreq").value="";
+        document.getElementById("typereq").value="Sửa chữa";
+        document.getElementById("typereq").
+        // document.getElementById("contentreq").value="";
+        // document.getElementById("placereq").value="";
+        // document.getElementById("levereq").value="1";
+        document.getElementById('boxtimereq').style.display = 'none';
+        document.getElementById("pnum").value="";   
+        document.getElementById("timeendreq").value="";   
+      })
+      
+      function detail_ticketse() {
+      
+            var table = document.getElementById("tablese");
+            // document.getElementById('file').value="";
+            event.stopImmediatePropagation;
+            if (tablese) {
+                for (var i = 1; i < table.rows.length; i++) {
+                    table.rows[i].ondblclick = function(e) {
+                        tableText(this);
+                    }
+                }
+            }
+      }
+      
+      function tableText(tableRow) {
+        document.getElementById('title').innerHTML = "Thông tin yêu cầu";
+        document.getElementById('ps').style.display = 'none';
+        document.getElementById('btsavee').style.display = 'none';
+        document.getElementById('issue_bar').style.display = 'none';
+        document.getElementById('btsave').style.display = 'none';
+        document.getElementById('wo_bar').style.display = 'block';
+        document.getElementById('id01').style.display = 'block';
+        document.getElementById('boxadd').style.display = 'none';
+        document.getElementById('boxedit').style.display = 'block';
+        document.getElementById('boxtimereq').style.display = 'block';
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/w_order/loading_req', true);
+
+        var id = tableRow.childNodes[0].innerText;
+     
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            id: id
+        };
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse (this.responseText);
+            if (data.length>0){
+            // var c= data[0].time_exe;      
+            // var b=change_time2(c);
+            // var d=c.substr(0,c.length-14)+"T"+b.substr(b.lengthideh-8,5);
+            document.getElementById("staffreq").value=data[0].user_req;
+            document.getElementById("typereq").value=data[0].type_req;
+            document.getElementById("placereq").value=data[0].place_req;
+            document.getElementById("levereq").value=data[0].leve_req;
+            document.getElementById("timereq").value= change_time2(data[0].time_req);
+            document.getElementById("hidedate").value= data[0].time_req;
+            document.getElementById("hideeq").value= data[0].type_eq;
+            document.getElementById("hidecycle").value= data[0].cycle;
+            document.getElementById("timeendreq").value= data[0].timeend_req;         
+            document.getElementById("staffwork").value= data[0].FM_staff;
+            document.getElementById("solution").value= data[0].solution;
+            document.getElementById("reason").value= data[0].reason;
+            document.getElementById("departreq").value=data[0].depart_req;
+            document.getElementById("contentreq").value=data[0].req;
+            document.getElementById("emailreq").value=data[0].emailreq;
+            document.getElementById("pnum").value=data[0].phonenum;
+            document.getElementById("idreqq").value=data[0].id;
+            document.getElementById("rec_progress").value=data[0].rec_progress;
+            document.getElementById("quality").value=data[0].quality;
+            document.getElementById("comment").value=data[0].comment;
+            if (data[0].quality!=''){
+                document.getElementById('btsavee').disabled = true;
+                document.getElementById('btsave1').disabled = true;
+                // document.getElementById('btdistri').style.display = 'block';
+              }
+            }
+          }
+        }
+        xmlhttp.send(JSON.stringify(data));    
+      }
+      
+      document.getElementById('btsave').addEventListener('click', function() {
+        var r= confirm("Bạn có chắc chắn thêm yêu cầu này ???");
+        if (r == true){
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/w_order/insert', true);
+          event.preventDefault(); //prevent default action 
+
+          var departreq= document.getElementById("departreq").value;
+          var staffreq=document.getElementById("staffreq").value;
+          var typereq= document.getElementById("typereq").value;
+          var contentreq= document.getElementById("contentreq").value;
+          var placereq= document.getElementById("placereq").value;
+          var levereq= document.getElementById("levereq").value;
+          var timeendreq= document.getElementById("timeendreq").value;       
+          var email=document.getElementById("emailreq").value;
+          var phone=document.getElementById("pnum").value;   
+
+          if (departreq == "" || staffreq == "" || email== "" || contentreq =="" )
+          {
+            confirm("Bạn chưa nhập đầy đủ thông tin !!!");
+            return;
+          }
+
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+              timeendreq: timeendreq,
+              departreq:departreq,
+              staffreq:staffreq,
+              typereq:typereq,
+              contentreq:contentreq,
+              placereq:placereq,
+              levereq:levereq,
+              email:email,
+              phone:phone
+          };
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var data = this.responseText;
+              if (data == "ok") {
+                  loaddata()
+                  alert_ok("Đã thêm yêu cầu thành công !!!");
+                  console.log("wwwww")
+              } else {
+                alert("Đã có lỗi rồi !!!");
+              }
+                  document.getElementById('id01').style.display = 'none';
+              }
+          }
+          xmlhttp.send(JSON.stringify(data));
+        }
+      })
+     
+      document.getElementById('btsearch').addEventListener('click', function() {
+          var name= document.getElementById("searchname").value;
+          var level= document.getElementById("levereq").value;
+          var day1= document.getElementById("day1").value;
+          var day2= document.getElementById("day2").value;
+          name='%'+name+'%';
+          if (name =="") {name='%';}
+          if (level =="") {level='%';}
+          if (day1 =="") {day1='0000-00-00';}
+          if (day2 =="") {day2='2222-02-22';}
+
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/wo/search', true);
+          //event.preventDefault(); //prevent default action 
+     
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+              name: name,
+              level:level,
+              day1:day1,
+              day2:day2
+          };
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var jsonObject = JSON.parse(this.responseText);
+            var trHTMLPM = '';
+            var trHTMLCM = '';
+            var trHTMLSE = '';
+            var i;
+            for (i = 0; i < jsonObject.length; i++) {
+            // var id=i+1;
+            var id_req = jsonObject[i].id;
+            var dept_req = jsonObject[i].depart_req;
+            var type_req = jsonObject[i].type_req;
+            var req = jsonObject[i].req;
+            var user_req = jsonObject[i].user_req;
+            var time_req = jsonObject[i].time_req;
+            var time_rec = jsonObject[i].time_rec;
+            var rec_type = jsonObject[i].status_work;
+            var user_rec = jsonObject[i].user_rec;
+            var FM_staff = jsonObject[i].FM_staff;
+            var time_exe = jsonObject[i].time_exe;
+            var time_commit = jsonObject[i].time_commit;
+            var time_confirm = jsonObject[i].time_confirm;
+            var score = jsonObject[i].quality;
+            var type= id_req.substring(0, 2);
+            console.log(type)
+            time_req=change_time(time_req);
+            time_rec=change_time(time_rec);
+            time_exe=change_time(time_exe);
+            time_confirm=change_time(time_confirm);
+            var timeendreq=change_time3(jsonObject[i].timeend_req);
+            // console.log(change_time(Date.now()));
+            // if (rec_type == "Chưa xử lý")
+            // {
+            //   trHTML += '<tr style="color: yellow;" ><td style="text-align: center;">' + id_req + '</td><td style="text-align: center;">' + dept_req + '</td><td style="text-align: center;">' + type_req + '</td><td style="text-align: center;">' + req + '</td><td style="text-align: center;">' + user_req + '</td><td style="text-align: center;">' + time_req + '</td><td style="text-align: center;">' + rec_type + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + time_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;">' + time_exe+ '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + time_confirm + '</td><td style="text-align: center;">' + score + '</td></tr>';
+            // }
+            // else {
+              if (type=="SE"){
+              trHTMLSE += '<tr ><td style="text-align: center;">' + id_req + '</td><td style="text-align: center;">' + dept_req + '</td><td style="text-align: center;">' + req + '</td><td style="text-align: center;">' + user_req + '</td><td style="text-align: center;">' + timeendreq + '</td><td style="text-align: center;">' + rec_type + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + time_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;">' + time_exe+ '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + time_confirm + '</td><td style="text-align: center;">' + score + '</td></tr>';
+            }
+          }
+        }
+        // $('#tablepm tbody').html(trHTMLPM);
+        // $('#tablecm tbody').html(trHTMLCM);
+        $('#tablese tbody').html(trHTMLSE);
+        }
+        xmlhttp.send(JSON.stringify(data));    
+         
+      })
+      
+      document.getElementById('btrefresh').addEventListener('click', function() {
+
+            loaddatase();
+          document.getElementById("searchname").value="";
+          document.getElementById("levereq").value="";
+         document.getElementById("day1").value="";
+          document.getElementById("day2").value="";
+      })
+   
+      document.getElementById('btsave1').addEventListener('click', function() {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/w_order/comment', true);
+        event.preventDefault(); //prevent default action 
+
+        var idreqq= document.getElementById("idreqq").value;
+        var progress=document.getElementById("rec_progress").value;
+        var quality= document.getElementById("quality").value;
+        var comment= document.getElementById("comment").value;
+
+        // send data jason
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            idreqq:idreqq,
+            progress:progress,
+            quality:quality,
+            comment:comment
+        };
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            if (data == "ok") {
+                loaddata()
+                alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+                // location.reload();
+            } else {
+                alert("Có lỗi rồi!!!");
+            }
+                document.getElementById('id02').style.display = 'none';
+            }
+        }
+        // console.log(data);
+        xmlhttp.send(JSON.stringify(data));
+        })
+    
+      function woissue() {
+            var wi = document.getElementById('typereq').value;
+            var titlew3 = document.getElementById('title').innerHTML;
+            if (titlew3 == "Thêm yêu cầu"){
+              if (wi == 'Yêu cầu vật tư') {
+                  document.getElementById("wo_bar").style.display = "none";
+                  document.getElementById("issue_bar").style.display = "block";
+                  document.getElementById("btsave").style.display = "none";
+                  document.getElementById("btsavee").style.display = "block";
+              } else {
+                  document.getElementById("wo_bar").style.display = "block";
+                  document.getElementById("issue_bar").style.display = "none";
+                  document.getElementById("btsave").style.display = "block";
+                  document.getElementById("btsavee").style.display = "none";
+              }
+            }
+        }
+    
+      document.getElementById('btsavee').addEventListener('click', function() {
+        var r = confirm("Bạn có chắc chắn thêm yêu cầu này ???");
+        if (r == true) {
+          console.log("thempartlog")
+          var table = document.getElementById("tableb");
+          var rows = table.getElementsByTagName('tr');
+          var userreq = document.getElementById('staffreq').value;
+          var email = document.getElementById("emailreq").value;
+          var phone = document.getElementById("pnum").value;
+          var departreq = document.getElementById("departreq").value;
+                    // if (rows.length == 1) {
+          for (var i = 1; i < rows.length; i++) {
+            var id = table.rows[i].cells[0].innerHTML;
+            var name = table.rows[i].cells[1].innerHTML;
+            var qty = table.rows[i].cells[2].innerHTML;
+            var stt = table.rows[i].cells[3].innerHTML;
+            var note = table.rows[i].cells[4].innerHTML;
+            var wo = "";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/part_log/insertreqq', true);
+            event.preventDefault(); //prevent default action 
+                        // send data jason
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+              idpart: id,
+              name: name,
+              qty_req: qty,
+              note: note,
+              wo: wo,
+              user: userreq,
+              email: email,
+              phone: phone,
+              departreq: departreq
+            };
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                if (data == "ok") {
+                  var table = document.getElementById("tableb");
+                  var tr = table.getElementsByTagName("tr");
+                  var i, j;
+                  for (i = 1; i < tr.length; i++) {
+                    document.getElementById('tableb').deleteRow(i);
+                  }
+                  loadpartlog()
+                  alert_ok("Đã thêm yêu cầu thành công !!!");
+                } else {
+                  alert_ok("Đã có lỗi !!!");
+                }
+                  document.getElementById('id01').style.display = 'none';
+                }
+              }
+            xmlhttp.send(JSON.stringify(data));
+          }
+          } else {
+            return
+          }
+        })
+    
+      document.getElementById('btspare').addEventListener('click', function() {
+        var name = document.getElementById("listipart").value;
+        var idpart = document.getElementById("idpart").value;
+        var qty1 = document.getElementById("qty_req").value;
+        var idreq = document.getElementById("idreq").value;
+        var note = document.getElementById("note").value;
+        var table = document.getElementById("tableb");
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell1.innerHTML = idpart;
+        cell2.innerHTML = name;
+        cell3.innerHTML = qty1;
+        cell4.innerHTML = "Chưa cấp";
+        cell5.innerHTML = note;
+        tb2();          
+      })
+
+      function tb2() {
+        document.getElementById("listipart").value = "";
+        document.getElementById("idpart").value = "";
+        document.getElementById("qty_req").value = "";
+        document.getElementById("qty_inhere").value = "";
+        document.getElementById("note").value = "";
+        document.getElementById("idwork").value = "";
+      }
+
+      function loadpartlog() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("get", '/part_log/loading_data', true);
+            event.preventDefault(); //prevent default action 
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = JSON.parse(this.responseText);
+                    var trHTML = '';
+                    var i;
+                    for (i = 0; i < jsonObject.length; i++) {
+                        var ipart = jsonObject[i].idpart;
+                        var fm_staff = jsonObject[i].fm_staff;
+                        var mc_code = jsonObject[i].ty_req;
+                        var wo = jsonObject[i].wo;
+                        var user_issue = jsonObject[i].user_issue;
+                        var time_issue = jsonObject[i].time_issue;
+                        var qty1 = jsonObject[i].qty_req;
+                        var qty2 = jsonObject[i].qty_issue;
+                        var note = jsonObject[i].note;
+                        var time_req = jsonObject[i].time_req;
+                        var status = jsonObject[i].status;
+                        var name = jsonObject[i].namepart;
+                        var id = jsonObject[i].Id;
+                        if (time_req=="Invalid Date") { time_req =""} else (time_req=change_time(time_req))
+                        if (time_issue=="Invalid Date") { time_issue =""} else (time_issue=change_time(time_issue))
+                        // time_req = change_time(time_req).replace(/[-:]/g, "");
+                        // time_issue = change_time(time_issue).replace(/[-:]/g, "");
+                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + ipart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + fm_staff + '</td><td style="text-align: center;">' + qty1 + '</td><td style="text-align: center;">' + time_req + '</td><td style="text-align: center;">' + status + '</td><td style="text-align: center;">' + user_issue + '</td><td style="text-align: center;">' + qty2 + '</td><td style="text-align: center;">' + time_issue + '</td><td style="text-align: center;">' + note + '</td></tr>';
+                    }
+                }
+                $('#tableissue tbody').html(trHTML);
+            }
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            xmlhttp.send();
+        }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   <%-include ('layout/header'); %>
+  <%-include ('./styles/staff/staffCss'); %>
+  </head>
+  <body onload="loaddata()">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" >
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" >
+        <div class="mdl-layout__header-row">
+          <div style="background-color: #263238;width: 239px;height: 65px;margin-left: -40px;"><h2 style="color: #b9e407;font-weight: bold; margin-left: 60px; font-family: cursive;">CMMS</h2></div>
+          <div style="background-color: #ffffff;width: 3px;height: 65px;background-color: #b9e407;"></div>
+          
+          <!-- <span style="border-left: thick solid #ff0000;"> </span> -->
+          <span class="mdl-layout-title" style="margin-left: 30px;">QUẢN LÝ NHÂN VIÊN</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+          </div>
+          <span><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation" style="height: 10px; font-size: 30px;">account_circle</i></span>
+          <span><id="user" style="font-size: 20px;" id="user"><%=user %></span>
+
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+          <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn" style="align-items: center;">
+            <li class="mdl-menu__item"  id="position" ><%=note %></li>
+            <a href="/logout" style="margin-left: 5px;" >
+              <button  class="btn-box" style="color: black; background-color: rgb(255, 255, 255);border: solid rgb(255, 255, 255);width: 230px;text-align: left;" >Đăng xuất</button></a>
+            </ul>
+        </div>
+     
+        <!-- <div  style="height: 100px; background-color: rgb(255, 255, 255); margin-top: 3px; margin-left: 10px; border: solid 1px rgb(255, 255, 255) ;" >
+            <button class="btn" id="btsearch"><i class="fa fa-search" ></i> Tìm kiếm</button>
+            <button class="btn" style=" background-color: #ffffff; border: solid 2px blueviolet;" id="btadd"><i class="fa fa-plus"></i> Thêm</button>
+        </div> -->
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">      
+        <%-include ('layout/menu'); %>
+      </div>
+         
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div  style="height: 80px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;overflow-x: auto;" >
+          <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">Họ và tên</p></div>
+          <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;text-align: center; margin: auto; " type="text" id="searchname" class="form-control"></div>
+          <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">Kỹ năng chuyên môn</p></div>
+          <div ><input list="typeq" aria-required="true" style=" width:150px; min-height: 10px;text-align: left;margin-left: 20px; " type="text" id="expertise" class="form-control col-autoo" ><datalist style="max-height: 100px !important;overflow-y: auto!important" id="typeq">
+            <option>Cơ khí</option>
+            <option>Điện công nghiệp</option>
+            <option>Điện lạnh</option>
+            <option>Điện tử</option>
+            <option>Xây dựng</option>
+            <option>Khác</option>
+          </datalist></div>
+          <button class="btn" style="margin-left: 20px;" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button>
+          <button class="btn" id="btsearch"><i class="fa fa-search" ></i> Tìm kiếm</button>
+          <button class="btn" style=" background-color: #c3fe3a; margin-left: 20px;" id="btadd"><i class="fa fa-plus"></i> Thêm</button>
+        </div>
+        <div  style="height: 700px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;" >
+          <div class="tableFixHead">
+              <div class="page-content" style=" margin-top: 0px;margin-left: 0px;">
+                <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
+                  <table id="tablea" class="tablea" style="width:99%; margin: auto;"  onclick="detail_ticket()">
+                    <thead>
+                      <tr>
+                        <th style="text-align: center;width: 100px;" rowspan="2">ID</th>
+                        <th style="text-align: center;width: 250px;" rowspan="2">HỌ VÀ TÊN</th>
+                        <th style="text-align: center;" >KỸ NĂNG CHUYÊN MÔN</th>
+                        <th style="text-align: center;width: 150px;"" rowspan="2">BẬC THỢ</th>                     
+                        <th style="text-align: center;width: 150px;" rowspan="2">CHỨC VỤ</th>
+                        <th style="text-align: center;width: 150px;" rowspan="2">TỔ ĐỘI</th>
+                      </tr>
+                      <!-- <tr>
+                          <th style="text-align: center;width: 80px;">CƠ KHÍ</th>
+                          <th style="text-align: center;width: 80px;">ĐIỆN CÔNG NGHIỆP</th>
+                          <th style="text-align: center;width: 80px;">ĐIỆN LẠNH</th> 
+                          <th style="text-align: center;width: 80px;">ĐIỆN TỬ</th>                           
+                          <th style="text-align: center;width: 80px;">XÂY DỰNG</th>
+                          <th style="text-align: center;width: 130px;">KHÁC</th>
+                      </tr> -->
+                    </thead>
+                    <tbody style="text-align: left;" >
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+        </div>
+        <div class="w3-container">
+          <div style="margin-top: 20px;" id="id01" class="w3-modal">
+            <div style="width: 1100px; min-height: 300px;border: solid 3px blueviolet;" class="w3-modal-content" >
+              <div style="width: 100%; height: 100%;" class="w3-container">
+                <span style="font-size: 25px;margin-right: 5px;" onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright" style="font-size: 35px; margin-top: 10px;margin-right: 10px;">&times;</span>
+                <div class="modal-header">
+                  <h5 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thông tin nhân viên</h5>
+                </div> 
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">ID</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:300px; min-height: 10px;text-align: center; margin: auto;" type="text" id="inid" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">HỌ VÀ TÊN</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:445px; min-height: 10px;text-align: center; margin: auto;" type="text" id="inname" class="form-control"></div>
+                <p class="modal-title col-auto1" style="margin-top: 30px;color: #7c4abe;font-weight: bold;margin-left: 45px;">CHUYÊN MÔN</p>
+                <div class=" col-autoo" style="margin-top: 26px;">
+                  <p style="color: #7c4abe;font-weight: bold;margin-left: 45px;margin-top: 5px;float: left;"><input  type="checkbox" id="cb1">  Cơ khí</p>
+                  <p style="color: #7c4abe;font-weight: bold;margin-left: 45px;margin-top: 5px;float: left;"><input type="checkbox" id="cb2">  Điện công nghiệp</p>
+                  <p style="color: #7c4abe;font-weight: bold;margin-left: 45px;margin-top: 5px;float: left;"><input type="checkbox" id="cb3">  Điện lạnh</p>
+                  <p style="color: #7c4abe;font-weight: bold;margin-left: 45px;margin-top: 5px;float: left;"><input type="checkbox" id="cb4">  Điện tử</p>
+                  <p style="color: #7c4abe;font-weight: bold;margin-left: 45px;margin-top: 5px;float: left;"><input type="checkbox" id="cb5">  Xây dựng</p>
+                  <input placeholder="Khác..." aria-required="true" style="float: left; width:230px; min-height: 10px;text-align: left;margin-left: 45px!important; margin: auto;" type="text" id="cb6" class="form-control">
+                </div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">BẬC THỢ</p>
+                <div style="margin-left: 0px;" ></div><select id="levels" style="color: rgb(0, 0, 0);width: 100px;" class="form-control col-autoo" >                
+                  <option ></option>
+                  <option >1</option>
+                  <option >2</option>
+                  <option >3</option>        
+                </select>    
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">VỊ TRÍ</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:250px; min-height: 10px;text-align: center; margin: auto;" type="text" id="inposition" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">TỔ ĐỘI</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:250px; min-height: 10px;text-align: center; margin: auto;" type="text" id="inteam" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">TRÌNH ĐỘ CHUYÊN MÔN</p>
+                <textarea  aria-required="true" style=" width:795px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 40px;" type="text" id="inleexpert" class="form-control col-90"> </textarea> 
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">CHỨNG CHỈ</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:300px; min-height: 10px;text-align: center; margin: auto;" type="text" id="incer" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">SDT</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:450px; min-height: 10px;text-align: center; margin: auto;" type="text" id="inpnum" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">Email</p>
+                <div class=" col-autoo"><input  aria-required="true" style=" width:890px; min-height: 10px;text-align: center; margin: auto;" type="text" id="mail" class="form-control"></div>
+                <p class="modal-title col-auto1" style="color: #7c4abe;font-weight: bold;margin-left: 45px;">ĐỊA CHỈ</p>
+                <textarea  aria-required="true" style=" width:895px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="inaddress" class="form-control col-90"> </textarea> 
+              </div>
+               
+              <div class="modal-footer" style="width: 98%;margin-left: 10px;margin-top: 20PX;"> 
+                <div id="blockadd" >
+                  <button  class="btn" id="btsave1" style="margin-top: -5px;"><i class="fa fa-save"></i> Lưu</button>
+                </div>
+                <div id="blockupda" >
+                  <button class="btn" id="btdelete" style="margin-top: -5px; background-color: red;"><i class="fa fa-times"></i> Xóa</button>
+                  <button  class="btn" id="btsave" style="margin-top: -5px;"><i class="fa fa-save"></i> Lưu</button>
+                </div>                                  
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </main>
+    <script type="text/javascript">
+        function loaddata(){
+          document.getElementById("linkstaff").style.backgroundColor="#4c4c4c";
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("get", '/staff/loading_data', true);
+          event.preventDefault(); //prevent default action 
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              var jsonObject = JSON.parse(this.responseText);
+              var trHTML = '';
+              var i;
+              for (i = 0; i < jsonObject.length; i++) {
+                var id = jsonObject[i].idfm;
+                var name = jsonObject[i].name;
+                var expertise = jsonObject[i].expertise;
+                var team = jsonObject[i].team;
+                var position = jsonObject[i].position;
+                var levels = jsonObject[i].levels;
+      
+                trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + expertise + '</td><td style="text-align: center;">' + levels + '</td><td style="text-align: center;">' + position + '</td><td style="text-align: center;">' + team + '</td></tr>';
+              }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+          }
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          xmlhttp.send();       
+        }
+        
+        document.getElementById('btsearch').addEventListener('click', function() {
+          var expert= document.getElementById("expertise").value;
+          var name= document.getElementById("searchname").value;
+          if (expert =="") {expert='%';} else {expert='%'+expert+'%';}
+          if (name =="") {name='%';} else {name='%'+name+'%';}
+          console.log(expert)
+          console.log(name)
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/staff/search', true);
+          event.preventDefault(); //prevent default action 
+     
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+              expert:expert,
+              name: name
+          };
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              var jsonObject = JSON.parse(this.responseText);
+              var trHTML = '';
+              var i;
+              for (i = 0; i < jsonObject.length; i++) {
+                var id = jsonObject[i].idfm;
+                var name = jsonObject[i].name;
+                var expertise = jsonObject[i].expertise;
+                var team = jsonObject[i].team;
+                var position = jsonObject[i].position;
+                var levels = jsonObject[i].levels;
+      
+                trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + expertise + '</td><td style="text-align: center;">' + levels + '</td><td style="text-align: center;">' + position + '</td><td style="text-align: center;">' + team + '</td></tr>';
+              }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+          }
+          // xmlhttp.setRequestHeader("Content-type", "application/json");
+          xmlhttp.send(JSON.stringify(data));    
+        })
+      
+        document.getElementById('btrefresh').addEventListener('click', function() {
+            loaddata();
+            document.getElementById("searchname").value="";
+            document.getElementById("expertise").value="";
+           
+        })
+
+        document.getElementById('btadd').addEventListener('click', function() {
+            document.getElementById('id01').style.display = 'block';
+          document.getElementById('blockupda').style.display='none';
+          document.getElementById('blockadd').style.display='block';
+          document.getElementById('inid').value="";
+          document.getElementById('inname').value="";
+          document.getElementById('cb6').value="";
+          // document.getElementById('inexpert').value="";
+          document.getElementById('levels').value="";
+          document.getElementById('inleexpert').value="";
+          document.getElementById('inposition').value="";
+          document.getElementById('mail').value="";
+          document.getElementById('inteam').value="";
+          document.getElementById('incer').value="";
+          document.getElementById('inaddress').value="";
+          document.getElementById('inpnum').value="";
+          document.getElementById("cb1").checked=false;
+          document.getElementById("cb2").checked=false;
+          document.getElementById("cb3").checked=false;
+          document.getElementById("cb4").checked=false;
+          document.getElementById("cb5").checked=false;
+        })
+        
+        function detail_ticket() {
+            var table = document.getElementById("tablea");
+            event.stopImmediatePropagation;
+            if (table) {
+                for (var i = 1; i < table.rows.length; i++) {
+                    table.rows[i].ondblclick = function(e) {
+                        tableText(this);
+                    }
+                }
+            }
+        }
+
+        function tableText(tableRow) {
+          document.getElementById("cb1").checked=false;
+          document.getElementById("cb2").checked=false;
+          document.getElementById("cb3").checked=false;
+          document.getElementById("cb4").checked=false;
+          document.getElementById("cb5").checked=false;
+          document.getElementById('blockupda').style.display='block';
+          document.getElementById('blockadd').style.display='none';
+          document.getElementById('id01').style.display = 'block';
+          document.getElementById('inid').value=tableRow.childNodes[0].innerText;
+          document.getElementById('inname').value=tableRow.childNodes[1].innerText;
+          document.getElementById('cb6').value="";
+          // document.getElementById('inleexpert').value="";
+          document.getElementById('levels').value=tableRow.childNodes[3].innerText;;        
+          document.getElementById('inposition').value=tableRow.childNodes[4].innerText;
+          document.getElementById('inteam').value=tableRow.childNodes[5].innerText;
+          var dpe=tableRow.childNodes[2].innerText;
+          if (dpe.includes("Cơ khí")){ document.getElementById("cb1").checked=true;}
+          if (dpe.includes("Điện công nghiệp")){ document.getElementById("cb2").checked=true;}
+          if (dpe.includes("Điện lạnh")){ document.getElementById("cb3").checked=true;}
+          if (dpe.includes("Điện tử")){ document.getElementById("cb4").checked=true;}
+          if (dpe.includes("Xây dựng")){ document.getElementById("cb5").checked=true;}
+          dpe=dpe.replace("Cơ khí","")
+          dpe=dpe.replace("Điện công nghiệp","")
+          dpe=dpe.replace("Điện lạnh","")
+          dpe=dpe.replace("Điện tử","")
+          dpe=dpe.replace("Xây dựng","")
+          console.log(dpe)
+          var cb6=dpe.lastIndexOf("|")
+          console.log(cb6)
+          document.getElementById("cb6").value=dpe.substring(cb6+1,dpe.length);
+          
+          var id=document.getElementById('inid').value;
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/staff/loadinfor', true);
+          //event.preventDefault(); //prevent default action 
+
+          var name = tableRow.childNodes[0].innerText
+     
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+              id: id
+          };
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var data = JSON.parse (this.responseText);
+              if (data.length>0){
+                // console.log(data)
+                document.getElementById('inleexpert').value=data[0].le_expert;
+                document.getElementById('incer').value=data[0].certificate;
+                document.getElementById('inaddress').value=data[0].address;
+                document.getElementById('inpnum').value=data[0].ph_num;
+                document.getElementById('mail').value=data[0].email;
+              }
+            }
+          }
+          xmlhttp.send(JSON.stringify(data));     
+
+        }
+
+        document.getElementById('btsave').addEventListener('click', function() {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/staff/update', true);
+          event.preventDefault(); //prevent default action 
+
+          var mail=document.getElementById('mail').value;
+          var id=document.getElementById('inid').value;
+          var name=document.getElementById('inname').value;
+          var levels= document.getElementById('levels').value;
+          var leexpert=document.getElementById('inleexpert').value;
+          var position=document.getElementById('inposition').value;
+          var team=document.getElementById('inteam').value;
+          var cer=document.getElementById('incer').value;
+          var address=document.getElementById('inaddress').value;
+          var pnum=document.getElementById('inpnum').value;
+          var cb="";
+          // --------------------------------
+          var cb1=document.getElementById("cb1").checked;
+          var cb2=document.getElementById("cb2").checked;
+          var cb3=document.getElementById("cb3").checked;
+          var cb4=document.getElementById("cb4").checked;
+          var cb5=document.getElementById("cb5").checked;
+          var cb6= document.getElementById('cb6').value;
+          if (cb1==true) {cb1="Cơ khí"; cb=cb+cb1+" |";}
+          console.log(cb)
+          if (cb2==true) {cb2="Điện công nghiệp"; cb=cb+" "+cb2+" |";}
+          console.log(cb)
+          if (cb3==true) {cb3="Điện lạnh"; cb=cb+" "+cb3+" |";}
+          console.log(cb)
+          if (cb4==true) {cb4="Điện tử";cb=cb+" "+cb4+" |";}
+          console.log(cb)
+          if (cb5==true) {cb5="Xây dựng";cb=cb+" "+cb5+" |";}
+          console.log(cb)
+          if (cb6!="") {cb=cb+" "+cb6+" |"}
+          cb=cb.substring(0, cb.length-1)
+          console.log(cb)
+          // ---------------------------------
+          // send data jason
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+            mail:mail,
+             id: id,
+             name: name,
+             levels: levels,
+             leexpert: leexpert,
+             position:position,
+             team:team,
+             cer:cer,
+             address:address,
+             pnum:pnum,
+             cb:cb
+              // id:id
+          };
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var data = this.responseText;
+              if (data == "ok") {
+                  loaddata()
+                  alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+                  // location.reload();
+              } else {
+                  alert("Có lỗi rồi!!!");
+              }
+                  document.getElementById('id01').style.display = 'none';
+              }
+          }
+          // console.log(data);
+          xmlhttp.send(JSON.stringify(data));
+        })
+
+        document.getElementById('btsave1').addEventListener('click', function() {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/staff/insert', true);
+          event.preventDefault(); //prevent default action 
+
+          var mail=document.getElementById('mail').value;
+          var id=document.getElementById('inid').value;
+          var name=document.getElementById('inname').value;
+          var levels= document.getElementById('levels').value;
+          var leexpert=document.getElementById('inleexpert').value;
+          var position=document.getElementById('inposition').value;
+          var team=document.getElementById('inteam').value;
+          var cer=document.getElementById('incer').value;
+          var address=document.getElementById('inaddress').value;
+          var pnum=document.getElementById('inpnum').value;
+          var cb="";
+          // --------------------------------
+          var cb1=document.getElementById("cb1").checked;
+          var cb2=document.getElementById("cb2").checked;
+          var cb3=document.getElementById("cb3").checked;
+          var cb4=document.getElementById("cb4").checked;
+          var cb5=document.getElementById("cb5").checked;
+          var cb6= document.getElementById('cb6').value;
+          if (cb1==true) {cb1="Cơ khí"; cb=cb+cb1+" |";}
+          console.log(cb)
+          if (cb2==true) {cb2="Điện công nghiệp"; cb=cb+" "+cb2+" |";}
+          console.log(cb)
+          if (cb3==true) {cb3="Điện lạnh"; cb=cb+" "+cb3+" |";}
+          console.log(cb)
+          if (cb4==true) {cb4="Điện tử";cb=cb+" "+cb4+" |";}
+          console.log(cb)
+          if (cb5==true) {cb5="Xây dựng";cb=cb+" "+cb5+" |";}
+          console.log(cb)
+          if (cb6!="") {cb=cb+" "+cb6+" |"}
+          cb=cb.substring(0, cb.length-1)
+          console.log(cb)
+          // ---------------------------------
+          // send data jason
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+            mail:mail,
+             id: id,
+             name: name,
+             levels: levels,
+             leexpert: leexpert,
+             position:position,
+             team:team,
+             cer:cer,
+             address:address,
+             pnum:pnum,
+             cb:cb
+              // id:id
+          };
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var data = this.responseText;
+              if (data == "ok") {
+                  loaddata()
+                  alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+                  // location.reload();
+              } else {
+                  alert("Có lỗi rồi!!!");
+              }
+                  document.getElementById('id01').style.display = 'none';
+              }
+          }
+          // console.log(data);
+          xmlhttp.send(JSON.stringify(data));
+        })
+
+        document.getElementById('btdelete').addEventListener('click', function() {
+            var r = confirm("Bạn có chắc muốn xóa không???");
+            if (r == true) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("post", '/staff/delete', true);
+                event.preventDefault(); //prevent default action 
+            
+                var id=document.getElementById("inid").value;
+
+        
+                // send data jason
+                xmlhttp.setRequestHeader("Content-type", "application/json");
+                data = {
+                    id: id      
+                };
+                xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    if (data == "ok") {
+                        loaddata()
+                        alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+                    } else {
+                        alert("Có lỗi rồi!!!");
+                    }
+                        document.getElementById('id01').style.display = 'none';
+                    }
+                }
+                // console.log(data);
+                xmlhttp.send(JSON.stringify(data));
+            }
+            else {
+                return
+            }
+      })
+
+        
+    </script> 
+  </body>
+</html>

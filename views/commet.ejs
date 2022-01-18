@@ -1,0 +1,650 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <!-- day picker -->
+        <!-- Include jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>CMMS</title>
+    
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+        <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
+    
+        <link rel="shortcut icon" href="images/favicon.png">
+    
+        <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+        <!--
+        <link rel="canonical" href="http://www.example.com/">
+        -->
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css"> -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+   <body onload="loaddata()">
+       <main>
+        <style>
+
+       
+            .mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen)>.mdl-layout__header {
+              margin-left: 240px;
+              width: calc(100% - 240px);
+              margin-left: 0px !important;
+              /* margin-left: 100px !important; */
+              width: 100%;
+          }
+           .autocomplete {
+              position: fixed;
+              display: inline-block;
+            }
+            input {
+              border: 1px solid transparent;
+              background-color: #ffffff;
+              padding: 10px;
+              font-size: 16px;
+            }
+            input[type=text] {
+              background-color: #ffffff;
+              width: 100%;
+            }
+            input[type=submit] {
+              background-color: DodgerBlue;
+              color: #fff;
+            }
+            .autocomplete-items {
+              position: absolute !important;
+              border: 1px solid #d4d4d4;
+              border-bottom: none;
+              border-top: none;
+              z-index: 99;
+              top: 100%;
+              left: 0;
+              right: 0;
+              max-height: 185px;
+              overflow-y: auto;
+            }
+            .autocomplete-items div {
+              padding: 10px;
+              cursor: pointer;
+              background-color: #fff;
+              border-bottom: 1px solid #d4d4d4;
+              text-align: center;
+              max-height: 200px;
+            }
+            .autocomplete-items div:hover {
+              background-color: #e9e9e9;
+            }
+            .autocomplete-active {
+    
+              background-color: DodgerBlue !important;
+              color: #ffffff;
+              max-height: 200px;
+            }
+            .autocompletee {
+              position: fixed;
+              display: inline-block;
+            }
+        
+            .autocompletee-items {
+              position: absolute !important;
+              border: 1px solid #d4d4d4;
+              border-bottom: none;
+              border-top: none;
+              z-index: 99;
+              top: 100%;
+              left: 0;
+              right: 0;
+              max-height: 100px;
+              overflow-y: auto;
+            }
+            .autocompletee-items div {
+              padding: 10px;
+              cursor: pointer;
+              background-color: #fff;
+              border-bottom: 1px solid #d4d4d4;
+              text-align: center;
+              max-height: 200px;
+            }
+            .autocompletee-items div:hover {
+              background-color: #e9e9e9;
+            }
+            .autocompletee-active {
+    
+              background-color: DodgerBlue !important;
+              color: #ffffff;
+              max-height: 200px;
+            }
+          .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+          }
+          /* .w3-bar .w3-button:active {
+            background-color: rgb(76, 0, 255) !important;
+    
+          }
+          .w3-bar .w3-button:d {
+            background-color: rgb(76, 0, 255) !important;
+    
+          } */
+          .dropbtn:hover, .dropbtn:focus {
+            background-color: white;
+            color: #3498DB;
+            border-top: solid 1px #3498DB;
+            border-left: solid 1px #3498DB;
+            border-right: solid 1px #3498DB;
+          }
+          .btn {
+                background-color: DodgerBlue;
+                border: none;
+                color: white;
+                padding: 8px 16px;
+                margin-top:18px;
+                cursor: pointer;
+                border-radius: 3px/3px;
+            }
+            .btn:hover {
+                background-color: RoyalBlue;
+            }
+            .form1{
+                height: 200px;
+            }
+            
+            .col-10 {
+            float: left;
+            width: 10%;
+            margin-top: 32px;
+            }
+    
+            .col-90 {
+            float: left;
+            width: 90%;
+            margin-top: 26px;
+            }
+            .col-901 {
+            float: left;
+            width: 100%;
+            margin-top: 26px;
+            }
+            .col-auto{
+                float: left;
+                min-width: 50px;
+                margin-left: 30px;
+                margin-top: 26px;
+            }
+            .col-aut1{
+                min-width:800px;
+                margin-left: 30px;
+                margin-top: 26px;
+                clear: left;
+            }
+            .col-autoo{
+                float: left;
+                margin-left: 10px;
+                min-width: 50px;
+                margin-top: 20px;
+                margin-left: 30px;
+            }
+            .col-autoo1{
+                float: left;
+                margin-left: 10px;
+                min-width: 10px;
+                margin-top: 20px;
+                margin-left: 30px;
+            }
+            .container{
+                height: 200px;
+                width: 300px;
+                position: relative;
+                margin-top: 15px;
+                }
+                .container .wrapper{
+                position: relative;
+                height: 200px;
+                width: 300;
+                border-radius: 5px;
+                background: #fff;
+                border: 2px dashed #c2cdda;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                }
+                .wrapper.active{
+                border: none;
+                }
+                .wrapper .image{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                }
+                .wrapper img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                }
+                .container #custom-btn{
+                text-align: center;
+                margin-top: -15px;
+                display: block;
+                width: 100%;
+                height: 20px;
+                border: none;
+                outline: none;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                cursor: pointer;
+                background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+                }
+        #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+        }
+        .left {
+          float: left;
+          width: 15%;
+          /* margin-top: 5px; */
+          
+          border: solid 1px rgb(255, 255, 255);
+        }
+        .right {
+          float: left;
+          width: 85%;
+          /* margin-top: 5px; */
+          border: solid 1px rgb(248, 248, 248);
+        }
+        html, body {
+          font-family: 'Roboto', 'Helvetica', sans-serif;
+        }
+        .demo-avatar {
+          width: 48px;
+          height: 48px;
+          border-radius: 24px;
+        }
+        .demo-layout .mdl-layout__header .mdl-layout__drawer-button {
+          color: rgba(0, 0, 0, 0.54);
+        }
+        .mdl-layout__drawer .avatar {
+          margin-bottom: 16px;
+        }
+        .demo-drawer {
+          border: none;
+          width: 250px;/* width: 250px; đổi */
+        }
+        .demo-drawer .mdl-menu__container {
+          z-index: -1;
+        }
+        .demo-drawer .demo-navigation {
+          z-index: -2;
+        }
+        /* END iOS Safari specific workaround */
+        .demo-drawer .mdl-menu .mdl-menu__item {
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+        .demo-drawer-header {
+          box-sizing: border-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-justify-content: flex-end;
+              -ms-flex-pack: end;
+                  justify-content: flex-end;
+          padding: 16px;
+          height: 151px;
+        }
+        .demo-avatar-dropdown {
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          position: relative;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          width: 100%;
+        }
+    
+        .demo-navigation {
+          -webkit-flex-grow: 1;
+              -ms-flex-positive: 1;
+                  flex-grow: 1;
+        }
+        .demo-layout .demo-navigation .mdl-navigation__link {
+          display: -webkit-flex !important;
+          display: -ms-flexbox !important;
+          display: flex !important;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          color: rgba(255, 255, 255, 0.56);
+          font-weight: 500;
+        }
+        .demo-layout .demo-navigation .mdl-navigation__link:hover {
+          background-color: #00BCD4;
+          color: #37474F;
+        }
+        .demo-navigation .mdl-navigation__link .material-icons {
+          font-size: 24px;
+          color: rgba(255, 255, 255, 0.56);
+          margin-right: 32px;
+          margin-left: -15px;
+        }
+    
+        .demo-content {
+          max-width: 1080px;
+        }
+    
+        .demo-charts {
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+        .demo-chart:nth-child(1) {
+          color: #ACEC00;
+        }
+        .demo-chart:nth-child(2) {
+          color: #00BBD6;
+        }
+        .demo-chart:nth-child(3) {
+          color: #BA65C9;
+        }
+        .demo-chart:nth-child(4) {
+          color: #EF3C79;
+        }
+        .demo-graphs {
+          padding: 16px 32px;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+          -webkit-align-items: stretch;
+              -ms-flex-align: stretch;
+                  align-items: stretch;
+        }
+        _:-ms-input-placeholder, :root .demo-graphs {
+          min-height: 664px;
+        }
+        _:-ms-input-placeholder, :root .demo-graph {
+          max-height: 300px;
+        }
+        /* TODO end */
+        .demo-graph:nth-child(1) {
+          color: #00b9d8;
+        }
+        .demo-graph:nth-child(2) {
+          color: #d9006e;
+        }
+    
+        .demo-cards {
+          -webkit-align-items: flex-start;
+              -ms-flex-align: start;
+                  align-items: flex-start;
+          -webkit-align-content: flex-start;
+              -ms-flex-line-pack: start;
+                  align-content: flex-start;
+        }
+        .demo-cards .demo-separator {
+          height: 32px;
+        }
+        .demo-cards .mdl-card__title.mdl-card__title {
+          color: white;
+          font-size: 24px;
+          font-weight: 400;
+        }
+        .demo-cards ul {
+          padding: 0;
+        }
+        .demo-cards h3 {
+          font-size: 1em;
+        }
+        .demo-updates .mdl-card__title {
+          min-height: 200px;
+          background-image: url('images/dog.png');
+          background-position: 90% 100%;
+          background-repeat: no-repeat;
+        }
+        .demo-cards .mdl-card__actions a {
+          color: #00BCD4;
+          text-decoration: none;
+        }
+    
+        .demo-options h3 {
+          margin: 0;
+        }
+        .demo-options .mdl-checkbox__box-outline {
+          border-color: rgba(255, 255, 255, 0.89);
+        }
+        .demo-options ul {
+          margin: 0;
+          list-style-type: none;
+        }
+        .demo-options li {
+          margin: 4px 0;
+        }
+        .demo-options .material-icons {
+          color: rgba(255, 255, 255, 0.89);
+        }
+        .demo-options .mdl-card__actions {
+          height: 64px;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          box-sizing: border-box;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+        }
+          .progress {
+          height: 20px;
+          margin-bottom: 10px;
+          width: 200px !important;
+        }
+        .mdl-layout--fixed-tabs .mdl-layout__tab {
+          float: none;
+          -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+          padding: 0;
+          COLOR: #7c4abe;
+          BACKGROUND-COLOR: white;
+      }
+      .mdl-layout.is-upgraded .mdl-layout__tab.is-active {
+          color: rgb(255,255,255);
+          BACKGROUND-COLOR: #1e90ff;
+      }
+      .mdl-layout__header-row{
+        padding: 0 0 0 0;
+      }
+        </style>
+        <h1 style="text-align: center;">ĐÁNH GIÁ CHẤT LƯỢNG CÔNG VIỆC</h1>
+        <!-- <span><id="user" style="font-size: 20px;">aaaaaaaaaa</span>
+        <span><id="user" style="font-size: 20px;"><%=id %></span> -->
+        <fieldset style="margin-top: 20px;width: 1200px;margin: auto;">
+            <legend>Thông tin liên quan</legend>
+            <div style="margin-top: -30px;">
+              <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 25px;">ID</p>
+              <p list="listname" aria-required="true" style=" width:420px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; " type="text" id="id" class="form-control col-90" ><%=id %></p>
+            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Người thực hiện</p>
+            <!-- <input  aria-required="true" style=" width:420px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="staffwork" class="form-control col-90">                                       -->
+            <input list="listname" aria-required="true" style=" width:420px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; " type="text" id="staffwork" class="form-control col-90" >
+    
+            <!-- <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="leverec" class="form-control col-90">     -->
+            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 25px;">Nguyên nhân</p>
+            <textarea  aria-required="true" style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="reason" class="form-control col-90"> </textarea> 
+            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Giải pháp</p>
+            <textarea  aria-required="true" style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="solution" class="form-control col-90"> </textarea>                 
+            </div>
+          </fieldset>
+          <fieldset style="margin-top: 30px !important;width: 1200px;margin: auto;">
+            <legend>Đánh giá</legend>
+            <div style="margin-top: -30px;">
+            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 25px;">Tiến độ</p>
+            <div ><select id="rec_progress" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90" >
+              <option >Chưa đánh giá</option>
+              <option >Đúng hạn</option>    
+              <option >Quá hạn</option>     
+              </select>          
+            </div>    
+            <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Chất lượng</p>
+            <div ><select id="quality" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90" >
+              <option > </option>
+              <option >Rất hài lòng</option>
+              <option >Hài lòng</option>    
+              <option >Bình thường</option>   
+              <option >Thất vọng</option>  
+              <option >Rất thất vọng</option>       
+              </select>          
+             </div>
+             <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 25px;">Nhận xét</p>
+             <textarea  aria-required="true" style=" width:1015px; min-height: 50px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;" type="text" id="comment" class="form-control col-90"> </textarea>                 
+            </div>
+          </fieldset>
+          <div class="modal-footer" style="margin-top: 20px; width: 50%;margin-left: 25%;">  
+            <div id="boxadd" style="margin-top: -20px;">
+              <button class="btn" id="btsave1" style="width:100%;"><i class="fa fa-send"></i> Gửi đánh giá</button>
+            </div>  
+          </div>
+          <div class="w3-container">
+            <div  id="id02" class="w3-modal">
+              <div style="width: 1100px; height: 600px;border: solid 3px blueviolet; border-radius: 20px;" class="w3-modal-content" >
+                <div style="width: 100%; height: 100%;" class="w3-container">
+                  <h1 style="font-size: 70px;color: red;margin-top: 180px;font-family: serif;text-align: center;">THANK YOU</h1>
+                  <i class="fa fa-check-circle-o" aria-hidden="true" style="font-size: 100px;margin-top: 20px;color: yellow;margin-left: 500px;"></i>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+       </main>
+       <script>
+        function loaddata(){
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/comment/load', true);
+
+            var id = document.getElementById("id").innerHTML;
+        
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                id: id
+            };
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse (this.responseText);
+                if (data.length>0){
+                document.getElementById("staffwork").value=data[0].user_req;
+                document.getElementById("solution").value= data[0].solution;
+                document.getElementById("reason").value= data[0].reason;
+                document.getElementById("rec_progress").value=data[0].rec_progress;
+                document.getElementById("quality").value=data[0].quality;
+                document.getElementById("comment").value=data[0].comment;
+             
+                }
+            }
+            }
+            xmlhttp.send(JSON.stringify(data)); 
+
+           }
+        
+        document.getElementById('btsave1').addEventListener('click', function() {
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/w_order/comment', true);
+            event.preventDefault(); //prevent default action 
+
+            var idreqq= document.getElementById("id").innerHTML;
+            var progress=document.getElementById("rec_progress").value;
+            var quality= document.getElementById("quality").value;
+            var comment= document.getElementById("comment").value;
+
+            // send data jason
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                idreqq:idreqq,
+                progress:progress,
+                quality:quality,
+                comment:comment
+            };
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                if (data == "ok") {
+                    // loaddata()
+                    document.getElementById('id02').style.display = 'block';
+                    // location.reload();
+                } else {
+                    alert("Có lỗi rồi!!!");
+                }
+                   
+                }
+            }
+            // console.log(data);
+            xmlhttp.send(JSON.stringify(data));
+            })
+      
+      </script>
+   </body>
+</html>

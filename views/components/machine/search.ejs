@@ -1,0 +1,50 @@
+<div
+style="height: 80px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;overflow-x: auto;">
+<div class="col-autoser">
+  <p class="modal-title" style="color: #7c4abe;font-weight: bold;">Tên thiết bị</p>
+</div>
+<div class="col-autooser"><input aria-required="true"
+    style=" width:150px; min-height: 10px;text-align: center; margin: auto; " type="text" id="searchname"
+    class="form-control"></div>
+<div class="col-autoser">
+  <p class="modal-title" style="color: #7c4abe;font-weight: bold;">Loại thiết bị</p>
+</div>
+<div class="col-autooser"><input list="typeq" aria-required="true"
+    style=" width:150px; min-height: 10px;text-align: left; margin: auto; " type="text" id="searchtypeq"
+    class="form-control"><datalist style="height: 10px !important;overflow-y: auto!important" id="typeq">
+    <%-sy%>
+  </datalist></div>
+<div class="col-autoser">
+  <p class="modal-title" style="color: #7c4abe;font-weight: bold;">Vị trí</p>
+</div>
+<div class="col-autooser"><input list="posi" aria-required="true"
+    style=" width:150px; min-height: 10px;text-align: left; margin: auto; " type="text" id="searchpos"
+    class="form-control"><datalist id="posi">
+    <%-po%>
+  </datalist></div>
+
+<button class="btn" style="margin-left: 20px;" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button>
+<button class="btn" id="btsearch"><i class="fa fa-search"></i> Tìm kiếm</button>
+<button class="btn" style=" background-color: #c3fe3a;" id="btadd"><i class="fa fa-plus"></i> Thêm</button>
+<button id="uploadex" class="btn"
+  style="margin-left: 100px; background-color: rgb(255, 0, 0);width: 110px;text-align: left;"><i
+    class="fa fa-upload"></i> Tải excel</button></a>
+<a href="" id="adownload" download style="display: none;">
+  <button id="btdownload" class="btn-box"
+    style=" background-color: rgb(255, 0, 0);border: solid rgb(255, 255, 255);width: 110px;text-align: left;"><i
+      class="fa fa-download"></i> Xuất excel</button></a>
+</a>
+<button id="dowloadex" class="btn" style="width: 110px;text-align: left;"><i class="fa fa-download"></i> Xuất
+  excel</button></a>
+<button style="margin-top: 20px;" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+  id="hdrbtn1">
+  <i class="material-icons">more_vert</i>
+</button>
+<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn1"
+  style="align-items: center;">
+  <a style="margin-left: 5px;">
+    <button id="macdie" class="btn-box"
+      style="color: black; background-color: rgb(255, 255, 255);border: solid rgb(255, 255, 255);width: 110px;text-align: left;">Máy
+      hết hạn</button></a>
+</ul>
+</div>

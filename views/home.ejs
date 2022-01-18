@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%-include ('layout/header'); %>
+  <%-include ('./styles/home/homeCss'); %>
+</head>
+
+<body onload="loaddata()">
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <%-include ('./components/home/homeHeader'); %>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <%-include ('layout/menu'); %>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <%-include ('./components/home/sumaryWork'); %>
+          <div class="col-50" style="height: 400px;">
+            <%-include ('./components/home/maintenancePlan'); %>
+          </div>
+          <div class="col-50" style="height: 400px;">
+            <%-include ('./components/home/requestAllocation') %>
+          </div>
+
+      </main>
+      <%-include ('./scripts/home/homeScript'); %>
+</body>
+
+</html>

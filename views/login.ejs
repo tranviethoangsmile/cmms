@@ -1,0 +1,131 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>HBI Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <!-- load fontawesome -->
+    <style>
+        body {
+            padding-top: 80px;
+            background-color: #263238;
+        }
+    </style>
+</head>
+<body onLoad="loadData()">
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3" >
+
+        <h1 style="color: rgb(255, 255, 0);"><span class="fa fa-sign-in"></span> Login System</h1>
+
+        <!-- hiển thị mọi tin nhắn được trả lại từ việc đăng nhập -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post" name="frmDangNhap">
+            <div class="form-group">
+                <label style="color: rgb(255, 255, 0);">Username</label>
+                <input type="text" class="form-control" name="username" id="username">
+            </div>
+            <div class="form-group">
+                <label style="color: rgb(255, 255, 0);">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <label  style="color: rgb(255, 255, 0);" style="font-size: 50px !important;">
+                <input style="font-size: 50px !important;" type="checkbox" checked="checked" name="remember" id="rememberMe"> Remember me
+            </label>
+            <span class="psw" style="color: rgb(255, 255, 0);margin-left: 310px;" onclick="forgot()" >Forgot <a href="#">password?</a></span>
+            <br>
+            <br>
+            <button onclick="lsRememberMe()" type="submit" class="btn btn-warning btn-lg" style="background-color: #0862d8;width: 540px; color: rgb(255, 255, 0);">Login</button>
+        </form>
+
+
+        <hr>
+<!-- 
+        <p>Need an account? <a href="/signup">Signup</a></p>
+        <p>Or go <a href="/">home</a>.</p> -->
+        <!-- <form>
+            <label for="email">Email</label>
+            <input type="email" id="email">
+            <label for="pass">Password</label>
+            <input type="password">
+            <input type="checkbox" value="lsRememberMe" id="rememberMe"> <label for="rememberMe">Remember me</label>
+            <input type="submit" value="Login" onclick="lsRememberMe()">
+          </form> -->
+
+    </div>
+
+</div>
+<script>
+    // const rmCheck = document.getElementById("rememberMe"),
+    // const user= document.getElementById("username");
+
+    // if (localStorage.checkbox && localStorage.checkbox !== "") {
+    //         rmCheck.setAttribute("checked", "checked");
+    //         user.value = localStorage.username;
+    //     } else {
+    //         rmCheck.removeAttribute("checked");
+    //         user.value = "";
+    // }
+
+    // function lsRememberMe() {
+    // if (rmCheck.checked && user.value !== "") {
+    //     localStorage.username = user.value;
+    //     localStorage.checkbox = rmCheck.value;
+    // } else {
+    //     localStorage.user = "";
+    //     localStorage.checkbox = "";
+    // }
+    // }
+    function checkSupport()
+    {
+        if (('sessionStorage' in window) && window['sessionStorage'] !== null)
+        {
+            alert("Trình duyệt hỗ trợ lưu trữ web");
+            return;
+        }
+        alert("Trình duyệt không hỗ trợ lưu trữ web"); 
+    }
+    function loadData(){
+        if(('localStorage' in window) && window['localStorage'] != null && localStorage.getItem('ghinho')
+            ){
+            document.frmDangNhap.username.value = localStorage.getItem('tendangnhap');
+            document.frmDangNhap.password.value = localStorage.getItem('matkhau');
+        }
+    }
+    function lsRememberMe()
+    {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var rememberMe = document.getElementById("rememberMe").checked;
+        if(('localStorage' in window) && window['localStorage'] != null){
+            localStorage.setItem('tendangnhap', username);
+            localStorage.setItem('matkhau', password);
+            // alert("Tên người dùng : " + localStorage.getItem('tendangnhap') + ", Mật khẩu : " + localStorage.getItem('matkhau'));
+        }
+        else{
+            alert("Trình duyệt không hỗ trợ LocalStorage");
+        }     
+        //ghi nho thong tin
+        if(rememberMe)
+        {
+            localStorage.setItem('ghinho', 1);
+        }
+    }
+    function forgot(){
+        document.getElementById("rememberMe").checked=false;
+        localStorage.removeItem('tendangnhap');
+        localStorage.removeItem('matkhau');
+        localStorage.removeItem('ghinho');
+        document.frmDangNhap.username.value = "";
+        document.frmDangNhap.password.value ="";
+    }
+</script>
+</body>
+</html>

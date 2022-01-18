@@ -1,0 +1,1125 @@
+<script>
+    function myFunction(){
+        document.getElementById("btsend").style.display ='block'
+    }
+    
+    function alert_ok(name) {
+        document.getElementById('contenalert').innerHTML = name;
+        $('.alert').removeClass('hidden');
+        $('.alert').addClass('show');
+        setTimeout(function() {
+            $('.alert').removeClass('show');
+            $('.alert').addClass('hidden');
+        }, 5500)
+    }
+
+    function change_time(time) {
+        return (new Date(time)).toLocaleString("en-US", {
+            timeZone: "Asia/Bangkok"
+        });
+    }
+
+    function change_time2(time) {
+        return (new Date(time)).toLocaleString('en-GB', {
+            timeZone: "Asia/Bangkok"
+        });
+    }
+
+    function change_time3(time) {
+        return (new Date(time)).toLocaleDateString('en-US');
+
+    }
+
+    function loaddata() {
+        document.getElementById("linkwork").style.backgroundColor = "#4c4c4c";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("get", '/work/loading_data', true);
+        event.preventDefault(); //prevent default action 
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = change_time3(jsonObject[i].time_exe);
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {   
+                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: #2196f3;">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '</tr>'
+                }
+            }
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.send();
+    }
+
+    function tyw(a) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/loading_dataa', true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            typework: a
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = jsonObject[i].time_commit;
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    time_exe = change_time(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    if (leve == "1" && status == "Đã phân công") {
+                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: #f44336;">' + status + '</td></tr>';
+                    } else if (leve == "2" && status == "Đã phân công") {
+                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: yellow;">' + status + '</td></tr>';
+                    } else {
+                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td></tr>';
+                    }
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+    }
+
+    document.getElementById('btrefresh').addEventListener('click', function() {
+        loaddata();
+        document.getElementById('leverec').value = '';
+        document.getElementById('day1').value = '';
+        document.getElementById('day2').value = '';
+        if (sttw != "%" || sttw == "") {
+            document.getElementById(sttw).style.backgroundColor = "white";
+        }
+        document.getElementById("Tất cả").style.backgroundColor = "white";
+        if (typw == "Bảo dưỡng định kỳ%") {
+            typw = "Bảo dưỡng định kỳ"
+        }
+        if (typw != "%") {
+            document.getElementById(typw).style.backgroundColor = "white";
+        }
+        if (name1 != "%") {
+            document.getElementById(name1).style.backgroundColor = "white";
+        }
+        name2a = name2.replace(/\s/g, "_");
+        if (name2 != "%") {
+            document.getElementById(name2a).style.backgroundColor = "white";
+        }
+        sttw = "";
+        typw = "%";
+        name1 = "%";
+        name2 = "%";
+        console.log(sttw)
+    })
+
+    function detail_ticket() {
+        var table = document.getElementById("tablea");
+        // document.getElementById('file').value="";
+        event.stopImmediatePropagation;
+        if (table) {
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].ondblclick = function(e) {
+                    tableText(this);
+                }
+            }
+        }
+    }
+
+    document.getElementById('bt2').addEventListener('click', function() {
+        var table = document.getElementById("tableb");
+        var tr = table.getElementsByTagName("tr");
+        var i, j;
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+        }
+
+        document.getElementById('tb2').style.display = 'block';
+        document.getElementById('tb1').style.display = 'none';
+        document.getElementById('tb3').style.display = 'none';
+        document.getElementById('btsave2').style.display = 'block';
+        document.getElementById('btsave1').style.display = 'none';
+        document.getElementById('btsave3').style.display = 'none';
+        // document.getElementById('btsend').style.display = 'block';
+
+        loadpart_log();
+        tb2();
+    })
+
+    document.getElementById('bt3').addEventListener('click', function() {
+        document.getElementById('tb3').style.display = 'block';
+        document.getElementById('tb1').style.display = 'none';
+        document.getElementById('tb2').style.display = 'none';
+        document.getElementById('btsave3').style.display = 'block';
+        document.getElementById('btsave1').style.display = 'none';
+        document.getElementById('btsave2').style.display = 'none';
+        // document.getElementById('btsend').style.display = 'none';
+    })
+
+    document.getElementById('bt1').addEventListener('click', function() {
+        document.getElementById('tb1').style.display = 'block';
+        document.getElementById('tb3').style.display = 'none';
+        document.getElementById('tb2').style.display = 'none';
+        document.getElementById('btsave1').style.display = 'block';
+        document.getElementById('btsave2').style.display = 'none';
+        document.getElementById('btsave3').style.display = 'none';
+        // document.getElementById('btsend').style.display = 'block';
+    })
+
+    function tableText(tableRow) {
+        
+
+        if(tableRow.childNodes[6].innerText=="Chưa phân công"){
+            document.getElementById('id02').style.display = 'block';
+            document.getElementById('btsend').style.display = 'block';
+            document.getElementById('boxprogress').style.display = 'none';
+            document.getElementById("progress").value = '0';
+        }
+        else{
+            document.getElementById('id01').style.display = 'block'; 
+            document.getElementById('btsend').style.display = 'none';
+            document.getElementById('boxprogress').style.display = 'block';
+        }
+
+        document.getElementById('tb1').style.display = 'block';
+        document.getElementById('tb3').style.display = 'none';
+        document.getElementById('tb2').style.display = 'none';
+        document.getElementById('btsave1').style.display = 'block';
+        document.getElementById('btsave2').style.display = 'none';
+        document.getElementById('btsave3').style.display = 'none';
+        document.getElementById("idreq").value = tableRow.childNodes[0].innerText;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/w_order/loading_req', true);
+
+        var id = tableRow.childNodes[0].innerText;
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            id: id
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                if (data.length > 0) {
+                    if(document.getElementById('user').innerText == data[0].user_rec || document.getElementById('user').innerText == data[0].user_staff ){
+                        document.getElementById('boxprogress').style.display = 'block';
+                    }
+                    else {
+                        document.getElementById('boxprogress').style.display = 'none';
+                    }
+
+                    document.getElementById("staffreq").value = data[0].user_req;
+                    document.getElementById("typereq").value = data[0].type_req;                      
+                    document.getElementById("idreqq").value = data[0].id;
+                    document.getElementById("placereq").value = data[0].place_req;
+                    document.getElementById("levereq").value = data[0].leve_req;
+                    if (data[0].name_work == ""){
+                    document.getElementById("namework").value = data[0].req;
+                    document.getElementById("typework").value = data[0].type_req;}
+                    else {
+                    document.getElementById("namework").value = data[0].name_work;
+                    document.getElementById("typework").value = data[0].type_work;}
+                    document.getElementById("hidedate").value = data[0].time_req;
+                    document.getElementById("hideeq").value = data[0].type_eq;
+                    document.getElementById("hidecycle").value = data[0].cycle;
+                    document.getElementById("cyclehide").value = data[0].cycle;
+                    document.getElementById("objshide").value = data[0].type_eq;
+                    document.getElementById("datehide").value = data[0].time_req;
+                    document.getElementById("timeendreq").value = data[0].timeend_req;
+                    document.getElementById("staffwork").value = data[0].FM_staff;
+                    document.getElementById('datestart').value = data[0].time_exe;                   
+                    document.getElementById('statuswork').value = data[0].status_work;
+                    document.getElementById('durawork').value = data[0].time_commit;
+                    document.getElementById('leverecc').value = data[0].leve_rec;
+                    document.getElementById("idreqq").value = data[0].id;
+                    document.getElementById("solution").value = data[0].solution;
+                    document.getElementById("reason").value = data[0].reason;
+                    document.getElementById("note").value = data[0].note;
+                    document.getElementById("quality").value = data[0].quality;
+                    document.getElementById("comment").value = data[0].comment;
+                    document.getElementById("progress").value = data[0].progress;
+                    document.getElementById("disprogress").innerHTML = data[0].progress + "%";
+                    document.getElementById("departreq").value = data[0].depart_req;
+                    document.getElementById("contentreq").value = data[0].req;
+                    document.getElementById("emailreq").value = data[0].emailreq;
+                    document.getElementById("pnum").value = data[0].phonenum;
+                }
+            }
+        }
+        xmlhttp.send(JSON.stringify(data));
+    }
+
+    function progresss() {
+        document.getElementById("disprogress").innerHTML = document.getElementById("progress").value + "%";
+    }
+
+    document.getElementById('btspare').addEventListener('click', function() {
+        // var trHTML="";
+        if (document.getElementById("qty_inhere").value != '') {
+            var name = document.getElementById("listipart").value;
+            var idpart = document.getElementById("idpart").value;
+            var qty1 = document.getElementById("qty_req").value;
+            // var idreq= document.getElementById("idreq").value;
+            // var typework= document.getElementById("typework").value;
+            // trHTML += '<tr ><td style="text-align: center;">' + typework + '</td><td style="text-align: center;">' + idpart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + qty1 + '</td></tr>';
+            // $('#tableb tbody').html(trHTML);
+            var table = document.getElementById("tableb");
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = idpart;
+            cell2.innerHTML = name;
+            cell3.innerHTML = qty1;
+            cell4.innerHTML = "Chưa cấp";
+            tb2();
+        } else {
+            alert("Vật tư yêu cầu hiện tại không có trong danh sách tồn kho!!!")
+            return
+        }
+    })
+
+    function tb2() {
+        document.getElementById("listipart").value = "";
+        document.getElementById("idpart").value = "";
+        document.getElementById("qty_req").value = "";
+        document.getElementById("qty_inhere").value = "";
+    }
+
+    function loadpart_log() {
+        console.log("hiiiiiii")
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/part_log/loadsp', true);
+
+        var idreq = document.getElementById("idreqq").value;
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            idreq: idreq
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    var id = i + 1;
+                    var ipart = jsonObject[i].idpart;
+                    var qty1 = jsonObject[i].qty_req;
+                    var name = jsonObject[i].namepart;
+                    var stt = jsonObject[i].status;
+                    // time_exe=change_time(time_exe);
+                    // time_confirm=change_time(time_confirm);
+
+                    trHTML += '<tr ><td style="text-align: center;">' + ipart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + qty1 + '</td><td style="text-align: center;">' + stt + '</td></tr>';
+                }
+                $('#tableb tbody').html(trHTML);
+
+            }
+        }
+        xmlhttp.send(JSON.stringify(data));
+    }
+
+    function detectqty() {
+        // console.log("hi")
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/part_log/loadinf', true);
+        //event.preventDefault(); //prevent default action 
+
+        var listipart = document.getElementById("listipart").value;
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            listipart: listipart
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                if (data.length > 0) {
+                    // console.log(data[0].QTY);
+                    var data1 = data[0].Qty;
+                    var data2 = data[0].Id;
+                    document.getElementById("qty_inhere").value = data1;
+                    document.getElementById("idpart").value = data2;
+                } else {
+                    document.getElementById("qty_inhere").value = "";
+                    document.getElementById("idpart").value = "";
+                }
+            }
+        }
+        xmlhttp.send(JSON.stringify(data));
+    }
+
+    document.getElementById('btsave2').addEventListener('click', function() {
+        var table = document.getElementById("tableb");
+        var rows = table.getElementsByTagName('tr');
+        var idreq = document.getElementById("idreqq").value;
+        var typework = document.getElementById("typework").value;
+
+        // if (rows.length == 1) {
+        for (var i = 1; i < rows.length; i++) {
+            var id = table.rows[i].cells[0].innerHTML;
+            var name = table.rows[i].cells[1].innerHTML;
+            var qty = table.rows[i].cells[2].innerHTML;
+            var stt = table.rows[i].cells[3].innerHTML;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/part_log/insertreqwo', true);
+            event.preventDefault(); //prevent default action 
+            // send data jason
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                idpart: id,
+                name: name,
+                qty_req: qty,
+                idreq: idreq,
+                typework: typework,
+                stt: stt
+
+
+            };
+            xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = this.responseText;
+                        if (data == "ok") {
+                            var table = document.getElementById("tableb");
+                            var tr = table.getElementsByTagName("tr");
+                            var i, j;
+                            for (i = 1; i < tr.length; i++) {
+                                document.getElementById('tableb').deleteRow(i);
+                            }
+                            loadpart_log()
+                            alert_ok("Bạn đã thêm vật tư cho công việc này.");
+                                // location.reload();
+                        } else {
+                            alert("Có lỗi rồi!!!");
+                        }
+                        // document.getElementById('id01').style.display = 'none';
+                    }
+                }
+                // console.log(data);
+            xmlhttp.send(JSON.stringify(data));
+        }
+        // }
+
+
+    })
+
+    function Send(){
+      var r= confirm("Bạn có chắc chắn phân công công việc này ???");
+      if (r == true){
+   
+        var id=document.getElementById('idreq').value;
+        var staff=document.getElementById('staffwork').value;
+
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("post", '/wo/send_wo_to_staff', true);
+          event.preventDefault(); 
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          data = {
+            id: id,
+            //stt: stt,
+            staff:staff
+
+
+          };
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            // console.log(data);
+            if (data == "ok") {
+                alert_ok("Ðã gửi mail phân công");
+                // location.reload();
+            } else {
+                alert("Có lỗi rồi!!!");
+            }
+            
+          }
+          }
+          xmlhttp.send(JSON.stringify(data));    
+      }
+    }
+
+    document.getElementById('btdistri').addEventListener('click', function() {
+        document.getElementById('id01').style.display = 'block';
+        document.getElementById('id02').style.display = 'none';
+    })
+
+    document.getElementById('btsave1').addEventListener('click', function() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/infordis', true);
+        event.preventDefault(); //prevent default action 
+
+        var progress = document.getElementById("progress").value;
+        console.log(progress)
+        var typework = document.getElementById("typework").value;
+        var namework = document.getElementById("namework").value;
+        var statuswork = document.getElementById("statuswork").value;
+        var datestart = document.getElementById('datestart').value;
+        var durawork = document.getElementById('durawork').value;
+
+        var staffwork = document.getElementById('staffwork').value;
+        var leverec = document.getElementById('leverecc').value;
+        var idreq = document.getElementById("idreq").value;
+
+        var solution = document.getElementById("solution").value;
+        var reason = document.getElementById("reason").value;
+        var note = document.getElementById("note").value;
+        var email = document.getElementById("emailreq").value;
+
+        var cyclehide = document.getElementById("cyclehide").value;
+        var objshide  = document.getElementById("objshide").value;
+        var datehide  = document.getElementById("datehide").value;
+
+        console.log(email)
+        // console.log(leverec);
+
+        // if (progress > 0) {
+        //     var stt = "Đang thực hiện";
+        // }
+        // if (progress == 100) {
+        //     var stt = "Hoàn thành";
+        // }
+        // if (progress == 0) {
+        //     var stt = "Đã phân công";
+        // }
+        // console.log(stt);
+        // var timereq = document.getElementById("hidedate").value;
+        // var eq = document.getElementById("hideeq").value;
+        // var cycle = document.getElementById("hidecycle").value;
+        // var mail = document.getElementById("mail").value;
+
+        // send data jason
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        datas = {
+            cyclehide : cyclehide,
+            objshide : objshide,
+            datehide : datehide,
+            progress: progress,
+            email: email,
+            typework: typework,
+            namework: namework,
+            statuswork: statuswork,
+            datestart: datestart,
+            durawork: durawork,
+            staffwork: staffwork,
+            leverec: leverec,
+            idreq: idreq,
+            solution: solution,
+            reason: reason,
+            note: note
+        };
+        xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    if (data == "ok") {
+                        loaddata()
+                        alert_ok("Thông tin được cập nhật !!!")
+                        // location.reload();
+                    } else if (data =="oke"){
+                        alert_ok("Đã gửi mail hoàn thành !!!")
+                    }
+                    else {
+                        alert("Có lỗi rồi!!!");
+                    }
+                    // document.getElementById('id01').style.display = 'none';
+                }
+            }
+            // console.log(data);
+        xmlhttp.send(JSON.stringify(datas));
+    })
+
+    document.getElementById('btsave3').addEventListener('click', function() {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/w_order/comment', true);
+        event.preventDefault(); //prevent default action 
+
+        var idreqq = document.getElementById("idreqq").value;
+        // var progress = document.getElementById("rec_progress").value;
+        var quality = document.getElementById("quality").value;
+        var comment = document.getElementById("comment").value;
+        var progress = document.getElementById("progress").value;
+
+        // send data jason
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            idreqq: idreqq,
+            progress: progress,
+            quality: quality,
+            comment: comment
+        };
+        xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    if (data == "ok") {
+                        loaddata()
+                        alert_ok("Bạn đã đánh giá công việc này.");
+                        // location.reload();
+                    } else {
+                        alert("Có lỗi rồi!!!");
+                    }
+                    // document.getElementById('id01').style.display = 'none';
+                }
+            }
+            // console.log(data);
+        xmlhttp.send(JSON.stringify(data));
+    })
+
+    var sttw = "";
+    typw = "%";
+    name1 = "%";
+    name2 = "%";
+
+    function searcha(a) {
+        if (sttw == "%") {
+            sttw = "Tất cả";
+        }
+        if (sttw != "") {
+            document.getElementById(sttw).style.backgroundColor = "white";
+        }
+        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        sttw = a;
+        if (sttw == "Tất cả" || sttw == "") {
+            sttw = '%';
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/search', true);
+        //event.preventDefault(); //prevent default action 
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            sttw,
+            typw,
+            name1,
+            name2
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    time_exe = change_time3(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    // console.log(now1);
+                    // console.log(now);
+                    // console.log(time_commit1);
+                    // // console.log(timeco)
+                    // console.log(commit);
+                    // console.log("--------------------");
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {
+                        // console.log("eee")       
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    // if (status=="Đã phân công"){
+                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // }
+                    trHTML += '</tr>'
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+
+    }
+
+    function detail_ticket1() {
+        var table = document.getElementById("tableb");
+        // document.getElementById('file').value="";
+        event.stopImmediatePropagation;
+        if (table) {
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].ondblclick = function(e) {
+                    deleText(this);
+                }
+            }
+        }
+    }
+
+    function deleText(tableRow) {
+
+        var r = confirm("Bạn có chắc muốn xóa không???");
+        if (r == true) {
+            var table = document.getElementById("tableb");
+            var rows = table.getElementsByTagName('tr');
+            for (var i = 1; i < rows.length; i++) {
+                if (rows[i].cells[0].innerText == tableRow.childNodes[0].innerText) {
+                    document.getElementById("tableb").deleteRow(i);
+                }
+            }
+        } else {
+            return
+        }
+    }
+
+    function searchb(a) {
+        if (typw == "Bảo dưỡng định kỳ%") {
+            typw = "Bảo dưỡng định kỳ";
+        }
+        console.log(typw)
+        if (typw != "%") {
+            document.getElementById(typw).style.backgroundColor = "white";
+        }
+        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        typw = a;
+        if (sttw == "Tất cả" || sttw == "") {
+            sttw = '%';
+        }
+        if (typw == "Bảo dưỡng định kỳ") {
+            typw = "Bảo dưỡng định kỳ%";
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/search', true);
+        //event.preventDefault(); //prevent default action 
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            sttw,
+            typw,
+            name1,
+            name2
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    time_exe = change_time3(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    // console.log(now1);
+                    // console.log(now);
+                    // console.log(time_commit1);
+                    // // console.log(timeco)
+                    // console.log(commit);
+                    // console.log("--------------------");
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {
+                        // console.log("eee")       
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    // if (status=="Đã phân công"){
+                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // }
+                    trHTML += '</tr>'
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+
+    }
+
+    function search1(a) {
+        if (name1 != "%") {
+            document.getElementById(name1).style.backgroundColor = "white";
+        }
+        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        name1 = a.replace(/_/g, " ");
+        if (sttw == "Tất cả" || sttw == "") {
+            sttw = '%';
+        }
+        if (typw == "Bảo dưỡng định kỳ") {
+            typw = "Bảo dưỡng định kỳ%";
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/search', true);
+        //event.preventDefault(); //prevent default action 
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            sttw,
+            typw,
+            name1,
+            name2
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    time_exe = change_time3(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    // console.log(now1);
+                    // console.log(now);
+                    // console.log(time_commit1);
+                    // // console.log(timeco)
+                    // console.log(commit);
+                    // console.log("--------------------");
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {
+                        // console.log("eee")       
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    // if (status=="Đã phân công"){
+                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // }
+                    trHTML += '</tr>'
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+
+    }
+
+    function search2(a) {
+        name2a = name2.replace(/\s/g, "_");
+        if (name2 != "%") {
+            document.getElementById(name2a).style.backgroundColor = "white";
+        }
+        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        name2 = a.replace(/_/g, " ");
+        if (sttw == "Tất cả" || sttw == "") {
+            sttw = '%';
+        }
+        if (typw == "Bảo dưỡng định kỳ") {
+            typw = "Bảo dưỡng định kỳ%";
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/search', true);
+        //event.preventDefault(); //prevent default action 
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            sttw,
+            typw,
+            name1,
+            name2
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    time_exe = change_time3(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    // console.log(now1);
+                    // console.log(now);
+                    // console.log(time_commit1);
+                    // // console.log(timeco)
+                    // console.log(commit);
+                    // console.log("--------------------");
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {
+                        // console.log("eee")       
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    // if (status=="Đã phân công"){
+                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // }
+                    trHTML += '</tr>'
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+
+    }
+
+    document.getElementById('btsearch').addEventListener('click', function() {
+        var level = document.getElementById("leverec").value;
+        var day1 = document.getElementById("day1").value;
+        var day2 = document.getElementById("day2").value;
+        name = '%' + name + '%';
+        if (name == "") {
+            name = '%';
+        }
+        if (level == "") {
+            level = '%';
+        }
+        if (day1 == "") {
+            day1 = '0000-00-00';
+        }
+        if (day2 == "") {
+            day2 = '2222-02-22';
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/work/searchh', true);
+        //event.preventDefault(); //prevent default action 
+
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+            level: level,
+            day1: day1,
+            day2: day2
+        };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = JSON.parse(this.responseText);
+                var trHTML = '';
+                var i;
+                for (i = 0; i < jsonObject.length; i++) {
+                    // var id=i+1;
+                    var user_rec = jsonObject[i].user_rec;
+                    var FM_staff = jsonObject[i].FM_staff;
+                    var time_exe = jsonObject[i].time_exe;
+                    var time_commit = change_time3(jsonObject[i].time_commit);
+                    var id = jsonObject[i].id;
+                    var leve = jsonObject[i].leve_rec;
+                    var name_work = jsonObject[i].name_work;
+                    var content_work = jsonObject[i].content_work;
+                    var status = jsonObject[i].status_work;
+                    var progr = jsonObject[i].progress;
+                    time_exe = change_time3(time_exe);
+                    var now = new Date();
+                    now = change_time(now);
+                    var timeconfirm = change_time3(jsonObject[i].time_confirm);
+                    var now1 = new Date();
+                    var time_commit1 = new Date(time_commit);
+                    var timeconfirm1 = new Date(timeconfirm)
+                    var commit = time_commit1.getTime() + 86400000;
+                    var confirm = timeconfirm1.getTime();
+                    var now = now1.getTime();
+                    // console.log(now1);
+                    // console.log(now);
+                    // console.log(time_commit1);
+                    // // console.log(timeco)
+                    // console.log(commit);
+                    // console.log("--------------------");
+                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    if (now < confirm && leve == "1" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                    } else if (now < confirm && leve == "2" && status == "Đã phân công") {
+                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                    } else if (status == "Đang thực hiện") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                    } else if (confirm > commit && status == "Hoàn thành") {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                    } else if (now > commit && status == "Đã phân công") {
+                        // console.log("eee")       
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                    } else {
+                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                    }
+                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    // if (status=="Đã phân công"){
+                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // }
+                    trHTML += '</tr>'
+                }
+            }
+            // console.log(trHTML);
+            $('#tablea tbody').html(trHTML);
+        }
+        xmlhttp.send(JSON.stringify(data));
+
+    })
+
+    document.getElementById('btprint').addEventListener('click', function() {
+        var r = confirm("Bạn có chắc muốn in các công việc: " + printt);
+        if (r == true) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/work/import_workex', true);
+            event.preventDefault();
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                print: printt
+            };
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    console.log(data);
+                    document.getElementById("adownload").href = data;
+                    document.getElementById("btdownload").click();
+                }
+            }
+            xmlhttp.send(JSON.stringify(data));
+        } else {
+            return
+        }
+    })
+
+    var printt = ""
+
+    function print(a) {
+        if (document.getElementById(a).checked == true) {
+            printt = printt + "|" + a;
+            console.log(printt);
+        } else {
+            printt = printt.replace("|" + a, "")
+            console.log(printt);
+        }
+    }
+</script>

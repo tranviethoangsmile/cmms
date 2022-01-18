@@ -1,0 +1,442 @@
+<script>
+    var reasonva=0;
+    function change_time(time){
+      return (new Date(time)).toLocaleString("en-US", {timeZone: "Asia/Bangkok"});
+    }
+      
+    function myFunction() {
+      reasonva=1;
+      if ( document.getElementById("namebox").innerHTML == "Thêm vật tư")
+      {
+        document.getElementById('blockadd').style.display= 'block';
+        document.getElementById('blockdelete').style.display = 'none'; 
+        document.getElementById('blockedit').style.display = 'none'; 
+      }
+      else {
+        document.getElementById('blockadd').style.display= 'none';
+        document.getElementById('blockdelete').style.display = 'block'; 
+        document.getElementById('blockedit').style.display = 'block'; 
+      }
+    }
+
+    function loaddata(){
+      document.getElementById("linkspare").style.backgroundColor="#4c4c4c";
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("get", '/sparen/loading_data', true);
+      event.preventDefault(); //prevent default action 
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var jsonObject = JSON.parse(this.responseText);
+          var trHTML = '';
+          var i;
+          for (i = 0; i < jsonObject.length; i++) {
+            var stt = jsonObject[i].Stt;
+            var id = jsonObject[i].Id;
+            var name = jsonObject[i].Name;
+            var image = jsonObject[i].Image;
+            var location = jsonObject[i].Location;
+            var qty = jsonObject[i].Qty;
+            var qtymin = jsonObject[i].Qty_min;
+            var unit = jsonObject[i].Unit;
+            var mc = jsonObject[i].Mc;
+            trHTML += '<tr ><td style="text-align: center;">' + stt + '</td><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + mc + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center; "><img src="'+image+'" width="100" height="75" style="border-radius: 5px/5px;"></td><td style="text-align: center;">' + qty + '</td><td style="text-align: center;">' + qtymin + '</td><td style="text-align: center;">' + unit + '</td><td style="text-align: center;">' + location + '</td></tr>';
+          }
+        }
+        $('#tablea tbody').html(trHTML);
+      }
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      xmlhttp.send();       
+    }
+
+    var loadFile = function(event) {
+      var image = document.getElementById('output');
+      image.src = URL.createObjectURL(event.target.files[0]);
+      document.getElementById('blockadd').style.display= 'none';
+      document.getElementById('blockdelete').style.display = 'block';    
+      document.getElementById('blockedit').style.display = 'block';     
+    }
+
+    function ctgroup() {
+      var input, filter, table, tr, th, i, y, txtValue, txtValuee;
+      input = document.getElementById("id_groupcs");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tablea");
+      tr = table.getElementsByTagName("tr");
+
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        th = tr[i].getElementsByTagName("td")[3];
+        if (td || th) {
+          txtValue = td.textContent || td.innerText;
+          txtValuee = th.textContent || th.innerText;
+          if ((txtValue.toUpperCase().indexOf(filter) > -1) || txtValuee.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+    function detail_ticket() {
+      var table = document.getElementById("tablea");
+      event.stopImmediatePropagation;
+      if (table) {
+        table.rows[0].ondblclick = function(e) {tableaddText(this);}
+        for (var i = 1; i < table.rows.length; i++) {
+        table.rows[i].ondblclick = function(e) {tableText(this);}
+        }
+      }
+    }
+
+    function tableText(tableRow) {
+      document.getElementById("namebox").innerHTML = "Thông tin vật tư";
+      document.getElementById('id01').style.display = 'block';
+      document.getElementById('blockadd').style.display= 'none';
+      document.getElementById('blockedit').style.display = 'none';
+      document.getElementById('blockdelete').style.display = 'block'; 
+
+      var x= tableRow.childNodes[4].innerHTML;
+      var imgsrc = x.slice(10, x.length -58);
+      var id= tableRow.childNodes[1].innerText
+
+      document.getElementById("id").value = tableRow.childNodes[1].innerText;
+      document.getElementById("mc").value = tableRow.childNodes[2].innerText;
+      document.getElementById("name").value =tableRow.childNodes[3].innerText;
+      document.getElementById("output").setAttribute("src", imgsrc);
+      document.getElementById("qty").value = tableRow.childNodes[5].innerText;
+      document.getElementById("qtymin").value = tableRow.childNodes[6].innerText;
+      document.getElementById("unit").value = tableRow.childNodes[7].innerText;
+      document.getElementById("pos").value = tableRow.childNodes[8].innerText;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/sparen/loadif', true);
+
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+        id: id
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse (this.responseText);
+          if (data.length>0){
+            document.getElementById("price").value = data[0].Price;
+            document.getElementById("number").value = data[0].Part_number;
+            document.getElementById("qtymax").value =  data[0].Qty_max;
+            document.getElementById("note").value = data[0].Note;
+            document.getElementById("fre").value = data[0].Fre_order;
+            document.getElementById("qtyim").value = data[0].Qty_im;
+            document.getElementById("qtyex").value = data[0].Qty_ex;
+            document.getElementById("userupdate").innerHTML = data[0].User_update;
+            document.getElementById("timeupdate").innerHTML = change_time(data[0].Time_update);
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));    
+    }
+
+    document.getElementById('btn_save').addEventListener('click', function() {
+      if ( document.getElementById("reason").value == "" && reasonva==1)
+      {
+        alert("Chưa nhập lý do thay đổi !!!");
+        return
+      }
+      reasonva=2;
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/sparen/update', true);
+      event.preventDefault(); //prevent default action 
+      
+      var id= document.getElementById("id").value;
+      var mc=document.getElementById("mc").value;          
+      var qty= document.getElementById("qty").value;
+      var qtymax= document.getElementById("qtymax").value;
+      var unit= document.getElementById("unit").value;
+      var qtymin= document.getElementById("qtymin").value;
+      var pos= document.getElementById("pos").value;
+      var price= document.getElementById("price").value;
+      var name= document.getElementById("name").value;
+      var number= document.getElementById("number").value;
+      var fre= document.getElementById("fre").value;
+      var note= document.getElementById("note").value;
+      var reason= document.getElementById("reason").value;
+      var qtyim= document.getElementById("qtyim").value;
+      var qtyex= document.getElementById("qtyex").value;
+
+      // save image 
+      var form = document.getElementById('upload_form');
+      if (document.getElementById('file').value != "") {
+        event.preventDefault();
+        var xsend = new XMLHttpRequest();
+        var fileInput = document.getElementById('file');
+        var file;
+        file = fileInput.files[0];
+        var newFileName = id+".jpg";
+        var formData = new FormData();
+        formData.append('file', file, newFileName);
+        if (file != null) {
+          xsend.open('POST', '/sparen/imgupload', true);
+          xsend.send(formData);                 
+        }
+      }
+            
+      // send data jason
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+        id:id,
+        mc:mc,
+        qty:qty,
+        qtymax:qtymax,
+        unit:unit,
+        qtymin:qtymin,
+        pos:pos,
+        price:price,
+        name:name,
+        number:number,
+        fre:fre,
+        note:note,
+        reason:reason,
+        image:newFileName,
+        qtyim:qtymin,
+        qtyex:qtyex
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          if (data == "ok") {
+            loaddata()
+            alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+          } else {
+            alert("Có lỗi rồi!!!");
+          }
+          document.getElementById('id01').style.display = 'none';
+        }
+      }
+      xmlhttp.send(JSON.stringify(data));
+    })
+
+    document.getElementById('btn_save1').addEventListener('click', function() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/sparen/insert', true);
+      event.preventDefault(); //prevent default action 
+      
+      var id= document.getElementById("id").value;
+      var mc=document.getElementById("mc").value;          
+      var qty= document.getElementById("qty").value;
+      var qtymax= document.getElementById("qtymax").value;
+      var unit= document.getElementById("unit").value;
+      var qtymin= document.getElementById("qtymin").value;
+      var pos= document.getElementById("pos").value;
+      var price= document.getElementById("price").value;
+      var name= document.getElementById("name").value;
+      var number= document.getElementById("number").value;
+      var fre= document.getElementById("fre").value;
+      var note= document.getElementById("note").value;
+
+      // save image 
+      var form = document.getElementById('upload_form');
+      if (document.getElementById('file').value != "") {
+        event.preventDefault();
+        var xsend = new XMLHttpRequest();
+        var fileInput = document.getElementById('file');
+        var file;
+        file = fileInput.files[0];
+        var newFileName = id+".jpg";
+        var formData = new FormData();
+        formData.append('file', file, newFileName);
+        if (file != null) {
+          xsend.open('POST', '/sparen/imgupload', true);
+          xsend.send(formData);                  
+        }
+      }          
+      
+      // send data jason
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+        id:id,
+        mc:mc,
+        qty:qty,
+        qtymax:qtymax,
+        unit:unit,
+        qtymin:qtymin,
+        pos:pos,
+        price:price,
+        name:name,
+        number:number,
+        fre:fre,
+        note:note,
+        image:newFileName
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          if (data == "ok") {
+            loaddata()
+            alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+          } else {
+            alert("Có lỗi rồi!!!");
+          }
+          document.getElementById('id01').style.display = 'none';
+          }
+        }
+      xmlhttp.send(JSON.stringify(data));
+    })
+
+    document.getElementById('addspare').addEventListener('click', function() {
+          document.getElementById("namebox").innerHTML ="Thêm vật tư"
+          document.getElementById('id01').style.display = 'block';
+          document.getElementById('blockadd').style.display= 'block';
+          document.getElementById('blockedit').style.display = 'none';
+          document.getElementById('blockdelete').style.display = 'none'; 
+          document.getElementById('file').value="";
+
+          document.getElementById("timeupdate").innerHTML = "";
+          document.getElementById("userupdate").innerHTML = ""; 
+          document.getElementById("id").value="";
+          document.getElementById("mc").value="";          
+          document.getElementById("qty").value="";
+          document.getElementById("qtymax").value="";
+          document.getElementById("unit").value="";
+          document.getElementById("qtymin").value="";
+          document.getElementById("pos").value="";
+          document.getElementById("price").value="";
+          document.getElementById("name").value="";
+          document.getElementById("number").value="";
+          document.getElementById("fre").value="";
+          document.getElementById("note").value="";
+          document.getElementById("reason").value="";
+
+          document.getElementById("output").setAttribute("src", "./public/img_spare/noimg.png");
+      })
+  
+    document.getElementById('btn_delete').addEventListener('click', function() {
+      var r = confirm("Bạn có chắc muốn xóa không???");
+      if (r == true) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("post", '/sparen/delete', true);
+        event.preventDefault(); //prevent default action 
+        var id= document.getElementById("id").value;
+
+        // send data jason
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        data = {
+          id: id      
+        }
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            if (data == "ok") {
+              loaddata()
+              alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+            } else {
+              alert("Có lỗi rồi!!!");
+            }
+            document.getElementById('id01').style.display = 'none';
+          }
+        }
+        xmlhttp.send(JSON.stringify(data));
+      }
+      else {
+        return
+      }
+    })
+      
+    document.getElementById('dowloadex').addEventListener('click', function() {  
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/spare/download_excel_File', true);
+      event.preventDefault(); 
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          console.log(data);
+          document.getElementById("adownload").href=data;
+          document.getElementById("btdownload").click();     
+        }
+      }
+      xmlhttp.send();    
+    })
+    
+    document.getElementById('btrefresh').addEventListener('click', function() {
+      loaddata();
+      document.getElementById("id_groupcs").value="";  
+    })
+      
+    document.getElementById('uploadex').addEventListener('click', function() {
+      document.getElementById('id03').style.display = 'block';   
+    })
+
+    var formm=document.getElementById('upload_formm');
+    formm.addEventListener('submit', e=>{e.preventDefault(); return false;})
+    var formic=document.getElementById('upload_formic');
+    formic.addEventListener('submitic', e=>{e.preventDefault(); return false;})
+
+    document.getElementById('submit').addEventListener('click', function() {
+      document.getElementById("loadd").style.display='block';
+      var form = document.getElementById('upload_formm');
+      if (document.getElementById('filee').value != '') {
+        event.preventDefault();
+        var xsend = new XMLHttpRequest();
+        var fileInput = document.getElementById('filee');
+        var file;
+        file = fileInput.files[0];
+        console.log(file['name']);
+        var formData = new FormData();
+        formData.append('filee', file);
+        if (file != null) {
+        xsend.open('POST', '/spare/Upload_excel_File', true);
+        xsend.send(formData);
+
+        xsend.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            if (data == "finishupspare") {
+              alert("Tải file lên thành công!!!");   
+              document.getElementById("filee").value="";
+              document.getElementById("id03").style.display="none";
+              loaddata();
+            }
+          }
+        }
+      }
+      } else {
+        alert("Không có tệp nào được chọn!!!")
+      }   
+    })
+
+    document.getElementById('submitic').addEventListener('click', function() {
+      console.log("ee")
+      document.getElementById("loaddic").style.display='block';
+      var form = document.getElementById('upload_formic');
+      if (document.getElementById('fileic').value != '') {
+        event.preventDefault();
+        var xsend = new XMLHttpRequest();
+        var fileInput = document.getElementById('fileic');
+        var file;
+        file = fileInput.files[0];
+        console.log(file['name']);
+        var formData = new FormData();
+        formData.append('filee', file);
+        if (file != null) {
+        xsend.open('POST', '/spare/Upload_excel_Fileic', true);
+        xsend.send(formData);
+
+        xsend.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = this.responseText;
+            if (data == "finishupspare") {
+              alert("Tải file lên thành công!!!");   
+              document.getElementById("filee").value="";
+              document.getElementById("id03").style.display="none";
+              loaddata();
+            }
+          }
+        }
+      }
+      } else {
+        alert("Không có tệp nào được chọn!!!")
+      }   
+    })
+
+
+    
+  </script>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%-include ('layout/header'); %>
+    <%-include ('./styles/spare/spareCss'); %>
+</head>
+
+<body onload="loaddata()">
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <%-include ('./components/spare/spareHeader');%>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <%-include ('layout/menu'); %>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div
+          style="height: 60px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;">
+          <%-include ('./components/spare/search'); %>
+        </div>
+        <div
+          style="height: 740px; background-color: rgb(255, 255, 255); margin-top: 3px;  border: solid 1px rgb(255, 255, 255) ;">
+          <div class="tableFixHead">
+            <div class="page-content" style=" margin-top: 0px;margin-left: 5px;">
+              <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
+              <%-include ('./components/spare/table'); %>
+            </div>
+          </div>
+        </div>
+        <div class="w3-container">
+          <div style="margin-top: 0px;" id="id01" class="w3-modal">
+            <div style="width: 1200px; min-height: 635px ; margin-left: 370px;border: solid 3px blueviolet;"
+              class="w3-modal-content">
+              <div style="width: 100%; height: 100%;" class="w3-container">
+                <span style="font-size: 25px;margin-right: 5px;"
+                  onclick="document.getElementById('id01').style.display='none'"
+                  class="w3-button w3-display-topright">&times;</span>
+
+                <div class="modal-header">
+                  <h5 class="modal-title" style="color: #7c4abe ; font-weight: bold;" id="namebox"></h5>
+                </div>
+                <div class="col-sm-4 " style="margin-top: 15px;margin-left: -10px;">
+
+                  <div class="container" action="CCS/Upload_New_PR" id="upload_form" method="POST">
+
+                    <div class="wrapper">
+                      <div class="image">
+                        <img id="output">
+                      </div>
+                    </div>
+                    <p><input type="file" name="image" id="file" onchange="loadFile(event)" style="display: none;"
+                        accept="image/png, image/gif, image/jpeg"></p>
+                    <p><label for="file" style="cursor: pointer;" id="custom-btn">Upload Image</label></p>
+
+                  </div>
+                </div>
+                <div class="col-sm-8 ">
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold;">ID</p>
+                  </div>
+                  <div class="col-autoo"><input aria-required="true"
+                      style=" width:220px; min-height: 10px;text-align: center; margin: auto; margin-left: 12px;"
+                      type="text" id="id" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 45px;">ID Hệ THỐNG</p>
+                  </div>
+                  <div class="col-autoo"><input aria-required="true"
+                      style=" width:220px; min-height: 10px;text-align: center; margin: auto;margin-left: 47px;"
+                      type="text" id="mc" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold;">SỐ LƯỢNG HIỆN CÓ</p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto; margin-left: 50px;"
+                      type="text" id="qty" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 45px;">ĐƠN VỊ TÍNH</p>
+                  </div>
+                  <div class="col-autoo"><input aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto;margin-left: 115px;"
+                      type="text" id="unit" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold;">SỐ LƯỢNG TỐI THIỂU</p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto; margin-left: 40px;"
+                      type="text" id="qtymin" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 45px;">SỐ LƯỢNG TỐI ĐA
+                    </p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto;margin-left: 80px;"
+                      type="text" id="qtymax" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold;">SỐ LƯỢNG NHẬP</p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto; margin-left: 67px;"
+                      type="text" id="qtyim" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 45px;">SỐ LƯỢNG XUẤT
+                    </p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:155px; min-height: 10px;text-align: center; margin: auto;margin-left: 88px;"
+                      type="text" id="qtyex" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold;">VỊ TRÍ</p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:220px; min-height: 10px;text-align: center; margin: auto; margin-left: 12px;"
+                      type="text" id="pos" class="form-control"></div>
+                  <div class="col-auto">
+                    <p class="modal-title" style="color: #7c4abe;font-weight: bold; margin-left: 45px;">ĐƠN GIÁ</p>
+                  </div>
+                  <div class="col-autoo"><input oninput="myFunction()" aria-required="true"
+                      style=" width:220px; min-height: 10px;text-align: center; margin: auto;margin-left: 76px;"
+                      type="text" id="price" class="form-control"></div>
+                </div>
+                <div style="margin-top:230px;">
+                  <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">NAME</p>
+                  <textarea oninput="myFunction()" aria-required="true"
+                    style=" width:950px; height: 80px;text-align: center; margin: auto; margin-top: 26px;" type="text"
+                    id="name" class="form-control col-90"></textarea>
+                  <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">SỐ BỘ PHẬN
+                  </p>
+                  <input aria-required="true"
+                    style=" width:370px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
+                    type="text" id="number" class="form-control col-90">
+                  <p class="modal-title col-10"
+                    style="color: #7c4abe;font-weight: bold; margin-left: 50px;width: 180px;">TẦN SUẤT ĐẶT HÀNG</p>
+                  <input oninput="myFunction()" aria-required="true"
+                    style=" width:350px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
+                    type="text" id="fre" class="form-control col-90">
+                  <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">GHI CHÚ</p>
+                  <input aria-required="true"
+                    style=" width:950px; min-height: 10px;text-align: center; margin: auto;margin-top: 26px;"
+                    type="text" id="note" class="form-control col-90">
+                </div>
+
+                <div class="modal-footer" style="margin-top: 520px">
+                  <div class="col-xs-12 col-sm-4 col-md-4 ">
+                    <h6 class="modal-title" style="color: #7c4abe; width:500px; text-align: left ;margin-left: -15px;"
+                      id="timeupdate"></h6>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4 ">
+                    <h6 class="modal-title" style="color: #7c4abe; width:500px; text-align: left ;margin-left: -15px;"
+                      id="userupdate"></h6>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4 ">
+                    <div id="blockdelete">
+                      <button class="btn" id="btn_delete" style="margin-top: -5px;"><i class="fa fa-times"></i>
+                        Xóa</button>
+                      <button class="btn" id="btn_save" style="margin-top: -5px;"><i class="fa fa-save"></i>
+                        Lưu</button>
+                    </div>
+                    <div id="blockedit">
+
+                      <input list="reasonn" placeholder="Nhập lý do thay đổi" aria-required="true"
+                        style=" width:1195px; min-height: 30px;text-align: center;margin-top: 20px;margin-left: -800px; "
+                        type="text" id="reason" class="form-control ">
+                      <datalist id="reasonn">
+                        <option></option>
+                        <option>Nhập</option>
+                        <option>Xuất</option>
+                      </datalist>
+                    </div>
+                    <div id="blockadd">
+                      <button class="btn" id="btn_save1" style="margin-top: -5px;"><i class="fa fa-save"></i>
+                        Lưu</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w3-container">
+            <div style="margin-top: 20px;" id="id02" class="w3-modal">
+              <div style="width: 1200px; height: 620px ; margin-left: 370px;border: solid 3px blueviolet;"
+                class="w3-modal-content">
+                <div style="width: 100%; height: 100%;" class="w3-container">
+                  <span onclick="document.getElementById('id02').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                  <form style="margin:auto ;width: 900px;margin-top: 50px; " action="CCS/Upload_New_PRR"
+                    id="upload_form1" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input style="height: auto;" type="file" class="form-control" name="file[]" id='file1'
+                        accept="image/png, image/gif, image/jpeg" multiple="true" onchange="loadmulti()">
+                    </div>
+                    <button id='submit1' type="submit" class="btn btn-primary">UPLOAD</button>
+                    <div></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w3-container">
+            <div id="id03" class="w3-modal">
+              <div style="width: 1000px; height: 480px ;border: solid 3px blueviolet;" class="w3-modal-content">
+                <div style="width: 100%; height: 100%;" class="w3-container">
+                  <span style="font-size: 25px;margin-right: 5px;"
+                    onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright"
+                    style="font-size: 35px; margin-top: 10px;margin-right: 10px;">&times;</span>
+                  <div class="modal-header">
+                    <h5 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Tải file excel</h5>
+                  </div>
+                  <fieldset style="margin-top: 20px;">
+                    <legend>Tải lên file excel</legend>
+                    <form style="width: 750px;float: left; " action="CCS/Upload_New_PRR" id="upload_formm" method="POST"
+                      enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label>File</label>
+                        <input style="height: auto;" type="file" class="form-control" name="files" id='filee'>
+                      </div>
+                    </form>
+                    <button id='submit' type="submit" class="btn btn-primary"
+                      style="float: left;margin-top: 36px;margin-left: 80px;">UPLOAD</button>
+                    <div class="loader" id="loadd" style="display: none; margin: auto;margin-top: 0px;"></div>
+                  </fieldset>
+                  <fieldset style="margin-top: 20px;">
+                    <legend>Tồn kho đầu kỳ từ hệ thống IC238</legend>
+                    <form style="width: 750px;float: left; " action="CCS/Upload_New_PRR" id="upload_formic"
+                      method="POST" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label>File</label>
+                        <input style="height: auto;" type="file" class="form-control" name="files" id='fileic'>
+                      </div>
+                    </form>
+                    <button id='submitic' type="submit" class="btn btn-primary"
+                      style="float: left;margin-top: 36px;margin-left: 80px;">UPLOAD</button>
+                    <div class="loader" id="loaddic" style="display: none; margin: auto;margin-top: 0px;"></div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+  </div>
+  <%-include ('./scripts/spare/spareScript'); %>
+</body>
+
+</html>
