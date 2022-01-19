@@ -1,139 +1,148 @@
 <script type="text/javascript">
-    function change_time(time){
-      return (new Date(time)).toLocaleDateString('fr-CA');
-    } 
+  $(document).ready(() => {
+    init();
+  })
 
-    function loaddata(){
-      var datenow = change_time(Date.now());
-      document.getElementById("date2").value= change_time(Date.now());
-      document.getElementById("date3").value= change_time(Date.now());
-      var date1 = new Date(datenow);
-      date11 =change_time(date1.setDate(date1.getDate() - 7));
-      date12 =change_time(date1.setDate(date1.getDate() + 14));
-      document.getElementById("date1").value= date11;
-      document.getElementById("date").value= date12;
+  init = () => {
+    loaddata();
+  }
 
-      pm()
-      loadchart()
-      wo()
-      document.getElementById("linkhome").style.backgroundColor="#4c4c4c";
-    
-    }
-             
-    function pm(){
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("post", '/home/loadpm', true);
-      var date=document.getElementById("date2").value;
-   
-      xmlhttp.setRequestHeader("Content-type", "application/json");
-      data = {
-        date: date
-      };
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var data = JSON.parse (this.responseText);
-          trHTML='';
-          if (data.length>0){
-            for (i = 0; i <  data.length; i++) {
-            var ob =  data[i].Objs+' - '+data[i].name_obj;
-            var cy =  data[i].Cycle;
-            var sta =  data[i].Staff;
-            var st =  data[i].Status;
+  
+  function change_time(time) {
+    return (new Date(time)).toLocaleDateString('fr-CA');
+  }
+
+  function loaddata() {
+    var datenow = change_time(Date.now());
+    document.getElementById("date2").value = change_time(Date.now());
+    document.getElementById("date3").value = change_time(Date.now());
+    var date1 = new Date(datenow);
+    date11 = change_time(date1.setDate(date1.getDate() - 7));
+    date12 = change_time(date1.setDate(date1.getDate() + 14));
+    document.getElementById("date1").value = date11;
+    document.getElementById("date").value = date12;
+
+    pm()
+    loadchart()
+    wo()
+    document.getElementById("linkhome").style.backgroundColor = "#4c4c4c";
+
+  }
+
+  function pm() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/home/loadpm', true);
+    var date = document.getElementById("date2").value;
+
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      date: date
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        trHTML = '';
+        if (data.length > 0) {
+          for (i = 0; i < data.length; i++) {
+            var ob = data[i].Objs + ' - ' + data[i].name_obj;
+            var cy = data[i].Cycle;
+            var sta = data[i].Staff;
+            var st = data[i].Status;
             trHTML += '<tr ><td style="text-align: center;">' + ob + '</td><td style="text-align: center;">' + cy + '</td><td style="text-align: center;">' + sta + '</td><td style="text-align: center;">' + st + '</td></tr>';
-           }
+          }
         }
         $('#tablepm tbody').html(trHTML);
-          }
-        }
-        xmlhttp.send(JSON.stringify(data));    
+      }
     }
- 
-    function wo(){
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("post", '/home/loadwo', true);
-      var date1=document.getElementById("date1").value;
-      var date2=document.getElementById("date").value;
-   
-      xmlhttp.setRequestHeader("Content-type", "application/json");
-      data = {
-        date1: date1,
-        date2: date2
-      };
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var data = JSON.parse (this.responseText);
-          if (data.length>0){
-            document.getElementById("n9").innerHTML=data[0].Count;
-            document.getElementById("n10").innerHTML=data[1].Count;
-            document.getElementById("n12").innerHTML=data[2].Count;
-            document.getElementById("n13").innerHTML=data[3].Count;
-            document.getElementById("n14").innerHTML=data[4].Count;
-            document.getElementById("n16").innerHTML=data[5].Count;
-          }                          
-          }
+    xmlhttp.send(JSON.stringify(data));
+  }
+
+  function wo() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/home/loadwo', true);
+    var date1 = document.getElementById("date1").value;
+    var date2 = document.getElementById("date").value;
+
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      date1: date1,
+      date2: date2
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        if (data.length > 0) {
+          document.getElementById("n9").innerHTML = data[0].Count;
+          document.getElementById("n10").innerHTML = data[1].Count;
+          document.getElementById("n12").innerHTML = data[2].Count;
+          document.getElementById("n13").innerHTML = data[3].Count;
+          document.getElementById("n14").innerHTML = data[4].Count;
+          document.getElementById("n16").innerHTML = data[5].Count;
         }
-        xmlhttp.send(JSON.stringify(data));    
+      }
     }
+    xmlhttp.send(JSON.stringify(data));
+  }
 
-    function loadchart(){
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("post", '/home/loadchart', true);
-      //event.preventDefault(); //prevent default action 
-      var date=document.getElementById("date3").value;
-      var lastday = new Date(document.getElementById("date3").value);
-      var tomorrow = new Date(document.getElementById("date3").value);
-      lastday =change_time(lastday.setDate(lastday.getDate() - 1));
-      tomorrow = change_time(tomorrow.setDate(tomorrow.getDate() + 1));
-   
-      xmlhttp.setRequestHeader("Content-type", "application/json");
-      data = {
-        lastday:lastday,
-        date: date,
-        tomorrow:tomorrow
-      };
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var data = JSON.parse (this.responseText);
-          if (data.length>0){
-            var yValues = [];
-            var zValues = [];
-            yValues.push(data[0].Count)
-            yValues.push(data[1].Count)
-            yValues.push(data[2].Count)
-            zValues.push(data[3].Count)
-            zValues.push(data[4].Count)
-            zValues.push(data[5].Count)
+  function loadchart() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/home/loadchart', true);
+    //event.preventDefault(); //prevent default action 
+    var date = document.getElementById("date3").value;
+    var lastday = new Date(document.getElementById("date3").value);
+    var tomorrow = new Date(document.getElementById("date3").value);
+    lastday = change_time(lastday.setDate(lastday.getDate() - 1));
+    tomorrow = change_time(tomorrow.setDate(tomorrow.getDate() + 1));
 
-            var xValues = [lastday,date,tomorrow];
-         
-            new Chart("myChart", {
-              type: "bar",
-              data: {
-                labels: xValues,
-                datasets: [{
-                  label: 'Yêu cầu',
-                  backgroundColor: "#ff684d",
-                  data: yValues
-                },{
-                  label: 'Đã cấp',
-                  backgroundColor: "#00b2ee",
-                  data: zValues
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      lastday: lastday,
+      date: date,
+      tomorrow: tomorrow
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        if (data.length > 0) {
+          var yValues = [];
+          var zValues = [];
+          yValues.push(data[0].Count)
+          yValues.push(data[1].Count)
+          yValues.push(data[2].Count)
+          zValues.push(data[3].Count)
+          zValues.push(data[4].Count)
+          zValues.push(data[5].Count)
+
+          var xValues = [lastday, date, tomorrow];
+
+          new Chart("myChart", {
+            type: "bar",
+            data: {
+              labels: xValues,
+              datasets: [{
+                label: 'Yêu cầu',
+                backgroundColor: "#ff684d",
+                data: yValues
+              }, {
+                label: 'Đã cấp',
+                backgroundColor: "#00b2ee",
+                data: zValues
+              }]
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
                 }]
-              },
-              options: {
-                scales:{
-                  yAxes:[{
-                    ticks:{
-                      beginAtZero: true
-                    }
-                  }]
-                }
-                }
-              })      
+              }
             }
-          }
+          })
         }
-      xmlhttp.send(JSON.stringify(data));           
-    }        
+      }
+    }
+    xmlhttp.send(JSON.stringify(data));
+  }
 
-  </script> 
+</script>
