@@ -1,13 +1,25 @@
 <script>
-    function myFunction(){
-        document.getElementById("btsend").style.display ='block'
+    let reCustomer = true;
+    $("#fullScreenbtn").on("click", () => {
+        reCustomer = false;
+        console.log(reCustomer);
+        if (!reCustomer) {
+            $(".custom-table").css ('max-height: 970px')
+        }else {
+            $(".custom-table").css ('max-height: 770px')
+        }
+    })
+
+
+    function myFunction() {
+        document.getElementById("btsend").style.display = 'block'
     }
-    
+
     function alert_ok(name) {
         document.getElementById('contenalert').innerHTML = name;
         $('.alert').removeClass('hidden');
         $('.alert').addClass('show');
-        setTimeout(function() {
+        setTimeout(function () {
             $('.alert').removeClass('show');
             $('.alert').addClass('hidden');
         }, 5500)
@@ -31,11 +43,10 @@
     }
 
     function loaddata() {
-        document.getElementById("linkwork").style.backgroundColor = "#4c4c4c";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("get", '/work/loading_data', true);
         event.preventDefault(); //prevent default action 
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -69,7 +80,7 @@
                         trHTML += '<td style="text-align: center;background-color: #2196f3;color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
                         trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + status + '</td>';
-                    } else if (now > commit && status == "Đã phân công") {   
+                    } else if (now > commit && status == "Đã phân công") {
                         trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + "Quá hạn" + '</td>';
                     } else {
                         trHTML += '<td style="text-align: center;background-color: #2196f3;">' + status + '</td>';
@@ -91,7 +102,7 @@
         data = {
             typework: a
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -125,7 +136,7 @@
         xmlhttp.send(JSON.stringify(data));
     }
 
-    document.getElementById('btrefresh').addEventListener('click', function() {
+    document.getElementById('btrefresh').addEventListener('click', function () {
         loaddata();
         document.getElementById('leverec').value = '';
         document.getElementById('day1').value = '';
@@ -154,20 +165,8 @@
         console.log(sttw)
     })
 
-    function detail_ticket() {
-        var table = document.getElementById("tablea");
-        // document.getElementById('file').value="";
-        event.stopImmediatePropagation;
-        if (table) {
-            for (var i = 1; i < table.rows.length; i++) {
-                table.rows[i].ondblclick = function(e) {
-                    tableText(this);
-                }
-            }
-        }
-    }
 
-    document.getElementById('bt2').addEventListener('click', function() {
+    document.getElementById('bt2').addEventListener('click', function () {
         var table = document.getElementById("tableb");
         var tr = table.getElementsByTagName("tr");
         var i, j;
@@ -187,7 +186,7 @@
         tb2();
     })
 
-    document.getElementById('bt3').addEventListener('click', function() {
+    document.getElementById('bt3').addEventListener('click', function () {
         document.getElementById('tb3').style.display = 'block';
         document.getElementById('tb1').style.display = 'none';
         document.getElementById('tb2').style.display = 'none';
@@ -197,7 +196,7 @@
         // document.getElementById('btsend').style.display = 'none';
     })
 
-    document.getElementById('bt1').addEventListener('click', function() {
+    document.getElementById('bt1').addEventListener('click', function () {
         document.getElementById('tb1').style.display = 'block';
         document.getElementById('tb3').style.display = 'none';
         document.getElementById('tb2').style.display = 'none';
@@ -207,17 +206,44 @@
         // document.getElementById('btsend').style.display = 'block';
     })
 
-    function tableText(tableRow) {
-        
+    // detail_ticket = () => {
+    //     $("#informationModal").modal("show");
+    //     var table = document.getElementById("tablea");
+    //     event.stopImmediatePropagation;
+    //     if (table) {
+    //         for (var i = 1; i < table.rows.length; i++) {
+    //             table.rows[i].ondblclick = function (e) {
+    //                 tableText(this);
+    //             }
+    //         }
+    //     }
+    // }
 
-        if(tableRow.childNodes[6].innerText=="Chưa phân công"){
-            document.getElementById('id02').style.display = 'block';
+    function detail_ticket() {
+        var table = document.getElementById("tablea");
+        // document.getElementById('file').value="";
+        event.stopImmediatePropagation;
+        if (table) {
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function (e) {
+                    tableText(this);
+                }
+            }
+        }
+    }
+
+
+    function tableText(tableRow) {
+        if (tableRow.childNodes[6].innerText == "Chưa phân công") {
+            // document.getElementById('id02').style.display = 'block';
+            $("#id02").modal('show');
             document.getElementById('btsend').style.display = 'block';
             document.getElementById('boxprogress').style.display = 'none';
             document.getElementById("progress").value = '0';
         }
-        else{
-            document.getElementById('id01').style.display = 'block'; 
+        else {
+            $("#id01").modal('show');
+            // document.getElementById('id01').style.display = 'block'; 
             document.getElementById('btsend').style.display = 'none';
             document.getElementById('boxprogress').style.display = 'block';
         }
@@ -239,28 +265,33 @@
         data = {
             id: id
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
+                console.log(data);
                 if (data.length > 0) {
-                    if(document.getElementById('user').innerText == data[0].user_rec || document.getElementById('user').innerText == data[0].user_staff ){
+                    if (document.getElementById('user').innerText == data[0].user_rec || document.getElementById('user').innerText == data[0].user_staff) {
                         document.getElementById('boxprogress').style.display = 'block';
                     }
                     else {
                         document.getElementById('boxprogress').style.display = 'none';
                     }
-
+                    console.log('dataid', data[0].id);
+                    console.log('type', data[0].type_req);
+                    console.log('staffreq', data[0].user_req);
                     document.getElementById("staffreq").value = data[0].user_req;
-                    document.getElementById("typereq").value = data[0].type_req;                      
+                    document.getElementById("typereq").value = data[0].type_req;
                     document.getElementById("idreqq").value = data[0].id;
                     document.getElementById("placereq").value = data[0].place_req;
                     document.getElementById("levereq").value = data[0].leve_req;
-                    if (data[0].name_work == ""){
-                    document.getElementById("namework").value = data[0].req;
-                    document.getElementById("typework").value = data[0].type_req;}
+                    if (data[0].name_work == "") {
+                        document.getElementById("namework").value = data[0].req;
+                        document.getElementById("typework").value = data[0].type_req;
+                    }
                     else {
-                    document.getElementById("namework").value = data[0].name_work;
-                    document.getElementById("typework").value = data[0].type_work;}
+                        document.getElementById("namework").value = data[0].name_work;
+                        document.getElementById("typework").value = data[0].type_work;
+                    }
                     document.getElementById("hidedate").value = data[0].time_req;
                     document.getElementById("hideeq").value = data[0].type_eq;
                     document.getElementById("hidecycle").value = data[0].cycle;
@@ -269,7 +300,7 @@
                     document.getElementById("datehide").value = data[0].time_req;
                     document.getElementById("timeendreq").value = data[0].timeend_req;
                     document.getElementById("staffwork").value = data[0].FM_staff;
-                    document.getElementById('datestart').value = data[0].time_exe;                   
+                    document.getElementById('datestart').value = data[0].time_exe;
                     document.getElementById('statuswork').value = data[0].status_work;
                     document.getElementById('durawork').value = data[0].time_commit;
                     document.getElementById('leverecc').value = data[0].leve_rec;
@@ -295,7 +326,7 @@
         document.getElementById("disprogress").innerHTML = document.getElementById("progress").value + "%";
     }
 
-    document.getElementById('btspare').addEventListener('click', function() {
+    document.getElementById('btspare').addEventListener('click', function () {
         // var trHTML="";
         if (document.getElementById("qty_inhere").value != '') {
             var name = document.getElementById("listipart").value;
@@ -341,7 +372,7 @@
         data = {
             idreq: idreq
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -375,7 +406,7 @@
         data = {
             listipart: listipart
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 console.log(data);
@@ -394,7 +425,7 @@
         xmlhttp.send(JSON.stringify(data));
     }
 
-    document.getElementById('btsave2').addEventListener('click', function() {
+    document.getElementById('btsave2').addEventListener('click', function () {
         var table = document.getElementById("tableb");
         var rows = table.getElementsByTagName('tr');
         var idreq = document.getElementById("idreqq").value;
@@ -421,74 +452,76 @@
 
 
             };
-            xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var data = this.responseText;
-                        if (data == "ok") {
-                            var table = document.getElementById("tableb");
-                            var tr = table.getElementsByTagName("tr");
-                            var i, j;
-                            for (i = 1; i < tr.length; i++) {
-                                document.getElementById('tableb').deleteRow(i);
-                            }
-                            loadpart_log()
-                            alert_ok("Bạn đã thêm vật tư cho công việc này.");
-                                // location.reload();
-                        } else {
-                            alert("Có lỗi rồi!!!");
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    if (data == "ok") {
+                        var table = document.getElementById("tableb");
+                        var tr = table.getElementsByTagName("tr");
+                        var i, j;
+                        for (i = 1; i < tr.length; i++) {
+                            document.getElementById('tableb').deleteRow(i);
                         }
-                        // document.getElementById('id01').style.display = 'none';
+                        loadpart_log()
+                        alert_ok("Bạn đã thêm vật tư cho công việc này.");
+                        // location.reload();
+                    } else {
+                        alert("Có lỗi rồi!!!");
                     }
+                    // document.getElementById('id01').style.display = 'none';
                 }
-                // console.log(data);
+            }
+            // console.log(data);
             xmlhttp.send(JSON.stringify(data));
+            $("#id01").modal("hide");
         }
         // }
 
 
     })
 
-    function Send(){
-      var r= confirm("Bạn có chắc chắn phân công công việc này ???");
-      if (r == true){
-   
-        var id=document.getElementById('idreq').value;
-        var staff=document.getElementById('staffwork').value;
+    function Send() {
+        var r = confirm("Bạn có chắc chắn phân công công việc này ???");
+        if (r == true) {
 
-          var xmlhttp = new XMLHttpRequest();
-          xmlhttp.open("post", '/wo/send_wo_to_staff', true);
-          event.preventDefault(); 
-          xmlhttp.setRequestHeader("Content-type", "application/json");
-          data = {
-            id: id,
-            //stt: stt,
-            staff:staff
+            var id = document.getElementById('idreq').value;
+            var staff = document.getElementById('staffwork').value;
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", '/wo/send_wo_to_staff', true);
+            event.preventDefault();
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            data = {
+                id: id,
+                //stt: stt,
+                staff: staff
 
 
-          };
-          xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            var data = this.responseText;
-            // console.log(data);
-            if (data == "ok") {
-                alert_ok("Ðã gửi mail phân công");
-                // location.reload();
-            } else {
-                alert("Có lỗi rồi!!!");
+            };
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    // console.log(data);
+                    if (data == "ok") {
+                        alert_ok("Ðã gửi mail phân công");
+                        // location.reload();
+                    } else {
+                        alert("Có lỗi rồi!!!");
+                    }
+
+                }
             }
-            
-          }
-          }
-          xmlhttp.send(JSON.stringify(data));    
-      }
+            xmlhttp.send(JSON.stringify(data));
+            $("#id01").modal("hide");
+        }
     }
 
-    document.getElementById('btdistri').addEventListener('click', function() {
-        document.getElementById('id01').style.display = 'block';
-        document.getElementById('id02').style.display = 'none';
+    document.getElementById('btdistri').addEventListener('click', function () {
+        $("#id01").modal("show");
+        $("#id02").modal("hide");
     })
 
-    document.getElementById('btsave1').addEventListener('click', function() {
+    document.getElementById('btsave1').addEventListener('click', function () {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("post", '/work/infordis', true);
         event.preventDefault(); //prevent default action 
@@ -511,8 +544,8 @@
         var email = document.getElementById("emailreq").value;
 
         var cyclehide = document.getElementById("cyclehide").value;
-        var objshide  = document.getElementById("objshide").value;
-        var datehide  = document.getElementById("datehide").value;
+        var objshide = document.getElementById("objshide").value;
+        var datehide = document.getElementById("datehide").value;
 
         console.log(email)
         // console.log(leverec);
@@ -535,9 +568,9 @@
         // send data jason
         xmlhttp.setRequestHeader("Content-type", "application/json");
         datas = {
-            cyclehide : cyclehide,
-            objshide : objshide,
-            datehide : datehide,
+            cyclehide: cyclehide,
+            objshide: objshide,
+            datehide: datehide,
             progress: progress,
             email: email,
             typework: typework,
@@ -552,27 +585,28 @@
             reason: reason,
             note: note
         };
-        xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var data = this.responseText;
-                    if (data == "ok") {
-                        loaddata()
-                        alert_ok("Thông tin được cập nhật !!!")
-                        // location.reload();
-                    } else if (data =="oke"){
-                        alert_ok("Đã gửi mail hoàn thành !!!")
-                    }
-                    else {
-                        alert("Có lỗi rồi!!!");
-                    }
-                    // document.getElementById('id01').style.display = 'none';
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                if (data == "ok") {
+                    loaddata()
+                    alert_ok("Thông tin được cập nhật !!!")
+                    // location.reload();
+                } else if (data == "oke") {
+                    alert_ok("Đã gửi mail hoàn thành !!!")
                 }
+                else {
+                    alert("Có lỗi rồi!!!");
+                }
+                // document.getElementById('id01').style.display = 'none';
             }
-            // console.log(data);
+        }
+        // console.log(data);
         xmlhttp.send(JSON.stringify(datas));
+        $("#id01").modal("hide")
     })
 
-    document.getElementById('btsave3').addEventListener('click', function() {
+    document.getElementById('btsave3').addEventListener('click', function () {
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("post", '/w_order/comment', true);
@@ -592,21 +626,22 @@
             quality: quality,
             comment: comment
         };
-        xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var data = this.responseText;
-                    if (data == "ok") {
-                        loaddata()
-                        alert_ok("Bạn đã đánh giá công việc này.");
-                        // location.reload();
-                    } else {
-                        alert("Có lỗi rồi!!!");
-                    }
-                    // document.getElementById('id01').style.display = 'none';
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                if (data == "ok") {
+                    loaddata()
+                    alert_ok("Bạn đã đánh giá công việc này.");
+                    // location.reload();
+                } else {
+                    alert("Có lỗi rồi!!!");
                 }
+                // document.getElementById('id01').style.display = 'none';
             }
-            // console.log(data);
+        }
+        // console.log(data);
         xmlhttp.send(JSON.stringify(data));
+        $("#id01").modal("hide");
     })
 
     var sttw = "";
@@ -615,6 +650,11 @@
     name2 = "%";
 
     function searcha(a) {
+        sttw = a;
+        typw = "%";
+        name1 = "%";
+        name2 = "%";
+        console.log(sttw)
         if (sttw == "%") {
             sttw = "Tất cả";
         }
@@ -638,7 +678,7 @@
             name1,
             name2
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -707,7 +747,7 @@
         event.stopImmediatePropagation;
         if (table) {
             for (var i = 1; i < table.rows.length; i++) {
-                table.rows[i].ondblclick = function(e) {
+                table.rows[i].ondblclick = function (e) {
                     deleText(this);
                 }
             }
@@ -758,7 +798,7 @@
             name1,
             name2
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -845,7 +885,7 @@
             name1,
             name2
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -933,7 +973,7 @@
             name1,
             name2
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -996,7 +1036,7 @@
 
     }
 
-    document.getElementById('btsearch').addEventListener('click', function() {
+    function search() {
         var level = document.getElementById("leverec").value;
         var day1 = document.getElementById("day1").value;
         var day2 = document.getElementById("day2").value;
@@ -1024,7 +1064,7 @@
             day1: day1,
             day2: day2
         };
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var jsonObject = JSON.parse(this.responseText);
                 var trHTML = '';
@@ -1085,9 +1125,12 @@
         }
         xmlhttp.send(JSON.stringify(data));
 
-    })
+    }
+    // document.getElementById("btnsearch").addEventListener('click', function() {
 
-    document.getElementById('btprint').addEventListener('click', function() {
+    // })
+
+    document.getElementById('btprint').addEventListener('click', function () {
         var r = confirm("Bạn có chắc muốn in các công việc: " + printt);
         if (r == true) {
             var xmlhttp = new XMLHttpRequest();
@@ -1097,7 +1140,7 @@
             data = {
                 print: printt
             };
-            xmlhttp.onreadystatechange = function() {
+            xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     var data = this.responseText;
                     console.log(data);

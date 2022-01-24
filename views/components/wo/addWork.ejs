@@ -1,0 +1,220 @@
+<div class="modal fade" id="id02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container fluid">
+                    <div class="container">
+                        <div class="modal-header">
+                            <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thêm công việc</h3>
+                        </div>
+                        <div class="card">
+                            <div class="card-body" style = "font-weight: bold; font-size:1vw">
+                                <div class="container">
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-4">
+                                            <span>Mã Yêu cầu</span>
+                                            <input aria-required="true" type="text" id="idreqq" class="form-control">
+                                        </div>
+                                        <div class="col-4">
+                                            <span>Loại Công Việc</span>
+                                            <input list="typeq" aria-required="true" type="text" id="typework"
+                                                class="form-control"><datalist id="typeq">
+                                                <option>Bảo dưỡnng định kỳ</option>
+                                                <option>Bảo trì yêu cầu</option>
+                                                <option>Dịch vụ yêu cầu</option>
+                                            </datalist>
+                                        </div>
+                                        <div class="col-4">
+                                            <span>Trạng Thái</span>
+                                            <select id="statuswork" class="form-control">
+                                                <option>Chưa xử lý</option>
+                                                <option>Ðã phân công</option>
+                                                <option>Ðã xử lý</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-2">
+                                            <span>Nội dung</span>
+                                        </div>
+                                        <div class="col-10">
+                                            <input aria-required="true" type="text" id="namework" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-6">
+                                            <span>Ngày bắt đầu</span>
+                                            <input class="form-control" type="date" id="datestart" name="birthday">
+                                        </div>
+                                        <div class="col-6">
+                                            <span>Ngày kết thúc</span>
+                                            <input class="form-control" type="date" id="durawork" name="birthday">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-4"><button id="bt1"><i class="fa fa-folder"></i>
+                                                Thông tin chung</button></div>
+                                        <div class="col-4"><button id="bt2"><i class="fa fa-bars"></i> Thông tin liên
+                                                quan</button></div>
+
+                                        <div class="col-4">
+                                            <button id="bt3"><i class="fa fa-check"></i> Ðánh giá</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="tb1" style="display: none">
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-6">
+                                            <label for="staffwork">Người thực hiện</label>
+                                            <input type="text" id="staffwork" class="form-control " autocomplete="off">
+                                            <datalist id="listname">
+                                                <%-namee%>
+                                            </datalist>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="leverec">Mức độ ưu tiên</label>
+                                            <select id="leverec" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row  mt-4 mb-4">
+                                        <div class="col-6">
+                                            <label for="reason">Nguyên nhân</label>
+                                            <textarea aria-required="true" type="text" id="reason"
+                                                class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="solution">Giải pháp</label>
+                                            <textarea aria-required="true" type="text" id="solution"
+                                                class="form-control">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tb2" style="display:none">
+                                    <div class="card-body">
+                                        <div class="row  mt-4 mb-4">
+                                            <div class="col-8">
+                                                <label for="listipart">Tên phụ tùng</label>
+                                                <input list="listnamesp" aria-required="true" type="text" id="listipart"
+                                                    class="form-control " onchange="detectqty()">
+                                                <datalist id="listnamesp">
+                                                    <%-nameesp%>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-4">
+                                                <span>Số lượng trong kho</span>
+                                                <input aria-required="true" type="text" id="qty_inhere"
+                                                    class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row  mt-4 mb-4">
+                                                <div class="col-8">
+                                                    <label for="idpart">Mã
+                                                        phụ tùng</label>
+                                                    <input aria-required="true" type="text" id="idpart"
+                                                        class="form-control ">
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="container">
+                                                        <div class="row  mt-4 mb-4">
+                                                            <div class="col-md-6">
+                                                                <label for="qty_req">Số
+                                                                    lượng yêu cầu</label>
+                                                                <input aria-required="true" type="text" id="qty_req"
+                                                                    class="form-control ">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label></label>
+                                                                <button
+                                                                    class="btn btn-primary btn btn-primary-primary mt-2"
+                                                                    id="btspare">
+                                                                    <i class="fa fa-plus"></i>
+                                                                    Thêm
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="container">
+                                            <table id="tableb" class="table table-hover" onclick="detail_ticket1()">
+                                                <thead style="background-color: rgb(192, 187, 187);">
+                                                    <tr>
+                                                        <th>Mã phụ tùng</th>
+                                                        <th>Tên phụ tùng</th>
+                                                        <th>Số lượng yêu cầu</th>
+                                                        <th>Trạng thái</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tb3" style="display: none">
+                                    <div class="container">
+                                        <div class="row  mt-4 mb-4">
+                                            <div class="col-6">
+                                                <label for="rec_progress">Tiến độ</label>
+                                                <select id="rec_progress" class="form-control">
+                                                    <option>Chua dánh giá</option>
+                                                    <option>Ðúng hạn</option>
+                                                    <option>Quá hạn</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="quality">Chất lượng</label>
+                                                <select id="quality" class="form-control">
+                                                    <option>--Chọn--</option>
+                                                    <option>Rất hài lòng</option>
+                                                    <option>Hài lòng</option>
+                                                    <option>Bình thường</option>
+                                                    <option>Thất vọng</option>
+                                                    <option>Rất thất vọng</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>Nhận xét</p>
+                                    <textarea aria-required="true" type="text" id="comment"
+                                        class="form-control "> </textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button class="btn btn-danger" onclick="Send()"><i class="fa fa-save"></i> Gửi công
+                                                việc</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-primary" id="btsave1"><i class="fa fa-save"></i>Lưu</button>
+                                            <button class="btn btn-primary" id="btsave2"><i class="fa fa-save"></i>Lưu</button>
+                                            <button class="btn btn-primary" id="btsave3"><i class="fa fa-save"></i>Lưu</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .form-control{
+        font-weight: bold;
+        font-size: 0.75vw;
+    }
+</style>

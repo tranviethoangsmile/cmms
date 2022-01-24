@@ -1,323 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- include header links css -->
-  <%- include('layout/header'); %>
-    <%-include ('./styles/wo/woCss');%>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%-include ('layout/header'); %>
+    <!-- <%-include ('./styles/wo/woCss'); %> -->
 </head>
 
-<body onload="loaddata()">
-  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-    <%-include ('./components/wo/woHeader'); %>
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <%-include ('layout/menu'); %>
-      </div>
-
-      <main style="height: 500px !important; overflow-y: hidden !important;"
-        class="mdl-layout__content mdl-color--grey-100">
-        <%-include ('./components/wo/search'); %>
-          <div
-            style="height: 720px; background-color: rgb(255, 255, 255); margin-top: 28px; margin-left: 0px; border: solid 1px rgb(255, 255, 255) ;">
-            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-              <%-include ('./components/wo/layoutHeader'); %>
-                <div class="mdl-layout__content">
-                  <%-include ('./components/wo/routineMaintenance'); %>
-                  <%-include ('./components/wo/serviceRequest') %>
-                </div>
-            </div>
-          </div>
-          <div class="w3-container" style="position: absolute !important;z-index: 9999;">
-            <div id="id01" class="w3-modal" style="width: 100%; height: 100%;">
-              <div
-                style="width: 1300px; min-height: 600px ;max-height: 750px ;margin-top: 0px; border: solid 3px blueviolet;"
-                class="w3-modal-content">
-                <div style="width: 100%; height: 100%;" class="w3-container">
-                  <span style="font-size: 25px;margin-right: 5px;"
-                    onclick="document.getElementById('id01').style.display='none'"
-                    class="w3-button w3-display-topright">&times;</span>
-                  <div class="modal-header">
-                    <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thêm yêu cầu</h3>
-                  </div>
-                  <fieldset style="margin-top: 20px;">
-                    <legend>Thông tin ngườii yêu cầu</legend>
-                    <div style="margin-top: -30px;">
-                      <input aria-required="true"
-                        style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                        type="text" id="idreq" class="form-control col-90">
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Bộ phận
-                        yêu cầu</p>
-                      <input aria-required="true"
-                        style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                        type="text" id="departreq" class="form-control col-90">
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 75px;">Người
-                        yêu cầu</p>
-                      <input aria-required="true"
-                        style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;"
-                        type="text" id="staffreq" class="form-control col-90" autocomplete="off">
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Email
-                      </p>
-                      <input aria-required="true"
-                        style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                        type="text" id="emailreq" class="form-control col-90">
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 75px;">SDT</p>
-                      <input aria-required="true"
-                        style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;"
-                        type="text" id="pnum" class="form-control col-90">
-                    </div>
-                  </fieldset>
-                  <fieldset style="margin-top: 25px;">
-                    <legend>Thông tin yêu cầu</legend>
-                    <div style="margin-top: -30px;">
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Loại
-                        yêu cầu</p>
-                      <div><select aria-required="true" style=" width:1010px; min-height: 10px;text-align: left;"
-                          type="text" id="typereq" class="form-control col-90">
-                          <option>Bảo dưỡng định kỳ</option>
-                          <option>Dịch vụ</option>
-                          <option>Sửa chữa</option>
-                        </select></div>
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nội
-                        dung</p>
-                      <textarea aria-required="true"
-                        style=" width:1010px; min-height: 100px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
-                        type="text" id="contentreq" class="form-control col-90"> </textarea>
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mức độ
-                      </p>
-                      <div><select id="levereq" style="color: rgb(0, 0, 0);width: 140px;" class="form-control col-90">
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                      </div>
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Địa
-                        điểm</p>
-                      <input aria-required="true"
-                        style=" width:700px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
-                        type="text" id="placereq" class="form-control col-90">
-                      <div id="boxtimereq" style="display: none;">
-                        <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày
-                          bắt đầu</p>
-                        <input class="col-autoo form-control" type="text" id="timereq" name="birthday"
-                          style="width: 1010px;margin-left: 0px; ">
-                      </div>
-                      <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày
-                        kết thúc</p>
-                      <input class="col-autoo form-control" type="date" id="timeendreq" name="birthday"
-                        style="width: 1010px;margin-left: 0px;">
-                      <input aria-required="true"
-                        style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;"
-                        type="text" id="hideeq" class="form-control col-90">
-                      <input aria-required="true"
-                        style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;"
-                        type="text" id="hidedate" class="form-control col-90">
-                      <input aria-required="true"
-                        style="display: none; width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 10px;"
-                        type="text" id="hidecycle" class="form-control col-90">
-                    </div>
-                  </fieldset>
-                  <div class="modal-footer" style="margin-top: 20px; width: 98%;margin-left: 10px;">
-                    <div id="boxedit" style="margin-top: -20px;">
-                      <button class="btn" id="btdelete"><i class="fa fa-times"></i> Xóa</button>
-                      <button class="btn" id="btsavee"><i class="fa fa-save"></i> Luu</button>
-                      <button class="btn" id="btdistri"><i class="fa fa-calendar-plus-o"></i> Giao việc</button>
-                    </div>
-                    <div id="boxadd" style="margin-top: -20px;">
-                      <button class="btn" id="btsave"><i class="fa fa-save"></i> Luu</button>
-                    </div>
-                  </div>
-                </div>
+<body onload="loaddata()" class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
+  onload="loaddata()">
+  <div class="wrapper">
+    <%-include ('dashboard/nav');%>
+      <%-include ('dashboard/sidebar');%>
+        <div class="content-wrapper">
+            <%-include ('./components/wo/search'); %>
+          <%-include ('./components/wo/layoutHeader');%>
+        
+            <div class="tab-content" id="ex2-content">
+              <div class="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
+                <%- include ('./components/wo/routineMaintenance');%>
+              </div>
+              <div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+                <%- include ('./components/wo/serviceRequest');%>
               </div>
             </div>
-          </div>
-          <div class="w3-container">
-            <div id="id02" class="w3-modal">
-              <div style=" width: 1300px; min-height: 700px ;margin-top: 0px; border: solid 3px blueviolet;"
-                class="w3-modal-content">
-                <div style="width: 100%; height: 100%;" class="w3-container">
-                  <span style="font-size: 25px;margin-right: 5px;"
-                    onclick=" document.getElementById('id02').style.display='none'"
-                    class="w3-button w3-display-topright">&times;</span>
-                  <div class="modal-header">
-                    <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thêm công việc</h3>
-                  </div style="border-box: solid 1px red">
-                  <div style="margin-top: 0px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mã yêu
-                      cầu</p>
-                    <input aria-required="true"
-                      style=" width:300px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                      type="text" id="idreqq" class="form-control col-90">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Loại công
-                      việc</p>
-                    <div><input list="typeq" aria-required="true"
-                        style=" width:220px; min-height: 10px;text-align: left;" type="text" id="typework"
-                        class="form-control col-90"><datalist
-                        style="max-height: 100px !important;overflow-y: auto!important" id="typeq">
-                        <option>Bảo dưỡnng định kỳ</option>
-                        <option>Bảo trì yêu cầu</option>
-                        <option>Dịch vụ yêu cầu</option>
-                      </datalist></div>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 30px;">Trạng
-                      thái</p>
-                    <div><select id="statuswork" style="color: rgb(0, 0, 0);width: 200px;" class="form-control col-90">
-                        <option>Chưa xử lý</option>
-                        <option>Ðã phân công</option>
-                        <option>Ðã xử lý</option>
-                      </select>
-                    </div>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">N?i dung
-                    </p>
-                    <input aria-required="true"
-                      style=" width:1050px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                      type="text" id="namework" class="form-control col-90">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày bắt
-                      đầu</p>
-                    <input class="col-autoo form-control" type="date" id="datestart" name="birthday"
-                      style="width: 300px;margin-left: 0px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Ngày kết
-                      thúc</p>
-                    <input class="col-autoo form-control" type="date" id="durawork" name="birthday"
-                      style="width: 300px;margin-left: 0px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 800px;"></p>
-                  </div>
-
-                  <div class="w3-bar w3-black"
-                    style="color: blueviolet; background-color: rgb(161, 161, 161)!important;font-size: 15px; border: solid 1px blueviolet; margin-top: 20px!important ;">
-                    <a class="w3-bar-item w3-button is-active" id="bt1"><i class="fa fa-folder"></i> Thông tin chung</a>
-                    <a class="w3-bar-item w3-button" id="bt2"><i class="fa fa-bars"></i> Thông tin liên quan</a>
-                    <a class="w3-bar-item w3-button" id="bt3"><i class="fa fa-check"></i> Ðánh giá</a>
-                  </div>
-                  <div id="tb1"
-                    style=" margin-top: 0px; border-left: solid 1px rgb(218, 218, 218);border-bottom: solid 1px rgb(218, 218, 218);border-right: solid 1px rgb(218, 218, 218);height: 300px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Người
-                      thực hiện</p>
-                    <!-- <input  aria-required="true" style=" width:420px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="staffwork" class="form-control col-90">                                       -->
-                    <input list="listname" aria-required="true"
-                      style=" width:420px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; "
-                      type="text" id="staffwork" class="form-control col-90"><datalist
-                      style="height: 10px !important;overflow-y: auto!important" id="listname">
-                      <%-namee%>
-                    </datalist>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mức độ ưu
-                      tiên</p>
-                    <div><select id="leverec" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90">
-                        <option>1</option>
-                        <option>2</option>
-                      </select>
-                    </div>
-                    <!-- <input  aria-required="true" style=" width:400px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="leverec" class="form-control col-90">     -->
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nguyên
-                      nhân</p>
-                    <textarea aria-required="true"
-                      style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
-                      type="text" id="reason" class="form-control col-90"> </textarea>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Gi?i pháp
-                    </p>
-                    <textarea aria-required="true"
-                      style=" width:420px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
-                      type="text" id="solution" class="form-control col-90"> </textarea>
-                  </div>
-                  <div id="tb2"
-                    style=" margin-top: 0px; border-left: solid 1px rgb(218, 218, 218);border-bottom: solid 1px rgb(218, 218, 218);border-right: solid 1px rgb(218, 218, 218);min-height: 300px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Tên ph?
-                      tùng</p>
-                    <!-- <input  aria-required="true" style=" width:580px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;" type="text" id="d" class="form-control col-90">                                       -->
-                    <input list="listnamesp" aria-required="true"
-                      style=" width:580px; min-height: 10px;text-align: left; margin: auto;margin-top: 26px; "
-                      type="text" id="listipart" class="form-control col-90" onchange="detectqty()"><datalist
-                      style="height: 10px !important;overflow-y: auto!important" id="listnamesp">
-                      <%-nameesp%>
-                    </datalist>
-                    <!-- <div class="autocomplete col-autoo" style="width:580px;margin-left: -0px;margin-top: 25px; color: rgb(0, 0, 0);"><input autocomplete="off" style="text-align: center;" class="form-control" id="listipart" type="text" onchange="detectqty()"></div> -->
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">S? lu?ng
-                      trong kho</p>
-                    <input aria-required="true"
-                      style=" width:110px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 50px;"
-                      type="text" id="qty_inhere" class="form-control col-90" readonly>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Mã ph?
-                      tùng</p>
-                    <input aria-required="true"
-                      style=" width:580px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;"
-                      type="text" id="idpart" class="form-control col-90">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">S? lu?ng
-                      yêu c?u</p>
-                    <input aria-required="true"
-                      style=" width:110px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 50px;"
-                      type="text" id="qty_req" class="form-control col-90">
-                    <button class="btn col-10" style=" background-color: #9d6fda; margin-left: 20px;margin-top: 25px;"
-                      id="btspare"><i class="fa fa-plus"></i> Thêm</button>
-
-                    <div class="tableFixHeadd col-901">
-                      <div class="page-content" style=" margin-top:0px;">
-                        <div class="loader" id="load" style="display: none; margin: auto;margin-top: 0px;"></div>
-                        <table id="tableb" class="tablea" style="width:100%; margin: auto;" onclick="detail_ticket1()">
-                          <thead>
-                            <tr>
-                              <!-- <th style="text-align: center;width: 10px;" >Stt</th> -->
-                              <th style="text-align: center;width: 100px;">Mã phụ tùng</th>
-                              <th style="text-align: center;width: 300px;">Tên phụ tùng</th>
-                              <th style="text-align: center;width: 10px;">Số lượng yêu cầu</th>
-                              <th style="text-align: center;width: 10px;">Trạng thái</th>
-                            </tr>
-                          </thead>
-                          <tbody style="text-align: left;">
-                          </tbody>
-                          </thead>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="tb3"
-                    style=" margin-top: 0px; border-left: solid 1px rgb(218, 218, 218);border-bottom: solid 1px rgb(218, 218, 218);border-right: solid 1px rgb(218, 218, 218);height: 300px;">
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Tiến độ
-                    </p>
-                    <div><select id="rec_progress" style="color: rgb(0, 0, 0);width: 420px;"
-                        class="form-control col-90">
-                        <option>Chua dánh giá</option>
-                        <option>Ðúng hạn</option>
-                        <option>Quá hạn</option>
-                      </select>
-                    </div>
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Chất
-                      lượng</p>
-                    <div><select id="quality" style="color: rgb(0, 0, 0);width: 420px;" class="form-control col-90">
-                        <option> </option>
-                        <option>Rất hài lòng</option>
-                        <option>Hài lòng</option>
-                        <option>Bình thường</option>
-                        <option>Thất vọng</option>
-                        <option>Rất thất vọng</option>
-                      </select>
-                    </div>
-
-                    <p class="modal-title col-10" style="color: #7c4abe;font-weight: bold; margin-left: 50px;">Nhận xét
-                    </p>
-                    <textarea aria-required="true"
-                      style=" width:1020px; min-height: 200px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
-                      type="text" id="comment" class="form-control col-90"> </textarea>
-                  </div>
-
-                  <div class="modal-footer" style="margin-top: 10px; width: 98%;margin-left: 10px;">
-                    <div class="col-xs-12 col-sm-4 col-md-2 ">
-                      <button class="btn" style="margin-top: 0px;margin-left: 950px;background-color: red;"
-                        onclick="Send()"><i class="fa fa-save"></i> Gửi công việc</button>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2 ">
-                      <button class="btn" id="btsave1" style="margin-top: 0px;margin-left: 920px;"><i
-                          class="fa fa-save"></i> Luu</button>
-                      <button class="btn" id="btsave2" style="margin-top: 0px;margin-left: 920px;"><i
-                          class="fa fa-save"></i> Luu</button>
-                      <button class="btn" id="btsave3" style="margin-top: 0px;margin-left: 920px;"><i
-                          class="fa fa-save"></i> Luu</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+        <%-include ('./components/wo/addWork');%>
+          <%-include ('./components/wo/addRequest');%>
+            <%-include ('dashboard/footer');%>
   </div>
-  </main>
-  <%-include ('./scripts/wo/woScript');%>
+
+  <%-include ('layout/script');%>
+    <%-include ('./scripts/wo/woScript');%>
 </body>
 
 </html>

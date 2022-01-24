@@ -12,10 +12,12 @@
     } 
    
     function loaddata(){
-      document.getElementById("linkwo").style.backgroundColor="#4c4c4c";
+      // document.getElementById("linkwo").style.backgroundColor="#4c4c4c";
       loaddatapm();
       loaddatase();
     }
+
+    
 
     function loaddatapm(){
       var xmlhttp = new XMLHttpRequest();
@@ -101,7 +103,7 @@
     }
 
     document.getElementById('btadd').addEventListener('click', function() {
-      document.getElementById('id01').style.display = 'block';
+      $('#id01').modal('show');
       document.getElementById('boxadd').style.display = 'block';
       document.getElementById('boxedit').style.display = 'none';
       document.getElementById("departreq").value="";
@@ -167,11 +169,11 @@
     }
     
     function tableText(tableRow) {
-      document.getElementById('id01').style.display = 'block';
+     $('#id01').modal('show');
       document.getElementById('bt1').style.backgroundColor='#7b7b7b';
       document.getElementById('bt2').style.backgroundColor='rgb(161 161 161)';
       document.getElementById('bt3').style.backgroundColor='rgb(161 161 161)';
-      document.getElementById('id01').style.display = 'block';
+      $('#id01').modal('show');
       document.getElementById('boxadd').style.display = 'none';
       document.getElementById('boxedit').style.display = 'block';
       document.getElementById('btsave2').style.display = 'none';
@@ -261,12 +263,18 @@
           var data = this.responseText;
           if (data == "ok") {
               loaddata()
-              alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
+              Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
               // location.reload();
           } else {
               alert("Có lỗi rồi!!!");
           }
-              document.getElementById('id01').style.display = 'none';
+               $("#id01").modal("hide");
           }
       }
       // console.log(data);
@@ -309,12 +317,19 @@
             var data = this.responseText;
             if (data == "ok") {
                 loaddata()
-                alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
-                // location.reload();
+                $("#id01").modal("hide");
+                Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+              })
+                location.reload();
             } else {
                 alert("Có lỗi rồi!!!");
             }
-                document.getElementById('id01').style.display = 'none';
+            $("#id01").modal("hide");
             }
         }
         // console.log(data);
@@ -341,11 +356,17 @@
                   var data = this.responseText;
                   if (data == "ok") {
                       loaddata()
-                      alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
+                      Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
                   } else {
                       alert("Có lỗi rồi!!!");
                   }
-                      document.getElementById('id01').style.display = 'none';
+                       $("#id01").modal("hide");
                   }
               }
               // console.log(data);
@@ -357,12 +378,12 @@
     })
     
     document.getElementById('btdistri').addEventListener('click', function() {
-      document.getElementById('id02').style.display = 'block';
+      $('#id02').modal('show');
       document.getElementById('tb1').style.display = 'block';
       document.getElementById('tb2').style.display = 'none';
       document.getElementById('tb3').style.display = 'none';
       document.getElementById("idreqq").value=document.getElementById("idreq").value;
-      document.getElementById('id01').style.display = 'none';
+      $('#id01').modal('hide');
     })
 
     document.getElementById('bt2').addEventListener('click', function() {
@@ -453,11 +474,17 @@
           var data = this.responseText;
           if (data == "ok") {
               loaddata()
-              alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
+              Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
           } else {
               alert("Có lỗii rồi!!!");
           }
-              document.getElementById('id01').style.display = 'none';
+               $("#id01").modal("hide");
           }
       }
       xmlhttp.send(JSON.stringify(data));
@@ -487,7 +514,13 @@
               var data = this.responseText;
               if (data == "ok") {
                   loaddata()
-                  alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
+                  Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
               } else {
                   alert("Có lỗi rồi!!!");
               }
@@ -625,7 +658,7 @@
                   } else {
                       alert("Có l?i r?i!!!");
                   }
-                      document.getElementById('id01').style.display = 'none';
+                       $("#id01").modal("hide");
                   }
               }
               // console.log(data);
@@ -674,7 +707,7 @@
               } else {
                   alert("Có lỗi rồi!!!");
               }
-                  document.getElementById('id01').style.display = 'none';
+                   $("#id01").modal("hide");
               }
           }
           // console.log(data);
@@ -781,7 +814,7 @@
         if (this.readyState == 4 && this.status == 200) {
           var data = this.responseText;
           if (data == "ok") {
-              alert("ÐÃ CẬP NHẬT THÀNH CÔNG");
+              $.notify('đã cập nhật thành công', 'success');
               // location.reload();
           } else {
               alert("Có lỗi rồi!!!");

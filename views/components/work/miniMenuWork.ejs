@@ -1,24 +1,82 @@
-<div class="col-15" style=" height: 805px; background-color: rgb(255, 255, 255); margin-top: 3px;border-bottom: solid 1px rgb(170, 170, 170) ; ">
-    <button class="btnn" data-toggle="collapse" data-target="#sttwork">TRẠNG THÁI CÔNG VIỆC<i style=" float: right;margin-top: 5px;"class="fa fa-sort-desc"></i></button>
-    <div id="sttwork" class="collapse">
-        <button class="btnnn " id="Tất cả" value="aa" onclick="searcha(this.id)">Tất cả</button>
-        <button class="btnnn " id="Chưa phân công" onclick="searcha(this.id)">Chưa phân công</button>
-        <button class="btnnn " id="Đang thực hiện" onclick="searcha(this.id)">Đang thực hiện</button>
-        <button class="btnnn " id="Hoàn thành" onclick="searcha(this.id)">Hoàn thành</button>
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-expanded="false">
+                <span>TRẠNG THÁI CÔNG VIỆC</span></button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li> <button class="btn btn-outline-primary" id="Tất cả" value="aa" onclick="searcha(this.id)">Tất
+                        cả</button></li>
+                <li><button class="btn btn-outline-primary" id="Chưa phân công" onclick="searcha(this.id)">Chưa phân
+                        công</button>
+                </li>
+                <li><button class="btn btn-outline-primary" id="Đang thực hiện" onclick="searcha(this.id)">Đang thực
+                        hiện</button>
+                </li>
+                <li><button class="btn btn-outline-primary" id="Hoàn thành" onclick="searcha(this.id)">Hoàn
+                        thành</button>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle mt-2" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-expanded="false">
+                <span>LOẠI CÔNG VIỆC</span></button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><button class="btn btn-outline-primary" id="Bảo dưỡng định kỳ" onclick="searchb(this.id)">Bảo dưỡng
+                        định
+                        kỳ</button></li>
+                <li><button class="btn btn-outline-primary" id="Dịch vụ" onclick="searchb(this.id)">Dịch vụ</button>
+                </li>
+                <li><button class="btn btn-outline-primary" id="Sửa chữa" onclick="searchb(this.id)">Sửa chữa</button>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown" aria-labelledby="dropdownMenuButton">
+            <button class="btn btn-primary dropdown-toggle mt-2" data-toggle="collapse" data-target="#usreq">
+                <span>NGƯỜI GIAO</span>
+            </button>
+            <div id="usreq">
+                <%-name1%>
+            </div>
+        </div>
+        <div class="dropdown" aria-labelledby="dropdownMenuButton">
+            <button class="btn btn-primary dropdown-toggle mt-2" data-toggle="collapse" data-target="#usw">
+                <span>NGƯỜI NHẬN</span>
+            </button>
+            <div id="usw">
+                <%-name2%>
+            </div>
+        </div>
 
-    <button class="btnn" data-toggle="collapse" data-target="#tywork">LOẠI CÔNG VIỆC<i style=" float: right;margin-top: 5px;"class="fa fa-sort-desc"></i></button>
-    <div id="tywork" class="collapse">
-        <button class="btnnn " id="Bảo dưỡng định kỳ" onclick="searchb(this.id)">Bảo dưỡng định kỳ</button>
-        <button class="btnnn " id="Dịch vụ" onclick="searchb(this.id)">Dịch vụ</button>
-        <button class="btnnn " id="Sửa chữa" onclick="searchb(this.id)">Sữa chữa</button>
-    </div>
-    <button class="btnn" data-toggle="collapse" data-target="#usreq">NGƯỜI GIAO<i style=" float: right;margin-top: 5px;"class="fa fa-sort-desc"></i></button>
-    <div id="usreq" class="collapse">
-        <%-name1%>
-    </div>
-    <button class="btnn" data-toggle="collapse" data-target="#usw">NGƯỜI NHẬN<i style=" float: right;margin-top: 5px;"class="fa fa-sort-desc"></i></button>
-    <div id="usw" class="collapse">
-        <%-name2%>
+
     </div>
 </div>
+<style>
+    body {
+        overflow-x: 0;
+    }
+    button {
+        width: 100%;
+        font-weight: bold;
+
+    }
+
+    #usreq {
+        max-height: 310px;
+        overflow: scroll;
+    }
+
+    #usw {
+        max-height: 310px;
+        overflow: scroll;
+    }
+
+    .dropdown-menu.show {
+        min-width: 100%;
+        min-height: 300px;
+    }
+
+    span {
+        font-size: 1vw;
+    }
+</style>

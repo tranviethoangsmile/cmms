@@ -1,0 +1,223 @@
+<!-- <div class="w3-container" style="position: absolute !important;z-index: 9999;">
+    <div id="id01" class="w3-modal" style="width: 100%; height: 100%;">
+      <div
+        style="width: 1300px; min-height: 600px ;max-height: 750px ;margin-top: 0px; border: solid 3px blueviolet;"
+        class="w3-modal-content">
+        <div style="width: 100%; height: 100%;" class="w3-container">
+          <span style="font-size: 25px;margin-right: 5px;"
+            onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <div class="modal-header">
+            <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thêm yêu cầu</h3>
+          </div>
+          <fieldset>
+            <legend>Thông tin ngườii yêu cầu</legend>
+            <div>
+              <input aria-required="true"
+                style="display: none; 
+                type="text" id="idreq" class="form-control">
+              <p >Bộ phận
+                yêu cầu</p>
+              <input aria-required="true"
+                style=" 
+                type="text" id="departreq" class="form-control">
+              <p >Người
+                yêu cầu</p>
+              <input aria-required="true"
+                
+                type="text" id="staffreq" class="form-control" autocomplete="off">
+              <p >Email
+              </p>
+              <input aria-required="true"
+                style=" 
+                type="text" id="emailreq" class="form-control">
+              <p >SDT</p>
+              <input aria-required="true"
+                
+                type="text" id="pnum" class="form-control">
+            </div>
+          </fieldset>
+          <fieldset style="margin-top: 25px;">
+            <legend>Thông tin yêu cầu</legend>
+            <div>
+              <p >Loại
+                yêu cầu</p>
+              <div><select aria-required="true" style=" width:1010px; min-height: 10px;text-align: left;"
+                  type="text" id="typereq" class="form-control">
+                  <option>Bảo dưỡng định kỳ</option>
+                  <option>Dịch vụ</option>
+                  <option>Sửa chữa</option>
+                </select></div>
+              <p >Nội
+                dung</p>
+              <textarea aria-required="true"
+                style=" width:1010px; min-height: 100px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
+                type="text" id="contentreq" class="form-control"> </textarea>
+              <p >Mức độ
+              </p>
+              <div><select id="levereq" style="color: rgb(0, 0, 0);width: 140px;" class="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </div>
+              <p >Địa
+                điểm</p>
+              <input aria-required="true"
+                style=" width:700px; min-height: 10px;text-align: center; margin: auto; margin-top: 26px;margin-left: 0px;"
+                type="text" id="placereq" class="form-control">
+              <div id="boxtimereq" style="display: none;">
+                <p >Ngày
+                  bắt đầu</p>
+                <input class="col-autoo form-control" type="text" id="timereq" name="birthday"
+                  style="width: 1010px;margin-left: 0px; ">
+              </div>
+              <p >Ngày
+                kết thúc</p>
+              <input class="col-autoo form-control" type="date" id="timeendreq" name="birthday"
+                style="width: 1010px;margin-left: 0px;">
+              <input aria-required="true"
+                style="display: none;"
+                type="text" id="hideeq" class="form-control">
+              <input aria-required="true"
+                style="display: none;"
+                type="text" id="hidedate" class="form-control">
+              <input aria-required="true"
+                style="display: none;"
+                type="text" id="hidecycle" class="form-control">
+            </div>
+          </fieldset>
+          <div class="modal-footer" style="margin-top: 20px; width: 98%;margin-left: 10px;">
+            <div id="boxedit">
+              <button class="btn" id="btdelete"><i class="fa fa-times"></i> Xóa</button>
+              <button class="btn" id="btsavee"><i class="fa fa-save"></i> Luu</button>
+              <button class="btn" id="btdistri"><i class="fa fa-calendar-plus-o"></i> Giao việc</button>
+            </div>
+            <div id="boxadd">
+              <button class="btn" id="btsave"><i class="fa fa-save"></i> Luu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<div class="modal fade" id="id01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Yêu Cầu</h5>
+      </div>
+      <div class="modal-body" style = "font-weight: bold; font-size:1vw">
+        <div class="card">
+          <div class="card-body">
+            <div class="card">
+              <div class="container">
+                <span>Thông tin người yêu cầu</span>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-6">
+                    <input aria-required="true" style="display: none;" type="text" id="idreq" class="form-control">
+                    <span>
+                      Bộ phận yêu cầu
+                    </span>
+                    <input aria-required="true" type="text" id="departreq" class="form-control">
+                  </div>
+                  <div class="col-6">
+                    <span>Người yêu cầu</span>
+                    <input aria-required="true" type="text" id="staffreq" class="form-control" autocomplete="off">
+                  </div>
+                </div>
+                <div class="row  mt-4 mb-4 mb-2 mt-2">
+                  <div class="col-6">
+                    <span>Email</span>
+                    <input aria-required="true" type="text" id="emailreq" class="form-control">
+                  </div>
+                  <div class="col-6">
+                    <span>SĐT</span>
+                    <input aria-required="true" type="text" id="pnum" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="container">
+                <span>Thông tin yêu cầu</span>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-2">
+                    <span>Loại yêu cầu</span>
+                  </div>
+                  <div class="col-10">
+                    <select aria-required="true" id="typereq" class="form-control">
+                      <option>Bảo dưỡng định kỳ</option>
+                      <option>Dịch vụ</option>
+                      <option>Sửa chữa</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-2">
+                    <span>Nội dung</span>
+                  </div>
+                  <div class="col-10">
+                    <textarea aria-required="true" type="text" id="contentreq" class="form-control"> </textarea>
+                  </div>
+                </div>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-2">
+                    <span>Mức độ</span>
+                  </div>
+                  <div class="col-10">
+                    <select id="levereq" class="form-control">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-2">
+                    <span>Địa điểm</span>
+                  </div>
+                  <div class="col-10">
+                    <input aria-required="true" type="text" id="placereq" class="form-control">
+                  </div>
+                </div>
+                <div class="row  mt-4 mb-4">
+                  <div class="col-6">
+                    <div id="boxtimereq" style="display: none;">
+                      <span>Ngày bắt đầu</span>
+                      <input class="form-control" type="text" id="timereq" name="birthday">
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <span>Ngày kết thúc</span>
+                    <input class="col-autoo form-control" type="date" id="timeendreq" name="birthday">
+                    <input aria-required="true" style="display: none;" type="text" id="hideeq" class="form-control">
+                    <input aria-required="true" style="display: none;" type="text" id="hidedate" class="form-control">
+                    <input aria-required="true" style="display: none;" type="text" id="hidecycle" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div id="boxedit">
+          <div class="row  mt-4 mb-4">
+            <div class="col-4">
+              <button class="btn btn-danger" id="btdelete"><i class="fa fa-times"></i> Xóa</button>
+            </div>
+            <div class="col-4">
+              <button class="btn btn-success" id="btsavee"><i class="fa fa-save"></i>Lưu</button>
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary" id="btdistri"><i class="fa fa-calendar-plus-o"></i> Giao việc</button>
+            </div>
+          </div>
+        </div>
+        <div id="boxadd">
+          <button class="btn btn-success " id="btsave"><i class="fa fa-save"></i>Lưu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

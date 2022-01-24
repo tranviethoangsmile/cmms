@@ -7,11 +7,11 @@
   <%-include ('layout/header'); %>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed mt-20">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" onload="loaddata()">
   <div class="wrapper">
-    <%-include ('components/home/homeHeader');%>
+    <%-include ('dashboard/nav');%>
       <%-include ('dashboard/sidebar');%>
-        <div class="content-wrapper" style="min-height: auto;">
+        <div class="content-wrapper">
           <div class="card">
             <%-include ('./components/home/sumaryWork');%>
           </div>
@@ -29,11 +29,8 @@
           </div>
           <%-include ('dashboard/footer');%>
         </div>
-
   </div>
-  <!-- ./wrapper -->
-
-  <!-- REQUIRED SCRIPTS -->
+  
   <!-- jQuery -->
   <%-include ('./scripts/home/homeScript');%>
   <%-include ('layout/script');%>
