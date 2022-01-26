@@ -7,7 +7,7 @@
     }
 
     function loaddata() {
-      document.getElementById("linksche").style.backgroundColor = "#4c4c4c";
+      // document.getElementById("linksche").style.backgroundColor = "#4c4c4c";
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("get", '/sche/loading_data', true);
       event.preventDefault(); //prevent default action 
@@ -56,7 +56,7 @@
     }
 
     document.getElementById('uploadex').addEventListener('click', function () {
-      document.getElementById('id03').style.display = 'block';
+     $("#id03").modal('show');
     })
 
     var formm = document.getElementById('upload_formm');
@@ -115,7 +115,7 @@
 
       document.getElementById("cycle").value = "";
       document.getElementById("datestart").value = "";
-      document.getElementById('id02').style.display = 'block';
+      $("#id02").modal('show');
       document.getElementById('blockupda').style.display = 'block';
       document.getElementById('blockadd').style.display = 'none';
       document.getElementById("ursche").value = tableRow.childNodes[11].innerText;
@@ -171,12 +171,12 @@
     }
 
     document.getElementById('btadd').addEventListener('click', function () {
+      $("#id02").modal('show');
       document.getElementById('blockupda').style.display = 'none';
       document.getElementById('blockadd').style.display = 'block';
       $('#tableb tbody').html('');
       document.getElementById("cycle").value = "";
       document.getElementById("datestart").value = "";
-      document.getElementById('id02').style.display = 'block';
       document.getElementById("ursche").value = document.getElementById("user").innerHTML;
       document.getElementById("staffw").value = "";
       document.getElementById("levelsche").value = "";
@@ -243,7 +243,7 @@
         }
       }
       xmlhttp.send(JSON.stringify(data));
-
+      $("#id02").modal("hide")
     })
 
     function detail_ticket1() {
@@ -324,6 +324,7 @@
         }
       }
       xmlhttp.send(JSON.stringify(data));
+      $("#id02").modal("hide")
     })
 
     document.getElementById('btdelete').addEventListener('click', function () {
@@ -359,8 +360,7 @@
     })
 
     document.getElementById('btcopy').addEventListener('click', function () {
-      document.getElementById('id02').style.display = 'block';
-      // document.getElementById('id01').style.display = 'none';
+      $("#id02").modal('show');
       document.getElementById('blockupda').style.display = 'none';
       document.getElementById('blockadd').style.display = 'block';
       document.getElementById("ursche").value = document.getElementById("user").innerHTML;

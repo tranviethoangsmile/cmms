@@ -17,6 +17,17 @@
       loaddatase();
     }
 
+
+    $("#main").on("click", () => {
+      document.getElementById('service-tabs').style.display = 'none';
+      document.getElementById('main-tabs').style.display = 'block';
+    })
+
+    $("#service").on("click", ()=> {
+      document.getElementById('service-tabs').style.display = 'block';
+      document.getElementById('main-tabs').style.display = 'none';
+    })
+
     
 
     function loaddatapm(){
@@ -123,7 +134,7 @@
           event.stopImmediatePropagation;
           if (tablepm) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].ondblclick = function(e) {
+                  table.rows[i].onclick = function(e) {
                       tableText(this);
                   }
               }
@@ -136,7 +147,7 @@
     //       event.stopImmediatePropagation;
     //       if (tablecm) {
     //           for (var i = 1; i < table.rows.length; i++) {
-    //               table.rows[i].ondblclick = function(e) {
+    //               table.rows[i].onclick = function(e) {
     //                   tableText(this);
     //               }
     //           }
@@ -149,7 +160,7 @@
           event.stopImmediatePropagation;
           if (tablese) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].ondblclick = function(e) {
+                  table.rows[i].onclick = function(e) {
                       tableText(this);
                   }
               }
@@ -161,7 +172,7 @@
           event.stopImmediatePropagation;
           if (table) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].ondblclick = function(e) {
+                  table.rows[i].onclick = function(e) {
                       deleText(this);
                   }
               }

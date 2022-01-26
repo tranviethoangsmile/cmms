@@ -1,0 +1,158 @@
+<div class="modal fade" id="id01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #7c4abe ; font-weight: bold;" id="namebox">
+                </h2>
+            </div>
+            <div class="modal-body" style="font-weight: bold; font-size:1vw">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="container" action="CCS/Upload_New_PR" id="upload_form" method="POST">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <img id="output" src="public/img_mac/00.jpg">
+                                </div>
+                            </div>
+                            <span><input type="file" name="image" id="file" onchange="loadFile(event)"
+                                    style="display: none;" accept="image/png, image/gif, image/jpeg"></span>
+                            <span><label for="file" style="cursor: pointer;" id="custom-btn">Upload Image</label></span>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>ID</span>
+                                <input aria-required="true" type="text" id="id" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <span>ID Hệ THỐNG</span>
+                                <input aria-required="true" type="text" id="mc" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>SỐ LƯỢNG HIỆN CÓ</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="qty"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <span>ĐƠN VỊ TÍNH</span>
+                                <input aria-required="true" type="text" id="unit" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>SỐ LƯỢNG TỐI THIỂU</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="qtymin"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <span>SỐ LƯỢNG TỐI ĐA</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="qtymax"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>SỐ LƯỢNG NHẬP</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="qtyim"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <span>SỐ LƯỢNG XUẤT</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="qtyex"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>VỊ TRÍ</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="pos"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <span>ĐƠN GIÁ</span>
+                                <input oninput="myFunction()" aria-required="true" type="text" id="price"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <span>NAME</span>
+                    <textarea oninput="myFunction()" aria-required="true" type="text" id="name"
+                        class="form-control "></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>SỐ BỘ PHẬN</span>
+                        <input aria-required="true" type="text" id="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <span>TẦN SUẤT ĐẶT HÀNG</span>
+                        <input oninput="myFunction()" aria-required="true" type="text" id="fre" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <span>GHI CHÚ </span>
+                    <textarea aria-required="true" type="text" id="note" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-3">
+                        <h6 id="timeupdate"></h6>
+                    </div>
+                    <div class="col-3">
+                        <h6 id="userupdate"></h6>
+                    </div>
+                    <div class="col-6">
+                        <div id="blockdelete">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-danger" id="btn_delete"><i class="fa fa-times"></i>
+                                        Xóa</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" id="btn_save"><i class="fa fa-save"></i>
+                                        Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="blockedit">
+                            <div class="row">
+                                <input list="reasonn" placeholder="Nhập lý do thay đổi" aria-required="true" type="text"
+                                    id="reason" class="form-control ">
+                                <datalist id="reasonn">
+                                    <option></option>
+                                    <option>Nhập</option>
+                                    <option>Xuất</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div id="blockadd">
+                            <button class="btn" id="btn_save1"><i class="fa fa-save"></i>
+                                Lưu</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    h6{
+        color:red;
+        font-weight: bold;
+    }
+
+    button {
+        font-weight: bold;
+        font-size: 1vw;
+    }
+</style>

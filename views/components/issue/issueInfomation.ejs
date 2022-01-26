@@ -1,35 +1,79 @@
-<div  style="height: 190px; background-color: rgb(255, 255, 255); margin-top: 3px; border: solid 1px rgb(255, 255, 255) ;overflow-x: auto;" >
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold; ">TÊN PHỤ TÙNG</p></div>
-    <!-- <div class="autocomplete col-autoo" style="margin-left: 60px; width:500px; color: rgb(0, 0, 0);"><input autocomplete="off" style="text-align: center;" class="form-control" id="listipart" type="text" onchange="detectqty()"></div> -->
-    <input list="listnamesp" aria-required="true" style=" width:400px; min-height: 10px;text-align: left;margin-left: 60px!important; margin: auto;margin-top: 20px; " type="text" id="listipart" class="form-control col-autoo" onchange="detectqty()"><datalist style="height: 10px !important;overflow-y: auto!important" id="listnamesp"><%-nameesp%></datalist>
-    <div class="col-auto" style="margin-left: 50px;"><p  class="modal-title" style="color: #7c4abe;font-weight: bold;">MÃ PHỤ TÙNG</p></div>
-    <!-- <div class="autocompletee col-autoo" style="width:300px;margin-top: 20px;color: rgb(0, 0, 0);" ><input  style="text-align: center;" class="form-control" id="listmc" type="text" ></div> -->
-    <div class=" col-autoo"><input  aria-required="true" style=" width:300px; min-height: 10px;text-align: center; margin: auto; " type="text" id="idpart" class="form-control" onchange="detectqtyy()"></div>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;margin-left: 50px;">SỐ LƯỢNG TRONG KHO:</p></div>
-    <div class="col-auto"><h4 id="qty_inhere" style="color: #7c4abe;font-weight: bold;margin-top: -10px;margin-left: -10px;">--</h4></div>
-    <br><br/>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;float: left;">YÊU CẦU CÔNG VIỆC</p></div>
-    <div class="col-autoo"><input list="typeq" id="work_order" style="color: rgb(0, 0, 0);width: 400px;" class="form-control"><datalist id="typeq">
-      <option >          </option>
-      <option >Bảo dưỡng định kỳ</option>
-      <option >Bảo dưỡng yêu cầu</option>
-      <option >Dịch vụ yêu cầu</option>
-      <option >Khác</option>
-    </datalist>
+<div class="container" style="font-weight: bold;">
+  <div class="row mt-2">
+    <div class="col-4">
+      <span>TÊN PHỤ TÙNG</span>
+      <input list="listnamesp" aria-required="true" type="text" id="listipart" class="form-control "
+        onchange="detectqty()"><datalist id="listnamesp">
+        <%-nameesp%>
+      </datalist>
     </div>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;margin-left: 18px;">MÃ YÊU CẦU</p></div>
-    <div class="col-autoo"><input  aria-required="true" style=" width:200px; min-height: 10px;text-align: center; margin: auto;margin-left: 18px; " type="text" id="depart_req" class="form-control"></div>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;">SỐ LƯỢNG YÊU CẦU</p></div>
-    <div class="col-autoo1"><input aria-required="true" style=" width:100px; min-height: 10px;text-align: center; margin: auto;" type="text" id="qty_req" class="form-control"></div>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold;" >SỐ LƯỢNG CẤP</p></div>
-    <div class="col-autoo1"><input aria-required="true" style=" width:100px; min-height: 10px;text-align: center; margin: auto;margin-left: 10px;" type="text" id="qty_issue" class="form-control"></div> 
-    <br><br/>
-    <div class="col-auto"><p class="modal-title" style="color: #7c4abe;font-weight: bold; ">GHI CHÚ</p></div>
-    <div class="col-autoo"><input aria-required="true" style=" width:780px; min-height: 10px;text-align: center; margin: auto;margin-left: 30px;" type="text" id="note" class="form-control"></div>
-    <input aria-required="true" style=" width:10px; min-height: 10px;text-align: center; margin: auto; display: none;" type="text" id="keyy" class="form-control">
-    <div class="col-autoo" style="display: none;"><input id="time" name="bday" class="form-control"></div>
-    <!-- <div class="col-auto"><button class="btn" id="btn_req" style="margin-top: -8px;"><i class="fa fa-upload"></i> Yêu cầu</button></div>  -->
-    <div class="col-auto"><button class="btn" id="btn_issue" style="margin-top: -8px;"><i class="fa fa-download"></i>Cấp phát</button></div> 
-    <div class="col-auto"><button class="btn" style="margin-top: -9px;" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button></div>     
-    <button id="dowloadex"  class="btn col-auto" style="margin-top: 20px;" ><i class="fa fa-download" ></i>  Xuất excel</button></a>
+    <div class="col-4">
+      <span>MÃ PHỤ TÙNG</span>
+      <input aria-required="true" type="text" id="idpart" class="form-control" onchange="detectqtyy()">
+    </div>
+    <div class="col-4">
+      <span>SỐ LƯỢNG TRONG KHO:</span>
+      <h4 id="qty_inhere">--</h4>
+    </div>
   </div>
+  <div class="row mt-2">
+    <div class="col-4">
+      <span>YÊU CẦU CÔNG VIỆC</span>
+      <input list="typeq" id="work_order" class="form-control"><datalist id="typeq">
+        <option> </option>
+        <option>Bảo dưỡng định kỳ</option>
+        <option>Bảo dưỡng yêu cầu</option>
+        <option>Dịch vụ yêu cầu</option>
+        <option>Khác</option>
+      </datalist>
+    </div>
+    <div class="col-4">
+      <span>MÃ YÊU CẦU</span>
+      <input aria-required="true" type="text" id="depart_req" class="form-control">
+    </div>
+    <div class="col-4">
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <span>SỐ LƯỢNG YÊU CẦU</span>
+          <input aria-required="true" type="text" id="qty_req" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <span>SỐ LƯỢNG CẤP</span>
+          <input aria-required="true" type="text" id="qty_issue" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6">
+        <span>GHI CHÚ</span>
+        <input aria-required="true" type="text" id="note" class="form-control">
+      </div>
+      <div class="col-6">
+        <input aria-required="true" style="display: none;" type="text" id="keyy" class="form-control">
+        <div class="" style="display: none;"><input id="time" name="bday" class="form-control"></div>
+        <div class="row mt-4">
+          <div class="col-md-4">
+            <button class="btn btn-primary" id="btn_issue"><i class="fa fa-download"></i>Cấp phát</button>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-success" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button>
+          </div>
+          <div class="col-md-4">
+            <button id="dowloadex" class="btn btn-danger"><i class="fa fa-download"></i> Xuất excel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<style>
+  span{
+    font-weight: bold;
+    font-size: 0.8vw;
+  }
+  button {
+    width: 100%;
+  }
+</style>

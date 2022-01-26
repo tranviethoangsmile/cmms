@@ -1,0 +1,131 @@
+<div class="modal fade" id="id02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" style="color: #7c4abe ; font-weight: bold;" id="exampleModalLabel">Thêm mới: Kế
+                    hoạch
+                    bảo trì</h2>
+            </div>
+            <div class="modal-body" style="font-weight: bold; font-size:1vw">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="container">
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-4">
+                                        <label for="ursche">Người yêu cầu</label>
+                                        <input aria-required="true" type="text" class="form-control" id="ursche">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="">Người thực hiện</label>
+                                        <input aria-required="true" type="text" class="form-control" id="staffw">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="levelsche">Mức độ ưu tiên</label>
+                                        <select id="levelsche" class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-2">
+                                    <span>Nội dung</span>
+                                    <input aria-required="true" type="text" class="form-control" id="content">
+                                </div>
+                                <div class="row mt-2 mb-2">
+                                    <span>Ghi chú</span>
+                                    <input oninput="myFunction()" aria-required="true" type="text" id="note"
+                                        class="form-control">
+                                </div>
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-6">
+                                        <span>Tên thiết bị</span>
+                                        <input oninput="myFunction()" aria-required="true" type="text" id="namemac"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <span>Tên cũ</span>
+                                        <input oninput="myFunction()" aria-required="true" type="text" id="nameold"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="container">
+                                <h2 style="font-weight: bold;">Lịch Bảo trì</h2>
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-5">
+                                        <label for="cycle">Chu kì bảo dưỡng</label>
+                                        <select id="cycle" class="form-control">
+                                            <option></option>
+                                            <option style="margin: auto;">W</option>
+                                            <option style="margin: auto;">2W</option>
+                                            <option style="margin: auto;">3W</option>
+                                            <option style="margin: auto;">M</option>
+                                            <option style="margin: auto;">2M</option>
+                                            <option style="margin: auto;">Q</option>
+                                            <option style="margin: auto;">2Q</option>
+                                            <option style="margin: auto;">Y</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-5">
+                                        <span>Thời gian bắt đầu</span>
+                                        <input class="form-control" type="date" id="datestart" name="birthday">
+                                    </div>
+                                    <div class="col-2 mt-4">
+                                        <button class="btn btn-success" id="btaddsche"><i class="fa fa-plus">
+                                                Thêm</i></button>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-2">
+                                    <table id="tableb" class="table table-hover text-center" onclick="detail_ticket1()">
+                                        <thead>
+                                            <tr>
+                                                <th>Yêu cầu công việc
+                                                </th>
+                                                <th>Thời gian bắt đầu
+                                                </th>
+                                                <th>Trạng thái</th>
+                                                <th>Ngày hoàn thành
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row mt-2 mb-2">
+                    <div id="blockadd">
+                        <button class="btn btn-primary" id="btsave1"><i class="fa fa-save"></i>
+                            Lưu</button>
+                    </div>
+                    <div id="blockupda">
+                        <div class="row">
+                            <div class="col-4">
+                                <button class="btn btn-primary" id="btcopy"><i class="fa fa-copy"></i>
+                                    Sao
+                                    chép</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-primary" id="btdelete"><i class="fa fa-times"></i>
+                                    Xóa</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-primary" id="btsave"><i class="fa fa-save"></i>
+                                    Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

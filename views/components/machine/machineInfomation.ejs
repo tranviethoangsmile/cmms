@@ -1,0 +1,210 @@
+<div class="modal fade" id="id01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #7c4abe ; font-weight: bold;" id="namebox"></h2>
+            </div>
+            <div class="modal-body" style="font-weight: bold; font-size:1vw">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-4" id="bar">
+                                    <button class="btn btn-primary" id="informac"><i class="fa fa-folder"></i>
+                                        Thông tin chung
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-primary" id="maitmac"><i class="fa fa-bars"></i>
+                                        Bảo trì</button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-primary" id="operamac"><i class="fa fa-check"></i>
+                                        Vận hành
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="informacc">
+                                <div class="container">
+                                    <div class="row mt-2 mb-2">
+                                        <div class="col-4">
+                                            <div class="container" action="CCS/Upload_New_PR" id="upload_form"
+                                                method="POST">
+                                                <div class="wrapper">
+                                                    <div class="image">
+                                                        <img id="output" src="/public/img_mac/noimg.png">
+                                                    </div>
+                                                </div>
+                                                <input type="file" name="image" id="file" onchange="loadFile(event)"
+                                                    style="display: none;" accept="image/png, image/gif, image/jpeg">
+
+                                                <label for="file" style="cursor: pointer;" id="custom-btn">Upload
+                                                    Image</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="container">
+                                                <div class="row mt-2 mb-2">
+                                                    <div id="codeneww">
+                                                        <div>
+                                                            <p for="idpare">TÊN THIẾT BỊ
+                                                        </div>
+                                                        <div>
+                                                            <input aria-required=" true" type="text" id="codenew"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="des">Mô tả</label>
+                                                        <textarea aria-required=" true" type="text" id="des"
+                                                            class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2 mb-2" id="namemach">
+                                                    <div class="col-md-12">
+                                                        <label for="namemac">Loại thiết bị</label>
+                                                        <input aria-required="true" type="text" id="namemac"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="codeold">Tên cũ</label>
+                                                        <input aria-required="true" type="text" id="codeold"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2 mb-2">
+                                                    <div class="col-md-6">
+                                                        <label for="plant">Nhà máy</label>
+                                                        <input aria-required="true" type="text" id="plant"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="pos">Vị trí</label>
+                                                        <input aria-required="true" type="text" id="pos"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2 mb-2">
+                                                    <div class="col-md-6">
+                                                        <label for="start">Bắt đầu</label>
+                                                        <input aria-required="true" type="text" id="start"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="finish">Kết thúc</label>
+                                                        <input aria-required="true" type="text" id="finish"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mb-2">
+                                        <div class="col-6">
+                                            <label for="">Trạng thái</label>
+                                            <input aria-required="true" type="text" id="status">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="">Số seri</label>
+                                            <input aria-required="true" type="text" id="seri">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mb-2">
+                                        <label for="model">Model</label>
+                                        <input aria-required="true" type="text" id="model">
+                                        <p style="display: none;">
+                                            HỆ THỐNG
+                                            <input aria-required="true" style="display: none;" type="text" id="system">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="informaint" style="display: none">
+                                <table class="table table-hover" id="tablemaint" onclick="detail_ticket()">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>CHU KỲ BẢO DƯỠNG</th>
+                                            <th>THỜI GIAN</th>
+                                            <th>NGƯỜI BẢO DƯỠNG</th>
+                                            <th>TÌNH TRẠNG</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div id="inforope" style="display: none">
+                                <table class="table table-hover" id="tableope" onclick="detail_ticket()">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>YÊU CẦU CÔNG VIỆC</th>
+                                            <th>THỜI GIAN</th>
+                                            <th>NGƯỜI XỬ LÝ</th>
+                                            <th>HÀNH ĐỘNG</th>
+                                            <th>GHI CHÚ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <div class="row mt-2 mb-2">
+                        <div class="col-2">
+                            <div id="boxadd">
+                                <button class="btn btn-primary" id="btsavee"><i class="fa fa-save"></i> Lưu</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div id="nameupdate">
+                                <h6 class="modal-title" id="timeupdate">
+                                </h6>
+                            </div>
+                            <h6 class="modal-title" id="userupdate">
+                            </h6>
+                        </div>
+                        <div class="col-2">
+                            <div id="boxnormal">
+                                <button class="btn btn-success" id="btcopy"><i class="fa fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div id="boxnormall">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-danger" id="btdelete"><i class="fa fa-times"></i>
+                                            Xóa</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary" id="btsave"><i class="fa fa-save"></i>
+                                            Lưu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    button {
+        width: 100%;
+    }
+
+    h6 {
+        font-weight: bold;
+        color: #f70000;
+        width: 100%;
+    }
+</style>

@@ -20,7 +20,7 @@
     }
 
     function loaddata(){
-      document.getElementById("linkspare").style.backgroundColor="#4c4c4c";
+      // document.getElementById("linkspare").style.backgroundColor="#4c4c4c";
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("get", '/sparen/loading_data', true);
       event.preventDefault(); //prevent default action 
@@ -91,7 +91,7 @@
 
     function tableText(tableRow) {
       document.getElementById("namebox").innerHTML = "Thông tin vật tư";
-      document.getElementById('id01').style.display = 'block';
+          $("#id01").modal('show');
       document.getElementById('blockadd').style.display= 'none';
       document.getElementById('blockedit').style.display = 'none';
       document.getElementById('blockdelete').style.display = 'block'; 
@@ -208,7 +208,7 @@
           } else {
             alert("Có lỗi rồi!!!");
           }
-          document.getElementById('id01').style.display = 'none';
+              $("#id01").modal('hide');
         }
       }
       xmlhttp.send(JSON.stringify(data));
@@ -275,7 +275,7 @@
           } else {
             alert("Có lỗi rồi!!!");
           }
-          document.getElementById('id01').style.display = 'none';
+              $("#id01").modal('hide');
           }
         }
       xmlhttp.send(JSON.stringify(data));
@@ -283,7 +283,7 @@
 
     document.getElementById('addspare').addEventListener('click', function() {
           document.getElementById("namebox").innerHTML ="Thêm vật tư"
-          document.getElementById('id01').style.display = 'block';
+              $("#id01").modal('show');
           document.getElementById('blockadd').style.display= 'block';
           document.getElementById('blockedit').style.display = 'none';
           document.getElementById('blockdelete').style.display = 'none'; 
@@ -330,7 +330,7 @@
             } else {
               alert("Có lỗi rồi!!!");
             }
-            document.getElementById('id01').style.display = 'none';
+                $("#id01").modal('hide');
           }
         }
         xmlhttp.send(JSON.stringify(data));
@@ -362,7 +362,7 @@
     })
       
     document.getElementById('uploadex').addEventListener('click', function() {
-      document.getElementById('id03').style.display = 'block';   
+      $("#id03").modal('show');
     })
 
     var formm=document.getElementById('upload_formm');

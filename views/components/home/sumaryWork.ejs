@@ -1,68 +1,63 @@
-<div class="card">
-  <div class="card-body">
-    <div class="container">
-      <div class="col-12" style="height: 50%;">
-        <div class="row" style="height: 35px; margin: auto; background-color: #ffba00">
-          <div class="col-6 mt-2">
-            <h4 class="card_title" style="text-align: center; font-weight: bold;">Tổng hợp công việc</h4>
-          </div>
-          <div class="col-3 mt-2">
-            <input type="date" class="form-control" id="date" name="birthday" onchange="wo()" />
-          </div>
-          <div class="col-3 mt-2">
-            <input type="date" class="form-control" id="date1" name="birthday" onchange="wo()" />
-          </div>
-        </div>
+<div class="card text-center" style="height: 97%;">
+  <div class="card-title">
+    <div class="row" style="background-color: #ffba00">
+      <div class="col-md-4">
+        <h2>Tổng hợp công việc</h2>
       </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-6 mt-5">
-            <div class="card" style="background-color: #ffdd80">
-              <div class="col-12 mt-2">
-                <p style="text-align:center; font-weight: bold; font-size:2vw">Đang Thực Hiện</p>
-              </div>
-              <div class="card-body" style="text-align:center">
-                <div class="col-12 mt-4">
-                  <p style="font-weight: bold; font-size: 3vw;" id="n9"></p>
+      <div class="col-md-4">
+        <input type="date" id="date" name="birthday" onchange="wo()" />
+      </div>
+      <div class="col-md-4">
+        <input type="date" id="date1" name="birthday" onchange="wo()" />
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" style="height: 100%;">
+          <div class="card-title">
+            <h2>Đang thực hiện</h2>
+          </div>
+          <div class="card-body">
+            <h2 id="n9" style="margin-top:14%; font-size: 2.5vw;"></h2>
+            <div class="row" style="margin-top:30%">
+              <div class="col-md-6">
+                <div class="card-content">
+                  <h3>PM</h3>
+                  <span style="margin-top:10%" id="n10"></span>
                 </div>
-                <div class="row">
-                  <div class="col-6 mt-4">
-                    <p>PM</p>
-                    <p id="n10">
-                    </p>
-                  </div>
-                  <div class="col-6 mt-4">
-                    <p>SE</p>
-                    <p id="n12">
-                    </p>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card-content">
+                  <h3>SE</h3>
+                  <span style="margin-top:10%" id="n12"></span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-6 mt-5">
-            <div class="card"  style="background-color: #ffdd80">
-              <div class="col-12 mt-2">
-                <p style="text-align:center; font-weight: bold; font-size:2vw">Chưa Phân Công</p>
-              </div>
-              
-                <div class="card-body" style="text-align:center">
-                  <div class="col-12 mt-4">
-                    <p style="font-weight: bold; font-size: 3vw;" id="n13"></p>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 mt-4" >
-                      <p>PM</p>
-                      <p id="n14">
-                      </p>
-                    </div>
-                    <div class="col-6 mt-4">
-                      <p>SE</p>
-                      <p id="n16">
-                      </p>
-                    </div>
-                  </div>
+        </div>
+      </div>
+      <div class="col-md-6  mt-4">
+        <div class="card" style="height: 100%;">
+          <div class="card-title">
+            <h2>Chưa Phân Công</h2>
+          </div>
+          <div class="card-body">
+            <h2 id="n13" style="margin-top:14%;font-size: 2.5vw;"></h2>
+            <div class="row" style="margin-top:30%">
+              <div class="col-md-6">
+                <div class="card-content">
+                  <h3 style="color:black">PM</h3>
+                  <span style="color:black" id="n14"></span>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card-content">
+                  <h3 style="color:black">SE</h3>
+                  <span style="color:black" id="n16"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -72,7 +67,19 @@
 </div>
 
 <style>
-    body {
-        overflow-x: 0;
-    }
+  h2 {
+    font-weight: bold;
+    font-size: 1.5vw
+  }
+
+  h3{
+    font-weight: bold;
+    font-size: 2vw
+  }
+
+  span {
+    font-weight: bold;
+    font-size:1.2vw
+  }
+
 </style>

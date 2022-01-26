@@ -17,11 +17,11 @@
             <%-include ('./components/wo/search'); %>
           <%-include ('./components/wo/layoutHeader');%>
         
-            <div class="tab-content" id="ex2-content">
-              <div class="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
+            <div class="tab-content">
+              <div id="main-tabs" style="display:block">
                 <%- include ('./components/wo/routineMaintenance');%>
               </div>
-              <div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+              <div id="service-tabs" style = "display:none">
                 <%- include ('./components/wo/serviceRequest');%>
               </div>
             </div>

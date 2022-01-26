@@ -1,7 +1,7 @@
 <script>
          
     function loaddata(){
-        document.getElementById("linkissue").style.backgroundColor="#4c4c4c";
+        // document.getElementById("linkissue").style.backgroundColor="#4c4c4c";
       loadpart_log();
       // listid();
       // listmc();
@@ -50,7 +50,7 @@
     }
 
     document.getElementById('dowloadex').addEventListener('click',function(){
-      document.getElementById('id01').style.display='block';
+      $("#id01").modal('show');
     })
  
     // document.getElementById('btn_req').addEventListener('click', function() {
@@ -245,7 +245,8 @@
           document.getElementById("btdownload").click();     
         }
         }
-        xmlhttp.send(JSON.stringify(data));    
+        xmlhttp.send(JSON.stringify(data));
+        $("#id01").modal("hide");   
       })
 
     function  detectqty(){

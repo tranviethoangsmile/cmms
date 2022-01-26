@@ -11,7 +11,7 @@
     }
       
     function loaddata(){
-    document.getElementById("linkmachine").style.backgroundColor="#4c4c4c";
+    // document.getElementById("linkmachine").style.backgroundColor="#4c4c4c";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("get", '/machine/loading_data', true);
     event.preventDefault(); //prevent default action 
@@ -198,11 +198,11 @@
     }
 
     function tableText(tableRow) {
+      $("#id01").modal('show');
       document.getElementById('informacc').style.display = 'block'; 
       document.getElementById('informaint').style.display = 'none'; 
       document.getElementById('inforope').style.display = 'none';    
       document.getElementById("namebox").innerHTML = "Thông tin máy";
-      document.getElementById('id01').style.display = 'block';
       document.getElementById('boxnormal').style.display = 'block';
       document.getElementById('boxadd').style.display = 'none';
       document.getElementById('codeneww').style.display = 'none';
@@ -339,7 +339,7 @@
 
     document.getElementById('btadd').addEventListener('click', function() {
         document.getElementById("namebox").innerHTML ="Thông tin máy";
-        document.getElementById('id01').style.display = 'block';
+        $("#id01").modal('show');
         document.getElementById('boxnormal').style.display = 'none';
         document.getElementById('boxnormall').style.display = 'none';
         document.getElementById('boxadd').style.display = 'block';
@@ -573,7 +573,7 @@
         document.getElementById("namebox").innerHTML ="Thông tin máy";
         document.getElementById("timeupdate").innerHTML = "*(Nhập đầy đủ tên thiết bị, tên cũ, vị trí, số seri)";
         document.getElementById("userupdate").innerHTML ="";
-        document.getElementById('id01').style.display = 'block';
+        $("#id01").modal('show');
         document.getElementById('boxnormal').style.display = 'none';
         document.getElementById('boxnormall').style.display = 'none';
         document.getElementById('boxadd').style.display = 'block';
@@ -585,7 +585,7 @@
     })
     
     document.getElementById('macdie').addEventListener('click', function() {
-        document.getElementById('id02').style.display = 'block';   
+        $("#id02").modal('show');   
         loaddataa();   
     })
     
@@ -624,7 +624,7 @@
    }
     
     document.getElementById('uploadex').addEventListener('click', function() {
-        document.getElementById('id03').style.display = 'block';   
+        $("#id03").modal('show');
     })
     
     var formm=document.getElementById('upload_formm');

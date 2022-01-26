@@ -1,0 +1,58 @@
+<div class="modal fade" id="id03" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" style="color: #7c4abe ; font-weight: bold;" id="exampleModalLabel">Tải file
+                    Excel
+                </h2>
+            </div>
+            <div class="modal-body" style="font-weight: bold; font-size:1vw">
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Tải lên file excel</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="CCS/Upload_New_PRR" id="upload_formm" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>File</label>
+                                <input type="file" class="form-control" name="files" id='filee'>
+                            </div>
+                        </form>
+                        <div class = "row">
+                            <div class = "col-6">
+                                <div class="loader" id="loadd" style="display: none;"></div>
+                            </div>
+                            <div class = "col-6">
+                                <button style="width: 50%;" id='submit' type="submit" class="btn btn-primary">UPLOAD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Tồn kho đầu kỳ từ hệ thống IC238</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="CCS/Upload_New_PRR" id="upload_formic" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>File</label>
+                                <input type="file" class="form-control" name="files" id='fileic'>
+                            </div>
+                        </form>
+                        <div class = "row">
+                            <div class = "col-6">
+                                <div class="loader" id="loaddic" style="display: none;"></div>
+                            </div>
+                            <div class = "col-6">
+                                <button style="width: 50%;" id='submitic' type="submit" class="btn btn-primary">UPLOAD</button>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

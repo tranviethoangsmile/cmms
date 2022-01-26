@@ -13,27 +13,28 @@
       <%-include ('dashboard/sidebar');%>
         <div class="content-wrapper">
           <div class="card">
-            <%-include ('./components/home/sumaryWork');%>
-          </div>
-          <div class="card">
-            <div class="col-12 mt-2">
-              <div class="row">
-                <div class="col-6">
-                  <%-include ('./components/home/maintenancePlan');%>
-                </div>
-                <div class="col-6">
-                  <%-include ('./components/home/requestAllocation');%>
-                </div>
-              </div> 
+            <div class="row">
+              <div class="col-6">
+                <%-include ('./components/home/requestAllocation');%>                
+              </div>
+              <div class="col-6">
+                <%-include ('./components/home/sumaryWork');%>
+              </div>
             </div>
           </div>
-          <%-include ('dashboard/footer');%>
+          <div class="card">
+            <div class="card-body">
+              <%-include ('./components/home/maintenancePlan');%>
+            </div>
+          </div>
         </div>
+        <%-include ('dashboard/footer');%>
   </div>
-  
+
+
   <!-- jQuery -->
   <%-include ('./scripts/home/homeScript');%>
-  <%-include ('layout/script');%>
+    <%-include ('layout/script');%>
 </body>
 
 </html>
