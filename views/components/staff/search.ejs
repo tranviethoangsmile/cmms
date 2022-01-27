@@ -1,0 +1,47 @@
+<div class="row main-header mt-4" style="background-color: rgb(248,213,213);">
+    <div class="col-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="searchname">Họ và tên</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input aria-required="true" type="text" id="searchname" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expertise">Kỹ năng chuyên môn</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input list="typeq" aria-required="true" type="text" id="expertise" class="form-control">
+                        <datalist style="max-height: 100px !important;overflow-y: auto!important" id="typeq">
+                            <option>Cơ khí</option>
+                            <option>Điện công nghiệp</option>
+                            <option>Điện lạnh</option>
+                            <option>Điện tử</option>
+                            <option>Xây dựng</option>
+                            <option>Khác</option>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-success" id="btrefresh"><i class="fa fa-refresh"></i> Làm mới</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" id="btsearch"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-warning" id="btadd"><i class="fa fa-plus"></i> Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>

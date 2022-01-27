@@ -1,39 +1,41 @@
 <div class="custom-table">
     <table id="tablea" class="table table-hover text-center" style="border: 1px solid;" onclick="detail_ticket()">
-            <thead>
-                <tr>
-                    <th rowspan="2">MÃ CÔNG VIỆC
-                    </th>
-                    <th rowspan="2">CÔNG VIỆC</th>
-                    <!-- <th style="text-align: center;width: 200px;" rowspan="2">NỘI DUNG CÔNG VIỆC</th> -->
-                    <th colspan="2">THỜI GIAN THỰC
-                        HIỆN</th>
-                    <th rowspan="2">NGƯỜI GIAO</th>
-                    <th rowspan="2">NGƯỜI NHẬN</th>
-                    <th rowspan="2">TRẠNG THÁI</th>
-                    <th rowspan="2">TIẾN ĐỘ</th>
-                    <!-- <th style="text-align: center;width: 5px;" rowspan="2">IN</th> -->
-                </tr>
-                <tr>
-                    <th>BẮT ĐẦU</th>
-                    <th>KẾT THÚC</th>
-                </tr>
-            </thead>
-            <tbody style="font-weight: bold;">
-    
-            </tbody>
-        </div>
-    </table>
+        <thead class="main-header text-center" style="width: 72%;
+            margin-top: 4.5%;
+            margin-left: 28.5% !important;">
+            <tr>
+                <th style="width:10%;" rowspan="2">MÃ CÔNG VIỆC
+                </th>
+                <th style="width:32%;" rowspan="2">CÔNG VIỆC</th>
+                <!-- <th style="text-align: center;width: 200px;" rowspan="2">NỘI DUNG CÔNG VIỆC</th> -->
+                <th colspan="2">THỜI GIAN THỰC
+                    HIỆN</th>
+                <th style="width:10%;" rowspan="2">NGƯỜI GIAO</th>
+                <th style="width:10%;" rowspan="2">NGƯỜI NHẬN</th>
+                <th style="width:10%;"rowspan="2">TRẠNG THÁI</th>
+                <th style="width:10%;" rowspan="2">TIẾN ĐỘ</th>
+                <!-- <th style="text-align: center;width: 5px;" rowspan="2">IN</th> -->
+            </tr>
+            <tr>
+                <th style="width:10%;">BẮT ĐẦU</th>
+                <th style="width:10%;">KẾT THÚC</th>
+            </tr>
+        </thead>
+        <tbody style="position:absolute; font-weight: bold; margin-top: 7% !important; max-height: 100%; overflow:scroll">
+        </tbody>
+</div>
+</table>
 </div>
 
 <style>
     .custom-table {
-       max-height: 11%;
-       overflow: scroll;
+        max-height: 11%;
+        overflow: scroll;
     }
+
     table {
-      border: 1px solid black;
-      font-weight: bold;
-      font-size: 1vw;
+        border: 1px solid black;
+        font-weight: bold;
+        font-size: 1vw;
     }
 </style>

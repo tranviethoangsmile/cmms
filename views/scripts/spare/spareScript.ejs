@@ -214,7 +214,148 @@
       xmlhttp.send(JSON.stringify(data));
     })
 
+    checkValidForm = () => {
+      $("#addMaterialForm").validate({
+      ruler: {
+        id: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        mc: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        qty: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        unit: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        qtymin: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        qtymax: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        qtyim: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        qtyex: {
+          required: true,
+          email:true,
+          minlength: 3,
+          maxlength: 255
+        },
+        pos: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        price: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        name: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        number: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        fre: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        }
+      },
+      messages: {
+        id: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 50 kí tự'
+        },
+        mc: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        qty: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        unit: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        qtymin: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        qtymax: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        qtyim: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        qtyex: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        pos: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        price: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        name: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        number: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        fre: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        }
+      }
+    })
+    }
+
     document.getElementById('btn_save1').addEventListener('click', function() {
+      checkValidForm();
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("post", '/sparen/insert', true);
       event.preventDefault(); //prevent default action 
@@ -231,7 +372,10 @@
       var number= document.getElementById("number").value;
       var fre= document.getElementById("fre").value;
       var note= document.getElementById("note").value;
-
+      if(id === ""|| mc==="" || qty==="" || qtymax === "" || unit === "" || qtymin === "" || pos === "" || price === "" || name === "" || number === "" || note === "" ||number === ""){
+        $.notify('Thông tin chưa đầy đủ', 'error');
+        return;
+      } 
       // save image 
       var form = document.getElementById('upload_form');
       if (document.getElementById('file').value != "") {

@@ -9,10 +9,11 @@
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" onload="loaddata()">
   <div class="wrapper">
+    <%-include ('dashboard/preloader');%>
     <%-include ('dashboard/nav');%>
       <%-include ('dashboard/sidebar');%>
         <div class="content-wrapper">
-          <div class="card">
+          <div class="card" style="margin-top:-1%">
             <div class="row">
               <div class="col-6">
                 <%-include ('./components/home/requestAllocation');%>                
@@ -37,4 +38,4 @@
     <%-include ('layout/script');%>
 </body>
 
-</html>
+</html> 

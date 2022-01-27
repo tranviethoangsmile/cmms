@@ -10,10 +10,11 @@
 
 <body onload="loaddata()" class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
+    <%-include ('dashboard/preloader');%>
     <%-include ('dashboard/nav');%>
       <%-include ('dashboard/sidebar');%>
         <div class="content-wrapper">
-          <div class="row">
+          <div class="row" style="margin-top:-2%">
             <div class="col-2">
               <%-include ('./components/work/miniMenuWork');%>
             </div>

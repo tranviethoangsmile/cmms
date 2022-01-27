@@ -1,0 +1,451 @@
+<script type="text/javascript">
+
+
+  function loaddata() {
+    // document.getElementById("linkstaff").style.backgroundColor="#4c4c4c";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("get", '/staff/loading_data', true);
+    event.preventDefault(); //prevent default action 
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var jsonObject = JSON.parse(this.responseText);
+        var trHTML = '';
+        var i;
+        for (i = 0; i < jsonObject.length; i++) {
+          var id = jsonObject[i].idfm;
+          var name = jsonObject[i].name;
+          var expertise = jsonObject[i].expertise;
+          var team = jsonObject[i].team;
+          var position = jsonObject[i].position;
+          var levels = jsonObject[i].levels;
+
+          trHTML += '<tr ><td style="width:5%">' + id + '</td><td style="width:15%">' + name + '</td><td style="width:25%">' + expertise + '</td><td>' + levels + '</td><td>' + position + '</td><td>' + team + '</td></tr>';
+        }
+      }
+      // console.log(trHTML);
+      $('#tablea tbody').html(trHTML);
+    }
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.send();
+  }
+
+  document.getElementById('btsearch').addEventListener('click', function () {
+    var expert = document.getElementById("expertise").value;
+    var name = document.getElementById("searchname").value;
+    if (expert == "") { expert = '%'; } else { expert = '%' + expert + '%'; }
+    if (name == "") { name = '%'; } else { name = '%' + name + '%'; }
+    console.log(expert)
+    console.log(name)
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/staff/search', true);
+    event.preventDefault(); //prevent default action 
+
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      expert: expert,
+      name: name
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var jsonObject = JSON.parse(this.responseText);
+        var trHTML = '';
+        var i;
+        for (i = 0; i < jsonObject.length; i++) {
+          var id = jsonObject[i].idfm;
+          var name = jsonObject[i].name;
+          var expertise = jsonObject[i].expertise;
+          var team = jsonObject[i].team;
+          var position = jsonObject[i].position;
+          var levels = jsonObject[i].levels;
+
+          trHTML += '<tr ><td style="width:5%">' + id + '</td><td style="width:15%">' + name + '</td><td style="width:25%">' + expertise + '</td><td>' + levels + '</td><td>' + position + '</td><td>' + team + '</td></tr>';
+        }
+      }
+      // console.log(trHTML);
+      $('#tablea tbody').html(trHTML);
+    }
+    // xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.send(JSON.stringify(data));
+  })
+
+  document.getElementById('btrefresh').addEventListener('click', function () {
+    loaddata();
+    document.getElementById("searchname").value = "";
+    document.getElementById("expertise").value = "";
+
+  })
+
+  document.getElementById('btadd').addEventListener('click', function () {
+    $("#id01").modal('show');
+    document.getElementById('blockupda').style.display = 'none';
+    document.getElementById('blockadd').style.display = 'block';
+    document.getElementById('inid').value = "";
+    document.getElementById('inname').value = "";
+    document.getElementById('cb6').value = "";
+    // document.getElementById('inexpert').value="";
+    document.getElementById('levels').value = "";
+    document.getElementById('inleexpert').value = "";
+    document.getElementById('inposition').value = "";
+    document.getElementById('mail').value = "";
+    document.getElementById('inteam').value = "";
+    document.getElementById('incer').value = "";
+    document.getElementById('inaddress').value = "";
+    document.getElementById('inpnum').value = "";
+    document.getElementById("cb1").checked = false;
+    document.getElementById("cb2").checked = false;
+    document.getElementById("cb3").checked = false;
+    document.getElementById("cb4").checked = false;
+    document.getElementById("cb5").checked = false;
+  })
+
+  function detail_ticket() {
+    var table = document.getElementById("tablea");
+    event.stopImmediatePropagation;
+    if (table) {
+      for (var i = 1; i < table.rows.length; i++) {
+        table.rows[i].ondblclick = function (e) {
+          tableText(this);
+        }
+      }
+    }
+  }
+
+  function tableText(tableRow) {
+    document.getElementById("cb1").checked = false;
+    document.getElementById("cb2").checked = false;
+    document.getElementById("cb3").checked = false;
+    document.getElementById("cb4").checked = false;
+    document.getElementById("cb5").checked = false;
+    document.getElementById('blockupda').style.display = 'block';
+    document.getElementById('blockadd').style.display = 'none';
+    $("#id01").modal('show');
+    document.getElementById('inid').value = tableRow.childNodes[0].innerText;
+    document.getElementById('inname').value = tableRow.childNodes[1].innerText;
+    document.getElementById('cb6').value = "";
+    // document.getElementById('inleexpert').value="";
+    document.getElementById('levels').value = tableRow.childNodes[3].innerText;
+    document.getElementById('inposition').value = tableRow.childNodes[4].innerText;
+    document.getElementById('inteam').value = tableRow.childNodes[5].innerText;
+    var dpe = tableRow.childNodes[2].innerText;
+    if (dpe.includes("Cơ khí")) { document.getElementById("cb1").checked = true; }
+    if (dpe.includes("Điện công nghiệp")) { document.getElementById("cb2").checked = true; }
+    if (dpe.includes("Điện lạnh")) { document.getElementById("cb3").checked = true; }
+    if (dpe.includes("Điện tử")) { document.getElementById("cb4").checked = true; }
+    if (dpe.includes("Xây dựng")) { document.getElementById("cb5").checked = true; }
+    dpe = dpe.replace("Cơ khí", "")
+    dpe = dpe.replace("Điện công nghiệp", "")
+    dpe = dpe.replace("Điện lạnh", "")
+    dpe = dpe.replace("Điện tử", "")
+    dpe = dpe.replace("Xây dựng", "")
+    console.log(dpe)
+    var cb6 = dpe.lastIndexOf("|")
+    console.log(cb6)
+    document.getElementById("cb6").value = dpe.substring(cb6 + 1, dpe.length);
+
+    var id = document.getElementById('inid').value;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/staff/loadinfor', true);
+    //event.preventDefault(); //prevent default action 
+
+    var name = tableRow.childNodes[0].innerText
+
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      id: id
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        if (data.length > 0) {
+          // console.log(data)
+          document.getElementById('inleexpert').value = data[0].le_expert;
+          document.getElementById('incer').value = data[0].certificate;
+          document.getElementById('inaddress').value = data[0].address;
+          document.getElementById('inpnum').value = data[0].ph_num;
+          document.getElementById('mail').value = data[0].email;
+        }
+      }
+    }
+    xmlhttp.send(JSON.stringify(data));
+
+  }
+
+  document.getElementById('btsave').addEventListener('click', function () {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/staff/update', true);
+    event.preventDefault(); //prevent default action 
+
+    var mail = document.getElementById('mail').value;
+    var id = document.getElementById('inid').value;
+    var name = document.getElementById('inname').value;
+    var levels = document.getElementById('levels').value;
+    var leexpert = document.getElementById('inleexpert').value;
+    var position = document.getElementById('inposition').value;
+    var team = document.getElementById('inteam').value;
+    var cer = document.getElementById('incer').value;
+    var address = document.getElementById('inaddress').value;
+    var pnum = document.getElementById('inpnum').value;
+    var cb = "";
+    // --------------------------------
+    var cb1 = document.getElementById("cb1").checked;
+    var cb2 = document.getElementById("cb2").checked;
+    var cb3 = document.getElementById("cb3").checked;
+    var cb4 = document.getElementById("cb4").checked;
+    var cb5 = document.getElementById("cb5").checked;
+    var cb6 = document.getElementById('cb6').value;
+    if (cb1 == true) { cb1 = "Cơ khí"; cb = cb + cb1 + " |"; }
+    console.log(cb)
+    if (cb2 == true) { cb2 = "Điện công nghiệp"; cb = cb + " " + cb2 + " |"; }
+    console.log(cb)
+    if (cb3 == true) { cb3 = "Điện lạnh"; cb = cb + " " + cb3 + " |"; }
+    console.log(cb)
+    if (cb4 == true) { cb4 = "Điện tử"; cb = cb + " " + cb4 + " |"; }
+    console.log(cb)
+    if (cb5 == true) { cb5 = "Xây dựng"; cb = cb + " " + cb5 + " |"; }
+    console.log(cb)
+    if (cb6 != "") { cb = cb + " " + cb6 + " |" }
+    cb = cb.substring(0, cb.length - 1)
+    console.log(cb)
+    // ---------------------------------
+    // send data jason
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      mail: mail,
+      id: id,
+      name: name,
+      levels: levels,
+      leexpert: leexpert,
+      position: position,
+      team: team,
+      cer: cer,
+      address: address,
+      pnum: pnum,
+      cb: cb
+      // id:id
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = this.responseText;
+        if (data == "ok") {
+          loaddata()
+          $.notify('đã cập nhật thành công', 'success')
+          // location.reload();
+          $("#id01").modal('hide');
+        } else {
+          alert("Có lỗi rồi!!!");
+        }
+      }
+    }
+    // console.log(data);
+    xmlhttp.send(JSON.stringify(data));
+  })
+
+
+  $("#formAddNewStaff").validate({
+      ruler: {
+        id: {
+          required: true,
+          minlength: 3,
+          maxlength: 50
+        },
+        fullName: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        inposition: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        inTeam: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        skills: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        incer: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        phoneNumber: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        },
+        email: {
+          required: true,
+          email:true,
+          minlength: 3,
+          maxlength: 255
+        },
+        address: {
+          required: true,
+          minlength: 3,
+          maxlength: 255
+        }
+      },
+      messages: {
+        id: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 50 kí tự'
+        },
+        fullName: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        inposition: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        inTeam: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        skills: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        incer: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        phoneNumber: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        email: {
+          required: 'Không để trống',
+          email:'không hợp lệ',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        },
+        address: {
+          required: 'Không để trống',
+          minlength: 'độ dài tối thiểu là 3 kí tự',
+          maxlength: 'độ dài tối đã 255 kí tự'
+        }
+      }
+    })
+  document.getElementById('btsave1').addEventListener('click', function () {  
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("post", '/staff/insert', true);
+    event.preventDefault(); //prevent default action 
+
+    var mail = document.getElementById('mail').value;
+    var id = document.getElementById('inid').value;
+    var name = document.getElementById('inname').value;
+    var levels = document.getElementById('levels').value;
+    var leexpert = document.getElementById('inleexpert').value;
+    var position = document.getElementById('inposition').value;
+    var team = document.getElementById('inteam').value;
+    var cer = document.getElementById('incer').value;
+    var address = document.getElementById('inaddress').value;
+    var pnum = document.getElementById('inpnum').value;
+    var cb = "";
+    // --------------------------------
+    var cb1 = document.getElementById("cb1").checked;
+    var cb2 = document.getElementById("cb2").checked;
+    var cb3 = document.getElementById("cb3").checked;
+    var cb4 = document.getElementById("cb4").checked;
+    var cb5 = document.getElementById("cb5").checked;
+    var cb6 = document.getElementById('cb6').value;
+    if (cb1 == true) { cb1 = "Cơ khí"; cb = cb + cb1 + " |"; }
+    console.log(cb)
+    if (cb2 == true) { cb2 = "Điện công nghiệp"; cb = cb + " " + cb2 + " |"; }
+    console.log(cb)
+    if (cb3 == true) { cb3 = "Điện lạnh"; cb = cb + " " + cb3 + " |"; }
+    console.log(cb)
+    if (cb4 == true) { cb4 = "Điện tử"; cb = cb + " " + cb4 + " |"; }
+    console.log(cb)
+    if (cb5 == true) { cb5 = "Xây dựng"; cb = cb + " " + cb5 + " |"; }
+    console.log(cb)
+    if (cb6 != "") { cb = cb + " " + cb6 + " |" }
+    cb = cb.substring(0, cb.length - 1)
+    console.log(cb)
+
+    if(id === "" || name === "" || mail === "" || levels === "" || leexpert === "" || position === "" || team === "" || address === "" || pnum === ""){
+      $.notify('Nhập đầy đủ thông tin', 'danger');
+      return;
+    }
+    // ---------------------------------
+    // send data jason
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    data = {
+      mail: mail,
+      id: id,
+      name: name,
+      levels: levels,
+      leexpert: leexpert,
+      position: position,
+      team: team,
+      cer: cer,
+      address: address,
+      pnum: pnum,
+      cb: cb
+      // id:id
+    };
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = this.responseText;
+        if (data == "ok") {
+          loaddata()
+          alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+          // location.reload();
+        } else {
+          alert("Có lỗi rồi!!!");
+        }
+        $("#id01").modal('hide');
+      }
+    }
+    // console.log(data);
+    xmlhttp.send(JSON.stringify(data));
+  })
+
+  document.getElementById('btdelete').addEventListener('click', function () {
+    var r = confirm("Bạn có chắc muốn xóa không???");
+    if (r == true) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("post", '/staff/delete', true);
+      event.preventDefault(); //prevent default action 
+
+      var id = document.getElementById("inid").value;
+
+
+      // send data jason
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      data = {
+        id: id
+      };
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = this.responseText;
+          if (data == "ok") {
+            loaddata()
+            alert("ĐÃ CẬP NHẬT THÀNH CÔNG");
+          } else {
+            alert("Có lỗi rồi!!!");
+          }
+          $("#id01").modal('hide');
+        }
+      }
+      // console.log(data);
+      xmlhttp.send(JSON.stringify(data));
+    }
+    else {
+      return
+    }
+  })
+</script>

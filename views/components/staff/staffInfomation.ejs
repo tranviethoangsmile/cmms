@@ -1,0 +1,116 @@
+<div class="modal fade" id="id01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" style="color: #7c4abe ; font-weight: bold;" id="exampleModalLabel">Thông tin
+                    nhân viên
+                </h2>
+            </div>
+            <div class="modal-body" style="font-weight: bold; font-size:1vw">
+                <div class="container">
+                    <form id="formAddNewStaff">
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <span>ID</span>
+                                <input name="id" aria-required="true" type="text" id="inid" class="form-control"
+                                    maxlength="50" minlength="3" required>
+                            </div>
+                            <div class="col-6">
+                                <span>HỌ VÀ TÊN </span>
+                                <input name="fullName" aria-required="true" type="text" id="inname" class="form-control"
+                                    maxlength="255" minlength="3" required>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-2">
+                                <span>CHUYÊN MÔN:</span>
+                            </div>
+                            <div class="col-10">
+                                <div class="row mt-2">
+                                    <div class="col-md-2">
+                                        <span><input type="checkbox" id="cb1"> Cơ khí</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span><input type="checkbox" id="cb2"> Điện CN</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span><input type="checkbox" id="cb3"> Điện lạnh</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span><input type="checkbox" id="cb4"> Điện tử</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span><input type="checkbox" id="cb5"> Xây dựng</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input placeholder="Khác..." aria-required="true" type="text" id="cb6"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-4">
+                                <span>BẬC THỢ</span>
+                                <div></div><select id="levels" class="form-control ">
+                                    <option></option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <span>VỊ TRÍ</span>
+                                </span><input name="inposition" aria-required="true" type="text" id="inposition"
+                                    class="form-control" maxlength="255" minlength="3" required>
+                            </div>
+                            <div class="col-4">
+                                <span>TỔ ĐỘI</span>
+                                </span><input name="inTeam" aria-required="true" type="text" id="inteam"
+                                    class="form-control" maxlength="255" minlength="3" required>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <span>TRÌNH ĐỘ
+                                CHUYÊN MÔN</span>
+                            <textarea name="skills" aria-required="true" type="text" id="inleexpert"
+                                class="form-control" maxlength="255" minlength="3" required> </textarea>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <span>CHỨNG CHỈ </span>
+                                <input name="incer" aria-required="true" type="text" id="incer" class="form-control"
+                                    maxlength="255" minlength="3" required>
+                            </div>
+                            <div class="col-6">
+                                <span>SDT</span>
+                                <input name="phoneNumber" aria-required="true" type="text" id="inpnum"
+                                    class="form-control" maxlength="10" minlength="3" required>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <span>Email</span>
+                            <input name="email" aria-required="true" type="email" id="mail" class="form-control"
+                                maxlength="255" minlength="3" required>
+                        </div>
+                        <div class="row mt-2">
+                            <span>ĐỊA CHỈ</span>
+                            <textarea name="address" aria-required="true" type="text" id="inaddress"
+                                class="form-control" maxlength="255" minlength="3" required> </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="blockadd">
+                    <button type="button" class="btn btn-primary mt-4" id="btsave1"><i class="fa fa-save"></i>
+                        Lưu</button>
+                </div>
+                <div id="blockupda">
+                    <button class="btn btn-danger" id="btdelete"><i class="fa fa-times"></i> Xóa</button>
+                    <button class="btn btn-primary" id="btsave"><i class="fa fa-save"></i> Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
