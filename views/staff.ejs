@@ -10,17 +10,17 @@
 <body onload="loaddata()" class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
     <%-include ('dashboard/preloader');%>
-    <%-include ('dashboard/nav');%>
-      <%-include ('dashboard/sidebar');%>
-        <div class="content-wrapper">
-          <%-include ('./components/staff/search');%>
-          <%-include ('./components/staff/table');%>
-        </div>
-        <%-include ('./components/staff/staffInfomation');%>
-        <%-include ('dashboard/footer');%>
+      <%-include ('dashboard/nav');%>
+        <%-include ('dashboard/sidebar');%>
+          <div class="content-wrapper">
+            <%-include ('./components/staff/search');%>
+              <%-include ('./components/staff/table');%>
+          </div>
+          <%-include ('./components/staff/staffInfomation');%>
+            <%-include ('dashboard/footer');%>
   </div>
   <%-include ('layout/script');%>
-  <%-include ('scripts/staff/staffScript');%>
+    <%-include ('scripts/staff/staffScript');%>
 </body>
 
 </html>

@@ -1,21 +1,18 @@
-<div class="row main-header" style = "width:72%; margin-top:2.1%;margin-left: 28.5% !important; background-color: rgb(248,213,213);">
-    <div class="col-1">
-        <p style= "color:black">Thời gian</p>
-    </div>
+<div class="row main-header"
+    style="width:100%; margin-top:2%;margin-left: 28.5%; background-color: rgb(248,213,213);">
     <div class="col-4">
+        <span style="color:black">Thời gian</span>
         <div class="row">
             <div class="col-md-6">
-                <input class="form-control" type="date" id="day1"/>
+                <input class="form-control" type="date" id="day1" />
             </div>
             <div class="col-md-6">
-                <input class="form-control" type="date" id="day2"/>
-            </div>    
-        </div>     
+                <input class="form-control" type="date" id="day2" />
+            </div>
+        </div>
     </div>
     <div class="col-2">
-        <p style= "color:black">Mức độ ưu tiên</p>
-    </div>
-    <div class="col-3">
+        <span style="color:black">Mức độ ưu tiên</span>
         <select id="leverec" class="form-control">
             <option>-chọn-</option>
             <option>1</option>
@@ -23,22 +20,22 @@
         </select>
     </div>
     <div class="col-2">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-6">
                 <button class="btn btn-primary" onclick="search()">Tìm kiếm</button>
             </div>
             <div class="col-md-6">
                 <button class="btn btn-primary" id="btrefresh"> Làm mới</button>
             </div>
-        </div> 
-        <div class="row mt-2">
+        </div>
+        <div class="row">
             <a href="" id="adownload" download style="display: none;">
-                <button id="btdownload" class="btn btn-outline-info"><i
-                        class="fa fa-download"></i> Xuất excel</button>
-                    </a>
+                <button id="btdownload" class="btn btn-outline-info"><i class="fa fa-download"></i> Xuất excel</button>
             </a>
-            <button class="btn btn-outline-info mt-1" id="btprint" style="display: none;"><i class="fa fa-print"></i> Phiếu
+            </a>
+            <button class="btn btn-outline-info mt-1" id="btprint" style="display: none;"><i class="fa fa-print"></i>
+                Phiếu
                 công việc</button>
-        </div>   
+        </div>
     </div>
 </div>

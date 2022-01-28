@@ -134,7 +134,7 @@
           event.stopImmediatePropagation;
           if (tablepm) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].onclick = function(e) {
+                  table.rows[i].ondblclick = function(e) {
                       tableText(this);
                   }
               }
@@ -147,7 +147,7 @@
     //       event.stopImmediatePropagation;
     //       if (tablecm) {
     //           for (var i = 1; i < table.rows.length; i++) {
-    //               table.rows[i].onclick = function(e) {
+    //               table.rows[i].ondblclick = function(e) {
     //                   tableText(this);
     //               }
     //           }
@@ -160,7 +160,7 @@
           event.stopImmediatePropagation;
           if (tablese) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].onclick = function(e) {
+                  table.rows[i].ondblclick = function(e) {
                       tableText(this);
                   }
               }
@@ -172,7 +172,7 @@
           event.stopImmediatePropagation;
           if (table) {
               for (var i = 1; i < table.rows.length; i++) {
-                  table.rows[i].onclick = function(e) {
+                  table.rows[i].ondblclick = function(e) {
                       deleText(this);
                   }
               }

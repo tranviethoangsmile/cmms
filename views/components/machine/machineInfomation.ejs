@@ -26,96 +26,100 @@
                             </div>
                             <div id="informacc">
                                 <div class="container">
-                                    <div class="row mt-2 mb-2">
-                                        <div class="col-4">
-                                            <div class="container" action="CCS/Upload_New_PR" id="upload_form"
-                                                method="POST">
-                                                <div class="wrapper">
-                                                    <div class="image">
-                                                        <img id="output" src="/public/logo/hbilogo.png">
+                                    <form id= "machineInfomationForm">
+                                        <div class="row mt-2 mb-2">
+                                            <div class="col-4">
+                                                <div class="container" action="CCS/Upload_New_PR" id="upload_form"
+                                                    method="POST">
+                                                    <div class="wrapper">
+                                                        <div class="image">
+                                                            <img id="output" src="/public/logo/hbilogo.png">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <input type="file" name="image" id="file" onchange="loadFile(event)"
-                                                    style="display: none;" accept="image/png, image/gif, image/jpeg">
+                                                    <input type="file" name="image" id="file" onchange="loadFile(event)"
+                                                        style="display: none;"
+                                                        accept="image/png, image/gif, image/jpeg">
 
-                                                <label for="file" style="cursor: pointer;" id="custom-btn">Upload
-                                                    Image</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <div class="container">
-                                                <div class="row mt-2 mb-2">
-                                                    <div id="codeneww">
-                                                        <div>
-                                                            <p for="idpare">TÊN THIẾT BỊ
-                                                        </div>
-                                                        <div>
-                                                            <input aria-required=" true" type="text" id="codenew"
-                                                                class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="des">Mô tả</label>
-                                                        <textarea aria-required=" true" type="text" id="des"
-                                                            class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-2 mb-2" id="namemach">
-                                                    <div class="col-md-12">
-                                                        <label for="namemac">Loại thiết bị</label>
-                                                        <input aria-required="true" type="text" id="namemac"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="codeold">Tên cũ</label>
-                                                        <input aria-required="true" type="text" id="codeold"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-2 mb-2">
-                                                    <div class="col-md-6">
-                                                        <label for="plant">Nhà máy</label>
-                                                        <input aria-required="true" type="text" id="plant"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="pos">Vị trí</label>
-                                                        <input aria-required="true" type="text" id="pos"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-2 mb-2">
-                                                    <div class="col-md-6">
-                                                        <label for="start">Bắt đầu</label>
-                                                        <input aria-required="true" type="text" id="start"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="finish">Kết thúc</label>
-                                                        <input aria-required="true" type="text" id="finish"
-                                                            class="form-control">
-                                                    </div>
+                                                    <label for="file" style="cursor: pointer;" id="custom-btn">Upload
+                                                        Image</label>
                                                 </div>
                                             </div>
+                                            <div class="col-8">
+                                                <div class="container">
+                                                    <div class="row mt-2 mb-2">
+                                                        <div id="codeneww">
+                                                            <div>
+                                                                <p for="idpare" style="color:black;">TÊN THIẾT BỊ
+                                                            </div>
+                                                            <div>
+                                                                <input name="codenew" aria-required=" true" type="text" id="codenew"
+                                                                   class = "form-control" maxlength="255" minlength="3" required >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="des">Mô tả</label>
+                                                            <textarea name="des" aria-required=" true" type="text" id="des"
+                                                               class = "form-control" maxlength="255" minlength="3" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2 mb-2" id="namemach">
+                                                        <div class="col-md-12">
+                                                            <label for="namemac">Loại thiết bị</label>
+                                                            <input name="namemac" aria-required="true" type="text" id="namemac"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="codeold">Tên cũ</label>
+                                                            <input name ="codeld" aria-required="true" type="text" id="codeold"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2 mb-2">
+                                                        <div class="col-md-6">
+                                                            <label for="plant">Nhà máy</label>
+                                                            <input name="plant" aria-required="true" type="text" id="plant"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="pos">Vị trí</label>
+                                                            <input name=pos aria-required="true" type="text" id="pos"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2 mb-2">
+                                                        <div class="col-md-6">
+                                                            <label for="start">Bắt đầu</label>
+                                                            <input name = "start" aria-required="true" type="text" id="start"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="finish">Kết thúc</label>
+                                                            <input name = "finish" aria-required="true" type="text" id="finish"
+                                                               class = "form-control" maxlength="255" minlength="3" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mt-2 mb-2">
-                                        <div class="col-6">
-                                            <label for="">Trạng thái</label>
-                                            <input aria-required="true" type="text" id="status">
+                                        <div class="row mt-2 mb-2">
+                                            <div class="col-6">
+                                                <label for="">Trạng thái</label>
+                                                <input name = "status" aria-required="true" type="text" id="status" maxlength="255" minlength="3" required>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="seri">Số seri</label>
+                                                <input name="seri" aria-required="true" type="text" id="seri" maxlength="255" minlength="3" required>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <label for="">Số seri</label>
-                                            <input aria-required="true" type="text" id="seri">
+                                        <div class="row mt-2 mb-2">
+                                            <label for="model">Model</label>
+                                            <input name = "model" aria-required="true" type="text" id="model" maxlength="255" minlength="3" required>
+                                            <p style="display: none;">
+                                                HỆ THỐNG
+                                                <input aria-required="true" style="display: none;" type="text"
+                                                    id="system">
                                         </div>
-                                    </div>
-                                    <div class="row mt-2 mb-2">
-                                        <label for="model">Model</label>
-                                        <input aria-required="true" type="text" id="model">
-                                        <p style="display: none;">
-                                            HỆ THỐNG
-                                            <input aria-required="true" style="display: none;" type="text" id="system">
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div id="informaint" style="display: none">

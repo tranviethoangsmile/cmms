@@ -71,21 +71,21 @@
                     var commit = time_commit1.getTime() + 86400000;
                     var confirm = timeconfirm1.getTime();
                     var now = now1.getTime();
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: #2196f3;color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: #2196f3;color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #2196f3;color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: #2196f3;color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: #2196f3;">' + status + '</td>';
+                        trHTML += '<td style="background-color: #2196f3;">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     trHTML += '</tr>'
                 }
             }
@@ -122,11 +122,11 @@
                     var now = new Date();
                     now = change_time(now);
                     if (leve == "1" && status == "Đã phân công") {
-                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: #f44336;">' + status + '</td></tr>';
+                        trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + content_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td><td style="background-color: #f44336;">' + status + '</td></tr>';
                     } else if (leve == "2" && status == "Đã phân công") {
-                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: yellow;">' + status + '</td></tr>';
+                        trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + content_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td><td style="background-color: yellow;">' + status + '</td></tr>';
                     } else {
-                        trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + content_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td><td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td></tr>';
+                        trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + content_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td><td style="background-color: rgb(0 188 212);">' + status + '</td></tr>';
                     }
                 }
             }
@@ -334,7 +334,7 @@
             var qty1 = document.getElementById("qty_req").value;
             // var idreq= document.getElementById("idreq").value;
             // var typework= document.getElementById("typework").value;
-            // trHTML += '<tr ><td style="text-align: center;">' + typework + '</td><td style="text-align: center;">' + idpart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + qty1 + '</td></tr>';
+            // trHTML += '<tr ><td >' + typework + '</td><td >' + idpart + '</td><td >' + name + '</td><td >' + qty1 + '</td></tr>';
             // $('#tableb tbody').html(trHTML);
             var table = document.getElementById("tableb");
             var row = table.insertRow(1);
@@ -386,7 +386,7 @@
                     // time_exe=change_time(time_exe);
                     // time_confirm=change_time(time_confirm);
 
-                    trHTML += '<tr ><td style="text-align: center;">' + ipart + '</td><td style="text-align: center;">' + name + '</td><td style="text-align: center;">' + qty1 + '</td><td style="text-align: center;">' + stt + '</td></tr>';
+                    trHTML += '<tr ><td >' + ipart + '</td><td >' + name + '</td><td >' + qty1 + '</td><td >' + stt + '</td></tr>';
                 }
                 $('#tableb tbody').html(trHTML);
 
@@ -661,7 +661,7 @@
         if (sttw != "") {
             document.getElementById(sttw).style.backgroundColor = "white";
         }
-        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        // document.getElementById(a).style.backgroundColor = "#2e6da4";
         sttw = a;
         if (sttw == "Tất cả" || sttw == "") {
             sttw = '%';
@@ -711,25 +711,25 @@
                     // // console.log(timeco)
                     // console.log(commit);
                     // console.log("--------------------");
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td style="text-align: center;max-width:25%">' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
                         // console.log("eee")       
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     // if (status=="Đã phân công"){
-                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
-                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // // trHTML+='<td ><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td ></td>';
                     // }
                     trHTML += '</tr>'
                 }
@@ -778,7 +778,7 @@
         if (typw != "%") {
             document.getElementById(typw).style.backgroundColor = "white";
         }
-        document.getElementById(a).style.backgroundColor = "#2e6da4";
+        // document.getElementById(a).style.backgroundColor = "#2e6da4";
         typw = a;
         if (sttw == "Tất cả" || sttw == "") {
             sttw = '%';
@@ -831,25 +831,25 @@
                     // // console.log(timeco)
                     // console.log(commit);
                     // console.log("--------------------");
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
                         // console.log("eee")       
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     // if (status=="Đã phân công"){
-                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
-                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // // trHTML+='<td ><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td ></td>';
                     // }
                     trHTML += '</tr>'
                 }
@@ -918,25 +918,25 @@
                     // // console.log(timeco)
                     // console.log(commit);
                     // console.log("--------------------");
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
                         // console.log("eee")       
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     // if (status=="Đã phân công"){
-                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
-                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // // trHTML+='<td ><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td ></td>';
                     // }
                     trHTML += '</tr>'
                 }
@@ -1006,25 +1006,25 @@
                     // // console.log(timeco)
                     // console.log(commit);
                     // console.log("--------------------");
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
                         // console.log("eee")       
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     // if (status=="Đã phân công"){
-                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
-                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // // trHTML+='<td ><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td ></td>';
                     // }
                     trHTML += '</tr>'
                 }
@@ -1097,25 +1097,25 @@
                     // // console.log(timeco)
                     // console.log(commit);
                     // console.log("--------------------");
-                    trHTML += '<tr ><td style="text-align: center;">' + id + '</td><td style="text-align: center;">' + name_work + '</td><td style="text-align: center;">' + time_exe + '</td><td style="text-align: center;">' + time_commit + '</td><td style="text-align: center;">' + user_rec + '</td><td style="text-align: center;">' + FM_staff + '</td>'
+                    trHTML += '<tr ><td >' + id + '</td><td >' + name_work + '</td><td >' + time_exe + '</td><td >' + time_commit + '</td><td >' + user_rec + '</td><td >' + FM_staff + '</td>'
                     if (now < confirm && leve == "1" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: #f44336;">' + status + '</td>'
+                        trHTML += '<td style="background-color: #f44336;">' + status + '</td>'
                     } else if (now < confirm && leve == "2" && status == "Đã phân công") {
-                        trHTML += '<td style="text-align: center;background-color: yellow;">' + status + '</td>'
+                        trHTML += '<td style="background-color: yellow;">' + status + '</td>'
                     } else if (status == "Đang thực hiện") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:yellow">' + status + '</td>';
                     } else if (confirm > commit && status == "Hoàn thành") {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + status + '</td>';
                     } else if (now > commit && status == "Đã phân công") {
                         // console.log("eee")       
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);color:red">' + "Quá hạn" + '</td>';
                     } else {
-                        trHTML += '<td style="text-align: center;background-color: rgb(0 188 212);">' + status + '</td>';
+                        trHTML += '<td style="background-color: rgb(0 188 212);">' + status + '</td>';
                     }
-                    trHTML += '<td style="text-align: center;">' + progr + "%" + '</td>';
+                    trHTML += '<td >' + progr + "%" + '</td>';
                     // if (status=="Đã phân công"){
-                    // // trHTML+='<td style="text-align: center;"><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
-                    //   trHTML+= '<td style="text-align: center;"></td>';
+                    // // trHTML+='<td ><input type="checkbox" id="' + id + '"  onchange="print(this.id)"></td>';}else{
+                    //   trHTML+= '<td ></td>';
                     // }
                     trHTML += '</tr>'
                 }

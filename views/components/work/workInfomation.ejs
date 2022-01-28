@@ -65,19 +65,18 @@
                                             <div class="row"
                                                 style="background-color: rgb(192, 187, 187); min-height: 25px;">
                                                 <div class="col-4">
-                                                    <a class="w3-bar-item w3-button is-active" id="bt1"><i
-                                                            class="fa fa-folder"></i>
-                                                        Thông tin chung
+                                                    <a class="w3-bar-item w3-button is-active" id="bt1">
+                                                        <button class="btn btn-primary">Thông tin chung</button>
                                                     </a>
                                                 </div>
                                                 <div class="col-4">
-                                                    <a class="w3-bar-item w3-button" id="bt2"><i class="fa fa-bars"></i>
-                                                        Thông tin liên quan</a>
+                                                    <a class="w3-bar-item w3-button" id="bt2">
+                                                        <button class="btn btn-primary">Thông tin liên quan</button>
+                                                    </a>
                                                 </div>
                                                 <div class="col-4">
-                                                    <a class="w3-bar-item w3-button" id="bt3"><i
-                                                            class="fa fa-check"></i>
-                                                        Đánh giá
+                                                    <a class="w3-bar-item w3-button" id="bt3">
+                                                        <button class="btn btn-primary"> Đánh giá</button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -197,8 +196,8 @@
                                             </div>
                                         </div>
                                         <div id="tb3" style="display: none">
-                                            <p>Chất
-                                                lượng</p>
+                                            <span>Chất
+                                                lượng</span>
                                             <div><select id="quality" class="form-control ">
                                                     <option> </option>
                                                     <option>Rất hài lòng</option>
@@ -209,8 +208,8 @@
                                                 </select>
                                             </div>
                                             <br></br>
-                                            <p>Nhận
-                                                xét</p>
+                                            <span>Nhận
+                                                xét</span>
                                             <textarea aria-required="true" type="text" id="comment"
                                                 class="form-control "> </textarea>
                                         </div>
@@ -236,21 +235,3 @@
             </div>
         </div>
     </div>
-
-    <style>
-        a {
-            font-weight: bold;
-            font-size: 1vw;
-            cursor: pointer;
-        }
-
-        span {
-            font-weight: bold;
-            font-size: 1vw;
-        }
-
-        .form-control {
-            font-size: 1vw;
-            font-weight: bold;
-        }
-    </style>
