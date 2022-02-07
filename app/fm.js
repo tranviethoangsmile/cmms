@@ -290,6 +290,29 @@ module.exports = function (app, passport) {
 
     }) 
 
+    // AMT START
+
+
+
+
+
+    app.get('/amt',isLoggedIn, (req,res) => {
+        res.render('amt.ejs', {
+            user: req.user[0].user, // Lấy thông tin user trong session và truyền nó qua template
+            note: req.user[0].note
+        });
+    })
+
+
+
+
+
+
+
+
+
+    // AMT END
+
     app.get('/SE/:tagId', function(req, res) {
         console.log("aa")
         console.log(req.params.tagId);

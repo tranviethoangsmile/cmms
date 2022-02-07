@@ -8,7 +8,7 @@
                             <h3 class="modal-title" style="color: #7c4abe ; font-weight: bold;">Thêm công việc</h3>
                         </div>
                         <div class="card">
-                            <div class="card-body" style = "font-weight: bold; font-size:1vw">
+                            <div class="card-body" style="font-weight: bold; font-size:1vw">
                                 <div class="container">
                                     <div class="row  mt-4 mb-4">
                                         <div class="col-4">
@@ -70,8 +70,10 @@
                                     <div class="row  mt-4 mb-4">
                                         <div class="col-6">
                                             <label for="staffwork">Người thực hiện</label>
-                                            <input type="text" id="staffwork" class="form-control " autocomplete="off">
-                                            <datalist id="listname">
+                                            <input list="listname" aria-required="true"
+                                                type="text" id="staffwork" class="form-control">
+                                            <datalist
+                                                id="listname">
                                                 <%-namee%>
                                             </datalist>
                                         </div>
@@ -193,13 +195,17 @@
                                 <div class="modal-footer">
                                     <div class="row">
                                         <div class="col-6">
-                                            <button class="btn btn-danger" onclick="Send()"><i class="fa fa-save"></i> Gửi công
+                                            <button class="btn btn-danger" onclick="Send()"><i class="fa fa-save"></i>
+                                                Gửi công
                                                 việc</button>
                                         </div>
                                         <div class="col-6">
-                                            <button class="btn btn-primary" id="btsave1"><i class="fa fa-save"></i>Lưu</button>
-                                            <button class="btn btn-primary" id="btsave2"><i class="fa fa-save"></i>Lưu</button>
-                                            <button class="btn btn-primary" id="btsave3"><i class="fa fa-save"></i>Lưu</button>
+                                            <button class="btn btn-primary" id="btsave1"><i
+                                                    class="fa fa-save"></i>Lưu</button>
+                                            <button class="btn btn-primary" id="btsave2"><i
+                                                    class="fa fa-save"></i>Lưu</button>
+                                            <button class="btn btn-primary" id="btsave3"><i
+                                                    class="fa fa-save"></i>Lưu</button>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +218,7 @@
     </div>
 </div>
 <style>
-    .form-control{
+    .form-control {
         font-weight: bold;
         font-size: 0.75vw;
     }
