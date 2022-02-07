@@ -37,11 +37,101 @@ var con = mysql.createPool({
     database: "erpsystem"
 
 });
+// create app AMT start  
+var connect_pr2k = mysql.createPool({
+    connectionLimit: 30,
+
+    host: "pbvweb01v",
+
+    user: "intern",
+
+    password: "intern21",
+
+    database: "pr2k"
+})
+
+var connect_linebalancing = mysql.createPool({
+    connectionLimit: 30,
+
+    host: "pbvweb01v",
+
+    user: "intern",
+
+    password: "intern21",
+
+    database: "linebalancing"
+})
+
+var connect_mms = mysql.createPool({
+    connectionLimit: 30,
+
+    host: "pbvweb01v",
+
+    user: "intern",
+
+    password: "intern21",
+
+    database: "mms"
+})
+
+var connect_hrsystem = mysql.createPool({
+    connectionLimit: 30,
+
+    host: "pbvweb01v",
+
+    user: "intern",
+
+    password: "intern21",
+
+    database: "hrsystem"
+})
+
+
+// end AMT
+
 module.exports = con;
 module.exports = conn;
 module.exports = function (app, passport) {
 
     //---------------------------PASSPORT----------------------------
+    
+
+
+    // AMT START
+
+
+
+
+
+    app.get('/amt',isLoggedIn, (req,res) => {
+        res.render('amt.ejs', {
+            user: req.user[0].user, // Lấy thông tin user trong session và truyền nó qua template
+            note: req.user[0].note
+        });
+    })
+
+    app.get('/api/v1/getdata', (req, res) => {
+        connect_pr2k.getConnection((err, data)=>{
+            if(err) throw err;
+
+            var sql_data = "SELECT * FROM Pr2k.employee_scanticket WHERE EMPLOYEE='05721' AND DATE='20210525'";
+            data.query(sql_data, (err, dataList) => {
+                data.release();
+                console.log(dataList);
+                res.send(dataList);
+            })
+        })
+    })
+
+
+
+
+
+
+
+
+
+    // AMT END
 
     app.get('/login', function (req, res) {
         res.render('login.ejs', {message: req.flash('loginMessage')});
@@ -290,28 +380,6 @@ module.exports = function (app, passport) {
 
     }) 
 
-    // AMT START
-
-
-
-
-
-    app.get('/amt',isLoggedIn, (req,res) => {
-        res.render('amt.ejs', {
-            user: req.user[0].user, // Lấy thông tin user trong session và truyền nó qua template
-            note: req.user[0].note
-        });
-    })
-
-
-
-
-
-
-
-
-
-    // AMT END
 
     app.get('/SE/:tagId', function(req, res) {
         console.log("aa")

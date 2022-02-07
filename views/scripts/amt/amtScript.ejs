@@ -1,5 +1,24 @@
 <script>
-    $("#fullScreenbtn").on("click", () => {
-        alert("ok");
+    $(document).ready(() => {
+        init();
     })
+
+    init = () => {
+        getData();
+    }
+
+    getData = () => {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/api/v1/getdata",
+            type: "GET",
+        }).done((data) => {
+            console.log(data);
+        }).fail((err) => {
+            console.log(err);
+        })
+    }
 </script>

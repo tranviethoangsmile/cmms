@@ -62,12 +62,14 @@ require('./app/fm.js')(app, passport); // Load routes truyền vào app và pass
 require('./app/ecf.js')(app, passport); // Load routes truyền vào app và passport đã config ở trên
 var entries = [];
 app.locals.entries = entries;
+const port = process.env.PORT || 3000;
 app.use(logger("dev"));
+
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 
 var server = require("http").Server(app);
-server.listen(3000,'localhost')
+server.listen(port,'localhost')
 
 var conn = mysql.createPool({
 
