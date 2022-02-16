@@ -1,30 +1,43 @@
-<table id="tablea" class="table table-hover text-center" style="border: 1px solid;" onclick="detail_ticket()">
-    <thead class="text-center">
-        <tr>
-            <th rowspan="2">MÃ CÔNG VIỆC
-            </th>
-            <th rowspan="2">CÔNG VIỆC</th>
-            <!-- <th style="text-align: center;width: 200px;" rowspan="2">NỘI DUNG CÔNG VIỆC</th> -->
-            <th colspan="2">THỜI GIAN THỰC
-                HIỆN</th>
-            <th rowspan="2">NGƯỜI GIAO</th>
-            <th rowspan="2">NGƯỜI NHẬN</th>
-            <th rowspan="2">TRẠNG THÁI</th>
-            <th rowspan="2">TIẾN ĐỘ</th>
-            <!-- <th style="text-align: center;width: 5px;" rowspan="2">IN</th> -->
-        </tr>
-        <tr>
-            <th>BẮT ĐẦU</th>
-            <th>KẾT THÚC</th>
-        </tr>
-    </thead>
-    <tbody
-        style="font-weight: bold; min-width:100%; margin-top: 11.5% !important; max-height:100%; overflow:scroll">
-    </tbody>
-</table>
-
+<div class='table-cont' id='table-cont'>
+    <table id="tablea" class="table table-hover text-center" style="border: 1px solid;" onclick="detail_ticket()">
+        <thead>
+            <tr>
+                <th rowspan="2">MÃ CÔNG VIỆC
+                </th>
+                <th rowspan="2">CÔNG VIỆC</th>
+                <th colspan="2">THỜI GIAN THỰC
+                    HIỆN</th>
+                <th rowspan="2">NGƯỜI GIAO</th>
+                <th rowspan="2">NGƯỜI NHẬN</th>
+                <th rowspan="2">TRẠNG THÁI</th>
+                <th rowspan="2">TIẾN ĐỘ</th>
+            </tr>
+            <tr>
+                <th>BẮT ĐẦU</th>
+                <th>KẾT THÚC</th>
+            </tr>
+        </thead>
+        <tbody style="background-color: white;">
+        </tbody>
+    </table>
+</div>
 
 <style>
+    .table-cont {
+        /**make table can scroll**/
+        max-height: 800px;
+        overflow: auto;
+        /** add some style**/
+        /*padding: 2px;*/
+        background: #ddd;
+        margin: 20px 10px;
+        box-shadow: 0 0 1px 3px #ddd;
+    }
+
+    thead {
+        background-color: #ddd;
+    }
+
     table {
         border: 1px solid black;
         font-weight: bold;

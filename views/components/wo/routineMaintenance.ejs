@@ -1,5 +1,5 @@
-<div class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-  <table id="tablepm" class="table table-hover text-center" onclick="detail_ticketpm()" style="margin-top: 7.5%;">
+<div class='table-cont' id='table-cont'>
+  <table id="tablepm" class="table table-hover text-center" onclick="detail_ticketpm()" style="margin-top: 4.5%;">
     <thead>
       <tr>
         <th rowspan="2">MÃ YÊU CẦU</th>
@@ -22,12 +22,26 @@
         <th>THỜI GIAN CAM KẾT</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="background-color: white;">
     </tbody>
   </table>
 </div>
-
 <style>
+    
+.table-cont{
+  /**make table can scroll**/
+  max-height: 800px;
+  overflow: auto;
+  /** add some style**/
+  /*padding: 2px;*/
+  background: #ddd;
+  margin: 20px 10px;
+  box-shadow: 0 0 1px 3px #ddd;
+}
+thead{
+  background-color: #ddd;
+}
+
   table {
     border: 1px solid black;
     font-weight: bold;

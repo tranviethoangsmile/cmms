@@ -13,12 +13,28 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "/api/v1/getdata",
+            url: "/api/v1/getamtdata",
             type: "GET",
         }).done((data) => {
-            console.log(data);
+            $.each(data, (index,item) => {
+            $("#amt_data tbody").append(
+                `
+                <tr ondblclick="emloyeeDatail(${item.ID})">
+                    <td style="text-align: center;">${item.ID}</td>
+                    <td style="text-align: center;">${item.Name}</td>
+                    <td style="text-align: center;">${item.StartDate}</td>
+                    <td style="text-align: center;">${item.Line}</td>
+                    <td style="text-align: center;">${item.Shift}</td>
+                </tr>
+                 `
+                 );
+                });
         }).fail((err) => {
             console.log(err);
         })
+    }
+
+    emloyeeDatail = (id) => {
+        alert(id);
     }
 </script>

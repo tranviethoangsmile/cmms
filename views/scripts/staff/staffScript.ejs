@@ -1,5 +1,17 @@
 <script type="text/javascript">
+  $(document).ready(() => {
+    var tableCont = document.querySelector('#table-cont')
+    /**
+     * scroll handle
+     * @param {event} e -- scroll event
+     */
+    function scrollHandle(e) {
+      var scrollTop = this.scrollTop;
+      this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+    }
 
+    tableCont.addEventListener('scroll', scrollHandle)
+  })
 
   function loaddata() {
     // document.getElementById("linkstaff").style.backgroundColor="#4c4c4c";
@@ -242,104 +254,104 @@
 
 
   $("#formAddNewStaff").validate({
-      ruler: {
-        id: {
-          required: true,
-          minlength: 3,
-          maxlength: 50
-        },
-        fullName: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        inposition: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        inTeam: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        skills: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        incer: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        phoneNumber: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        },
-        email: {
-          required: true,
-          email:true,
-          minlength: 3,
-          maxlength: 255
-        },
-        address: {
-          required: true,
-          minlength: 3,
-          maxlength: 255
-        }
+    ruler: {
+      id: {
+        required: true,
+        minlength: 3,
+        maxlength: 50
       },
-      messages: {
-        id: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 50 kí tự'
-        },
-        fullName: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        inposition: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        inTeam: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        skills: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        incer: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        phoneNumber: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        email: {
-          required: 'Không để trống',
-          email:'không hợp lệ',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        },
-        address: {
-          required: 'Không để trống',
-          minlength: 'độ dài tối thiểu là 3 kí tự',
-          maxlength: 'độ dài tối đã 255 kí tự'
-        }
+      fullName: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      inposition: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      inTeam: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      skills: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      incer: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      phoneNumber: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      email: {
+        required: true,
+        email: true,
+        minlength: 3,
+        maxlength: 255
+      },
+      address: {
+        required: true,
+        minlength: 3,
+        maxlength: 255
       }
-    })
-  document.getElementById('btsave1').addEventListener('click', function () {  
+    },
+    messages: {
+      id: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 50 kí tự'
+      },
+      fullName: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      inposition: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      inTeam: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      skills: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      incer: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      phoneNumber: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      email: {
+        required: 'Không để trống',
+        email: 'không hợp lệ',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      },
+      address: {
+        required: 'Không để trống',
+        minlength: 'độ dài tối thiểu là 3 kí tự',
+        maxlength: 'độ dài tối đã 255 kí tự'
+      }
+    }
+  })
+  document.getElementById('btsave1').addEventListener('click', function () {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("post", '/staff/insert', true);
     event.preventDefault(); //prevent default action 
@@ -376,7 +388,7 @@
     cb = cb.substring(0, cb.length - 1)
     console.log(cb)
 
-    if(id === "" || name === "" || mail === "" || levels === "" || leexpert === "" || position === "" || team === "" || address === "" || pnum === ""){
+    if (id === "" || name === "" || mail === "" || levels === "" || leexpert === "" || position === "" || team === "" || address === "" || pnum === "") {
       $.notify('Nhập đầy đủ thông tin', 'danger');
       return;
     }

@@ -13,18 +13,17 @@
             <%-include ('dashboard/nav');%>
                 <%-include ('dashboard/sidebar');%>
                     <div class="content-wrapper">
-                        <%-include ('./components/amt/buttonTabsChanger');%>
-
+                        <%-include ('./components/amt/search');%>
+                            <div style="margin-top:5%">
+                                <%-include ('./components/amt/table');%>
+                            </div>
                     </div>
                     <!-- Tabs content -->
+                    <%-include ('dashboard/footer');%>
     </div>
-    <%-include ('dashboard/footer');%>
-        </div>
-
-
-        <!-- jQuery -->
-        <%-include ('layout/script');%>
-        <%-include ('./scripts/amt/amtScript');%>
+    <!-- jQuery -->
+    <%-include ('layout/script');%>
+    <%-include ('./scripts/amt/amtScript');%>
 </body>
 
 </html>

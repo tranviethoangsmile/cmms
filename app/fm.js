@@ -109,16 +109,16 @@ module.exports = function (app, passport) {
             note: req.user[0].note
         });
     })
-
-    app.get('/api/v1/getdata', (req, res) => {
-        connect_pr2k.getConnection((err, data)=>{
+    app.get('/api/v1/getamtdata', (req,res) => {
+        connect_hrsystem.getConnection((err,data) => {
             if(err) throw err;
-
-            var sql_data = "SELECT * FROM Pr2k.employee_scanticket WHERE EMPLOYEE='05721' AND DATE='20210525'";
-            data.query(sql_data, (err, dataList) => {
+            var sql_data = `SELECT * FROM ERPSYSTEM.setup_emplist a
+            WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND a.Line>'0'`;
+            data.query(sql_data, (err, employeeList) => {
+                if(err) throw err;
                 data.release();
-                console.log(dataList);
-                res.send(dataList);
+                console.log('data',employeeList);
+                res.send(employeeList);
             })
         })
     })

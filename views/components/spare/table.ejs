@@ -1,23 +1,37 @@
-<table id="tablea" class="table table-hover text-center" onclick="detail_ticket()">
-  <thead class="main-header text-center">
-    <tr>
-      <th style="width: 3%;">STT</th>
-      <th style="width: 15%;">ID</th>
-      <th>ID HỆ THỐNG </th>
-      <th style="width:55%">TÊN</th>
-      <th style="width:13%">ẢNH</th>
-      <th style="width:5% !important">SL</th>
-      <th>SLTT</th>
-      <th style="width:5%">ĐVT</th>
-      <th style="width:5%">VỊ TRÍ</th>
-    </tr>
-  </thead>
-  <tbody class="mt-xl-5" style="position:absolute; margin-top:4% !important">
-  </tbody>
-  </thead>
-</table>
-
+<div class='table-cont' id='table-cont'>
+  <table id="tablea" class="table table-hover text-center" onclick="detail_ticket()">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>ID HỆ THỐNG </th>
+        <th>TÊN</th>
+        <th>ẢNH</th>
+        <th>SL</th>
+        <th>SLTT</th>
+        <th>ĐVT</th>
+        <th>VỊ TRÍ</th>
+      </tr>
+    </thead>
+    <tbody style="background-color: white">
+    </tbody>
+    </thead>
+  </table>
+</div>
 <style>
+  .table-cont{
+  /**make table can scroll**/
+  max-height: 800px;
+  overflow: auto;
+  /** add some style**/
+  /*padding: 2px;*/
+  background: #ddd;
+  margin: 20px 10px;
+  box-shadow: 0 0 1px 3px #ddd;
+}
+thead{
+  background-color: #ddd;
+}
   table {
     border: 1px solid black;
     font-weight: bold;

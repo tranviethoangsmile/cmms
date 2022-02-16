@@ -1,19 +1,34 @@
-<table id="tablea" class="table table-striped table-hover" onclick="detail_ticket()">
-  <thead class="main-header text-center">
+<div class='table-cont' id='table-cont'>
+<table id="tablea" class="table table-hover" onclick="detail_ticket()" style="margin-top: 1%;">
+  <thead>
     <tr>
-      <th style="width: 90px">ID</th>
-      <th  style = "width:190px">HỌ VÀ TÊN</th>
-      <th style = "width: 400px">KỸ NĂNG CHUYÊN MÔN</th>
-      <th style="width: 100px;">BẬC THỢ</th>                     
-      <th  style = "width: 550px">CHỨC VỤ</th>
-      <th style="width: 200px"> TỔ ĐỘI</th>
+      <th>ID</th>
+      <th>HỌ VÀ TÊN</th>
+      <th>KỸ NĂNG CHUYÊN MÔN</th>
+      <th>BẬC THỢ</th>                     
+      <th>CHỨC VỤ</th>
+      <th> TỔ ĐỘI</th>
     </tr>
   </thead>
-  <tbody style="position:absolute; text-align: center; margin-top:3.5% !important;" >
+  <tbody style="background-color: white">
   </tbody>
 </table>
-
+</div>
 <style>
+  .table-cont{
+  /**make table can scroll**/
+  max-height: 800px;
+  overflow: auto;
+  /** add some style**/
+  /*padding: 2px;*/
+  background: #ddd;
+  margin: 20px 10px;
+  box-shadow: 0 0 1px 3px #ddd;
+}
+thead{
+  background-color: #ddd;
+}
+
   table {
     border: 1px solid black;
     font-weight: bold;

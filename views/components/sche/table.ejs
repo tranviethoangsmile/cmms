@@ -1,34 +1,51 @@
-<table id="tablea" class = "table table-hover text-center" onclick="detail_ticket()" style="margin-top: 6.4%;">
+<div class='table-cont' id='table-cont'>
+  <table id="tablea" class="table table-hover text-center" onclick="detail_ticket()" style="margin-top: 3%;">
     <thead>
       <tr>
         <th rowspan="2">TÊN THIẾT BỊ</th>
         <th colspan="6">CHU KỲ BẢO DƯỠNG</th>
 
-        <th  rowspan="2">MỨC ĐỘ ƯU TIÊN</th>
-        <th  rowspan="2">NGƯỜI THỰC HIỆN</th>
+        <th rowspan="2">MỨC ĐỘ ƯU TIÊN</th>
+        <th rowspan="2">NGƯỜI THỰC HIỆN</th>
         <!-- <th  rowspan="2">THỜI GIAN BẢO DƯỠNG</th> -->
-        <th  rowspan="2">GHI CHÚ</th>
-        <th  rowspan="2">THỜI GIAN CẬP NHẬT</th>
-        <th  rowspan="2">NGƯỜI CẬP NHẬT</th>
+        <th rowspan="2">GHI CHÚ</th>
+        <th rowspan="2">THỜI GIAN CẬP NHẬT</th>
+        <th rowspan="2">NGƯỜI CẬP NHẬT</th>
       </tr>
       <tr>
-        <th >1</th>
-        <th >THỜI GIAN</th>
+        <th>1</th>
+        <th>THỜI GIAN</th>
         <th>2</th>
-        <th >THỜI GIAN</th>
-        <th >3</th>
-        <th >THỜI GIAN</th>
+        <th>THỜI GIAN</th>
+        <th>3</th>
+        <th>THỜI GIAN</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="background-color: white;">
     </tbody>
     </thead>
   </table>
+</div>
 
-  <style>
-    table {
-      border: 1px solid black;
-      font-weight: bold;
-      font-size: 1vw;
-    }
-  </style>
+<style>
+  
+.table-cont{
+  /**make table can scroll**/
+  max-height: 800px;
+  overflow: auto;
+  /** add some style**/
+  /*padding: 2px;*/
+  background: #ddd;
+  margin: 20px 10px;
+  box-shadow: 0 0 1px 3px #ddd;
+}
+thead{
+  background-color: #ddd;
+}
+
+  table {
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 1vw;
+  }
+</style>
