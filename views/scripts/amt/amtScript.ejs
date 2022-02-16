@@ -1,6 +1,19 @@
 <script>
     $(document).ready(() => {
         init();
+
+        var tableCont = document.querySelector('#table-cont')
+        /**
+         * scroll handle
+         * @param {event} e -- scroll event
+         */
+        function scrollHandle(e) {
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+
+        tableCont.addEventListener('scroll', scrollHandle)
+
     })
 
     init = () => {
@@ -16,19 +29,20 @@
             url: "/api/v1/getamtdata",
             type: "GET",
         }).done((data) => {
-            $.each(data, (index,item) => {
-            $("#amt_data tbody").append(
-                `
+            console.log(data);
+            $.each(data, (index, item) => {
+                $("#amt_data tbody").append(
+                    `
                 <tr ondblclick="emloyeeDatail(${item.ID})">
                     <td style="text-align: center;">${item.ID}</td>
                     <td style="text-align: center;">${item.Name}</td>
-                    <td style="text-align: center;">${item.StartDate}</td>
+                    <td style="text-align: center;">${item.Dept}</td>
                     <td style="text-align: center;">${item.Line}</td>
                     <td style="text-align: center;">${item.Shift}</td>
                 </tr>
                  `
-                 );
-                });
+                );
+            });
         }).fail((err) => {
             console.log(err);
         })

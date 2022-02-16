@@ -113,7 +113,7 @@ module.exports = function (app, passport) {
         connect_hrsystem.getConnection((err,data) => {
             if(err) throw err;
             var sql_data = `SELECT * FROM ERPSYSTEM.setup_emplist a
-            WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND a.Line>'0'`;
+            WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND ML =''`;
             data.query(sql_data, (err, employeeList) => {
                 if(err) throw err;
                 data.release();

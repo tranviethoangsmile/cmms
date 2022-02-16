@@ -8,30 +8,17 @@
     </div>
   </div>
   <div class="col-12 mt-5">
-    <table class="table  table-striped table-hover"style="font-size:1vw;">
-      <thead>
-        <tr>
-          <th>THIẾT BỊ BẢO TRÌ</th>
-          <th>CHU KỲ</th>
-          <th>NGƯỜI BẢO TRÌ</th>
-          <th>TRẠNG THÁI</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- hiển thị thông tin -->
-      </tbody>
-    </table>
-    <div id="table_custom">
+    <div class='table-cont' id='table-cont'>
       <table class="table table-hover" style="font-size:1vw" id="tablepm" onclick="detail_ticketpm()">
         <thead>
           <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>THIẾT BỊ BẢO TRÌ</th>
+            <th>CHU KỲ</th>
+            <th>NGƯỜI BẢO TRÌ</th>
+            <th>TRẠNG THÁI</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: white">
           <!-- hiển thị thông tin -->
         </tbody>
       </table>
@@ -40,8 +27,18 @@
 </div>
 
 <style>
-  #table_custom {
-    max-height: 50%;
-    overflow: scroll;
+  .table-cont {
+    /**make table can scroll**/
+    max-height: 800px;
+    overflow: auto;
+    /** add some style**/
+    /*padding: 2px;*/
+    background: #ddd;
+    margin: 20px 10px;
+    box-shadow: 0 0 1px 3px #ddd;
+  }
+
+  thead {
+    background-color: #ddd;
   }
 </style>

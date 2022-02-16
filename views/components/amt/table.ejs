@@ -1,32 +1,41 @@
-<table class="table table-hover text-center" id="amt_data">
-    <thead class="main-header text-center" style="margin-top: 4.3%;">
-        <tr>
-            <th style="width: 10%;">ID</th>
-            <th style="width: 35%;">Họ và Tên</th>
-            <th style="width:32%">Ngày bắt đầu</th>
-            <th style="width: 10%;">Line</th>
-            <th style="width: 250px;">Ca</th>
-        </tr>
-    </thead>
-    <thead class="text-center">
-        <tr>
-            <th style="width: 10%;">ID</th>
-            <th style="width: 35%;">Họ và Tên</th>
-            <th style="width:32%">Ngày bắt đầu</th>
-            <th style="width: 10%;">Line</th>
-            <th style="width: 250px;">Ca</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class='table-cont' id='table-cont'>
+    <table id='amt_data' class="table table-hover text-center">
+        <thead class="text-center">
+            <tr>
+                <th>ID</th>
+                <th>Họ và Tên</th>
+                <th>Tuần vào</th>
+                <th>Nhóm chuyền</th>
+                <th>Công đoạn</th>
+                <th>Ca</th>
 
-    </tbody>
+                
+            </tr>
+        </thead>
+        <tbody>
 
-</table>
+        </tbody>
+    </table>
+</div>
 <style>
-    table {
-      border: 1px solid black;
-      font-weight: bold;
-      font-size: 1vw;
+    .table-cont {
+        /**make table can scroll**/
+        max-height: 800px;
+        overflow: auto;
+        /** add some style**/
+        /*padding: 2px;*/
+        background: #ddd;
+        margin: 20px 10px;
+        box-shadow: 0 0 1px 3px #ddd;
     }
-  
-  </style>
+
+    thead {
+        background-color: #ddd;
+    }
+
+    table {
+        border: 1px solid black;
+        font-weight: bold;
+        font-size: 1vw;
+    }
+</style>
