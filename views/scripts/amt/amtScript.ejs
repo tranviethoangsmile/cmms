@@ -33,12 +33,12 @@
             $.each(data, (index, item) => {
                 $("#amt_data tbody").append(
                     `
-                <tr ondblclick="emloyeeDatail(${item.ID})">
-                    <td style="text-align: center;">${item.ID}</td>
-                    <td style="text-align: center;">${item.Name}</td>
-                    <td style="text-align: center;">${item.Dept}</td>
-                    <td style="text-align: center;">${item.Line}</td>
-                    <td style="text-align: center;">${item.Shift}</td>
+                <tr ondblclick="emloyeeDetail(${item.ID})">
+                    <td>${item.ID}</td>
+                    <td>${item.Name}</td>
+                    <td>${item.Dept}</td>
+                    <td>${item.Line}</td>
+                    <td>${item.Shift}</td>
                 </tr>
                  `
                 );
@@ -48,7 +48,51 @@
         })
     }
 
-    emloyeeDatail = (id) => {
-        alert(id);
+
+    emloyeeDetail = (id) => {
+        $("#employee_detail").modal('show')
+      $.ajax({
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/api/v1/getemployeedetail/" + id,
+            type: "GET",
+      }).done((data) =>{
+          $.each(data, (index,item) => {
+              $("#id_employee").val(`${item.ID}`);
+              $("#name_employee").val(`${item.Name}`);
+              $("#shift_employee").val(`${item.Shift}`)
+              $("#line_employee").val(`${item.Line}`);
+              $("#operation_name").val(`${item.OPERATION_NAME}`);
+              $("#float_eff").val(`${item.FLOAT_EFF}`);
+              $("#date").val(`${item.DATE}`);
+          })
+      }).fail((e) => {
+          console.log("fail",e)
+      })
     }
+
+    saveTagetsFloatEff = () => {
+        let employeetagetstracking = {
+            ID : $("#id_employee").val(),
+            OPERATION_NAME: $("#operation_name").val(),
+            TAGETS: $("#tagets").val(),
+            DATE: $("#date").val(),
+        }
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/api/v1/employeetagetstracking/",
+            type: "POST",
+            data: JSON.stringify(employeetagetstracking)
+        }).done((data) => {
+            console.log(data)
+        }).fail((err) => {
+            console.log("ERROR",err)
+        })
+    }
+
 </script>

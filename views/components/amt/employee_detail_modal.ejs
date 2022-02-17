@@ -1,0 +1,67 @@
+<div class="modal fade" id="employee_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="date_custom">Ngày</label>
+                            <input type="date" id="date_custom" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-md-12">
+                                <span>ID</span>
+                                <input type="text" class="form-control" id="id_employee" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Họ và tên: </span>
+                                <input type="text" class="form-control" id="name_employee" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Ca</span>
+                                <input type="text" class="form-control" id="shift_employee" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Chuyền</span>
+                                <input type="text" class="form-control" id="line_employee" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-md-12">
+                                <span>Công đoạn</span>
+                                <input type="text" class="form-control" id="operation_name" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Ngày</span>
+                                <input type="text" class="form-control" id="date" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Chỉ tiêu</span>
+                                <input type="text" class="form-control" id="float_eff" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Thực tế</span>
+                                <input type="text" class="form-control" id="tagets">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary" onclick = "saveTagetsFloatEff()">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

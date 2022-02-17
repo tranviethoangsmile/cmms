@@ -4,38 +4,19 @@
             <tr>
                 <th>ID</th>
                 <th>Họ và Tên</th>
-                <th>Tuần vào</th>
+                <th>Bộ phận</th>
                 <th>Nhóm chuyền</th>
-                <th>Công đoạn</th>
                 <th>Ca</th>
-
-                
             </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: white;">
 
         </tbody>
     </table>
 </div>
-<style>
-    .table-cont {
-        /**make table can scroll**/
-        max-height: 800px;
-        overflow: auto;
-        /** add some style**/
-        /*padding: 2px;*/
-        background: #ddd;
-        margin: 20px 10px;
-        box-shadow: 0 0 1px 3px #ddd;
-    }
 
-    thead {
-        background-color: #ddd;
-    }
-
-    table {
-        border: 1px solid black;
-        font-weight: bold;
-        font-size: 1vw;
-    }
-</style>
+<!-- query get data -->
+<!-- SELECT t1.ID,t1.Name, t1.Line, t1.StartDate, t1.Shift,t2.FLOAT_EFF, t2.OPERATION_NAME FROM (SELECT * FROM ERPSYSTEM.setup_emplist a -->
+<!-- WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND ML ='') t1 -->
+<!-- LEFT JOIN  (SELECT * FROM linebalancing.bundle_group_by_employee_detail l WHERE (l.FLOAT_EFF < 350) AND DATE = "20220210") t2 -->
+ <!-- ON RIGHT(t1.ID,5)=t2.EMPLOYEE -->

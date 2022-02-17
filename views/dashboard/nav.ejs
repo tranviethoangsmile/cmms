@@ -28,12 +28,29 @@
 </nav>
 
 <style>
-  thead {
-    background-color: white;
-  }
+ .table-cont {
+        /**make table can scroll**/
+        max-height: 800px;
+        overflow: auto;
+        /** add some style**/
+        /*padding: 2px;*/
+        background: #ddd;
+        margin: 20px 10px;
+        box-shadow: 0 0 1px 3px #ddd;
+    }
+
+    thead {
+        background-color: #ddd;
+    }
 
   .error {
     color: red;
+  }
+
+  table {
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 1vw;
   }
 
   .form-control {

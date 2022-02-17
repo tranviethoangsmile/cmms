@@ -86,6 +86,19 @@ var connect_hrsystem = mysql.createPool({
     database: "hrsystem"
 })
 
+var connect_amt = mysql.createPool({
+    connectionLimit: 30,
+
+    host: "pbvweb01v",
+
+    user: "intern",
+
+    password: "intern21",
+
+    database: "amt"
+})
+
+
 
 // end AMT
 
@@ -109,18 +122,49 @@ module.exports = function (app, passport) {
             note: req.user[0].note
         });
     })
+
     app.get('/api/v1/getamtdata', (req,res) => {
         connect_hrsystem.getConnection((err,data) => {
             if(err) throw err;
-            var sql_data = `SELECT * FROM ERPSYSTEM.setup_emplist a
+            let sql_data = `SELECT * FROM ERPSYSTEM.setup_emplist a
             WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND ML =''`;
             data.query(sql_data, (err, employeeList) => {
                 if(err) throw err;
                 data.release();
-                console.log('data',employeeList);
                 res.send(employeeList);
             })
         })
+    })
+
+
+    app.get('/api/v1/getemployeedetail/:tagId', (req, res) => {
+        connect_hrsystem.getConnection((err,data) => {
+            let id = req.params.tagId;
+            console.log(id)
+            if(err) throw err;
+            let sql_data = `SELECT t1.ID,t1.Name, t1.Line, t1.StartDate, t1.Shift,t2.FLOAT_EFF, t2.OPERATION_NAME,t2.DATE FROM (SELECT * FROM ERPSYSTEM.setup_emplist a
+                WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND ML ='' AND a.ID = ${id}) t1
+                LEFT JOIN  (SELECT * FROM linebalancing.bundle_group_by_employee_detail l WHERE (l.FLOAT_EFF < 350) AND DATE = "20220210") t2
+                ON RIGHT(t1.ID,5)=t2.EMPLOYEE`;
+                 data.query(sql_data, (err,employeeDetail) => {
+                     if (err) throw err;
+                     data.release();
+                     console.log("employeeDetail",employeeDetail);
+                     res.send(employeeDetail);
+                 })
+        })
+    })
+
+    app.post('/api/v1/employeetagetstracking/', (req, res) => {   
+        connect_amt.getConnection((err, data) => {
+            let ID = req.body.ID;
+            let OPERATION_NAME = req.body.OPERATION_NAME;
+            let TAGETS = req.body.TAGETS;
+            let DATE = req.body.DATE;
+            if(err) throw err;
+            let sql_data = ``
+        })
+
     })
 
 
