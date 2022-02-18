@@ -26,19 +26,20 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "/api/v1/getamtdata",
+            url: "/api/amt/getamtdata",
             type: "GET",
         }).done((data) => {
             console.log(data);
             $.each(data, (index, item) => {
                 $("#amt_data tbody").append(
                     `
-                <tr ondblclick="emloyeeDetail(${item.ID})">
+                <tr ondblclick="emloyeeOption(${item.ID})">
                     <td>${item.ID}</td>
                     <td>${item.Name}</td>
                     <td>${item.Dept}</td>
                     <td>${item.Line}</td>
                     <td>${item.Shift}</td>
+                    <td><button class="btn btn-outline-success">Chi tiết</button</td>
                 </tr>
                  `
                 );
@@ -49,50 +50,100 @@
     }
 
 
-    emloyeeDetail = (id) => {
+    emloyeeOption = (id) => {
         $("#employee_detail").modal('show')
-      $.ajax({
-        headers: {
+        $.ajax({
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "/api/v1/getemployeedetail/" + id,
+            url: "/api/amt/getemployeedetail/" + id,
             type: "GET",
-      }).done((data) =>{
-          $.each(data, (index,item) => {
-              $("#id_employee").val(`${item.ID}`);
-              $("#name_employee").val(`${item.Name}`);
-              $("#shift_employee").val(`${item.Shift}`)
-              $("#line_employee").val(`${item.Line}`);
-              $("#operation_name").val(`${item.OPERATION_NAME}`);
-              $("#float_eff").val(`${item.FLOAT_EFF}`);
-              $("#date").val(`${item.DATE}`);
-          })
-      }).fail((e) => {
-          console.log("fail",e)
-      })
+        }).done((data) => {
+            $.each(data, (index, item) => {
+                $("#id_employee").val(`${item.ID}`);
+                $("#name_employee").val(`${item.Name}`);
+                $("#shift_employee").val(`${item.Shift}`)
+                $("#line_employee").val(`${item.Line}`);
+            })
+        }).fail((e) => {
+            console.log("fail", e)
+        })
     }
 
-    saveTagetsFloatEff = () => {
-        let employeetagetstracking = {
-            ID : $("#id_employee").val(),
+    saveChangeInfomationOffEmployee = () => {
+        let employee_detail = {
+            ID: $("#id_employee").val(),
             OPERATION_NAME: $("#operation_name").val(),
-            TAGETS: $("#tagets").val(),
-            DATE: $("#date").val(),
+            TIME_TRAINING: $("#time_training").val(),
+            REDUCE_DATE: $("#reduce_date").val(),
+            NOTE: $("#note").val()
+        }
+        if (employee_detail.OPERATION_NAME == '' || employee_detail.TIME_TRAINING == '' || employee_detail.REDUCE_DATE == '') {
+            if (employee_detail.OPERATION_NAME == '') {
+                $("#operation_name").val('Không được bỏ trống..');
+            } else if (employee_detail.TIME_TRAINING == '') {
+                $("#time_training").val('Không được bỏ trống..');
+            } else if (employee_detail.REDUCE_DATE == '') {
+                $("#reduce_date").val('Không được bỏ trống..')
+            }
+            $.notify('Vui lòng nhập đầy đủ thông tin', 'error')
+            return;
         }
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "/api/v1/employeetagetstracking/",
+            url: "/api/amt/updateemployeedetail",
             type: "POST",
-            data: JSON.stringify(employeetagetstracking)
-        }).done((data) => {
-            console.log(data)
-        }).fail((err) => {
-            console.log("ERROR",err)
+            data: JSON.stringify(employee_detail)
+        }).done((date) => {
+            if (date.status == '404') {
+                $.notify('Cập nhật không thành công', 'error')
+            } else {
+                $.notify('Cập nhậ thành công', 'success')
+                $("#operation_name").val(''),
+                    $("#time_training").val(''),
+                    $("#reduce_date").val(''),
+                    $("#note").val('')
+                $("#employee_detail").modal('hide');
+            }
+        }).fail((e) => {
+            console.log('fail: >>', e)
         })
+
     }
 
+    option_detail = () => {
+        $("#option_detail").modal("show");
+    }
+
+    updload_file = () => {
+        var form = document.getElementById('upload_file_tagets');
+        if (document.getElementById('tagets_file').value != '') {
+            event.preventDefault();
+            var xsend = new XMLHttpRequest();
+            var fileInput = document.getElementById('tagets_file');
+            var file;
+            file = fileInput.files[0];
+            console.log(file['name']);
+            var formData = new FormData();
+            formData.append('filee', file);
+            if (file != null) {
+                xsend.open('POST', '/api/amt/uploadfiletagetstrainingtracking', true);
+                xsend.send(formData);
+                xsend.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = this.responseText;
+                        if (data == "finishupspare") {
+                            alert("Tải file lên thành công!!!");
+                        }
+                    }
+                }
+            }
+        } else {
+            alert("Không có tệp nào được chọn!!!")
+        }
+    }
 </script>

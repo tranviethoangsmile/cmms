@@ -2,16 +2,10 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thay đổi thông tin</h5>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="date_custom">Ngày</label>
-                            <input type="date" id="date_custom" class="form-control">
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="col-md-12">
@@ -33,20 +27,20 @@
                         </div>
                         <div class="col-6">
                             <div class="col-md-12">
-                                <span>Công đoạn</span>
-                                <input type="text" class="form-control" id="operation_name" disabled>
+                                <span>Công đoạn:</span>
+                                <input type="text" class="form-control" id="operation_name" required>
                             </div>
                             <div class="col-md-12">
-                                <span>Ngày</span>
-                                <input type="text" class="form-control" id="date" disabled>
+                                <span>Thời gian đào tạo:</span>
+                                <input type="text" class="form-control" id="time_training" required>
                             </div>
                             <div class="col-md-12">
-                                <span>Chỉ tiêu</span>
-                                <input type="text" class="form-control" id="float_eff" disabled>
+                                <span>Ngày thay đổi:</span>
+                                <input type="text" class="form-control" id="reduce_date"required>
                             </div>
                             <div class="col-md-12">
-                                <span>Thực tế</span>
-                                <input type="text" class="form-control" id="tagets">
+                                <span>Ghi chú:</span>
+                                <input type="text" class="form-control" id="note" required>
                             </div> 
                         </div>
                     </div>
@@ -55,10 +49,10 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-secondary" onclick="() => {$(this).modal('hide')}" data-bs-dismiss="modal">Hủy</button>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary" onclick = "saveTagetsFloatEff()">Lưu</button>
+                        <button type="button" class="btn btn-primary" onclick = "saveChangeInfomationOffEmployee()">Lưu</button>
                     </div>
                 </div>
             </div>
