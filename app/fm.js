@@ -146,7 +146,7 @@ module.exports = function (app, passport) {
     })
 
 
-    app.get('/api/amt/getemployeedetail/:tagId', (req, res) => {
+    app.get('/api/amt/getemployeeoption/:tagId', (req, res) => {
         let today = new Date();
         let year = today.getFullYear();
         let month = today.getMonth();
@@ -155,10 +155,8 @@ module.exports = function (app, passport) {
         connect_hrsystem.getConnection((err, data) => {
             let id = req.params.tagId;
             if (err) throw err;
-            let sql_data = `SELECT t1.ID,t1.Name, t1.Line, t1.StartDate, t1.Shift,t2.FLOAT_EFF, t2.OPERATION_NAME,t2.DATE FROM (SELECT * FROM ERPSYSTEM.setup_emplist a
-                WHERE a.StartDate >'2022-01-09' AND a.Dept='AMTPR' AND ML ='' AND a.ID = ${id}) t1
-                LEFT JOIN  (SELECT * FROM linebalancing.bundle_group_by_employee_detail l WHERE (l.FLOAT_EFF < 350) AND DATE = "20220218") t2
-                ON RIGHT(t1.ID,5)=t2.EMPLOYEE`;
+            let sql_data = `SELECT a.ID, a.Name, a.Line, a.StartDate, a.Shift FROM ERPSYSTEM.setup_emplist a
+                WHERE a.ID = '${id}'`;
             data.query(sql_data, (err, employeeDetail) => {
                 if (err) throw err;
                 data.release();

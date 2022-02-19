@@ -76,7 +76,8 @@ $(document).ready(() => {
     formm.addEventListener('submit', e => { e.preventDefault(); return false; })
 
     document.getElementById('submit').addEventListener('click', function () {
-      document.getElementById("loadd").style.display = 'block';
+      console.log('loading...')
+      // document.getElementById("loadd").style.display = 'block';
       var form = document.getElementById('upload_formm');
       if (document.getElementById('filee').value != '') {
         event.preventDefault();

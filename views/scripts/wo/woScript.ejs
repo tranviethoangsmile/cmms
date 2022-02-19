@@ -218,6 +218,7 @@
       xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
           var data = JSON.parse (this.responseText);
+          console.log(data);
           if (data.length>0){
           document.getElementById("staffreq").value=data[0].user_req;
           document.getElementById("typereq").value=data[0].type_req;
@@ -314,7 +315,7 @@
         var departreq= document.getElementById("departreq").value;
         var staffreq=document.getElementById("staffreq").value;
         var typereq= document.getElementById("typereq").value;
-        var typeeq= "";
+        var typeeq= $("#hideeq").val();
         var contentreq= document.getElementById("contentreq").value;
         var placereq= document.getElementById("placereq").value;
         // var procer= "";
@@ -349,7 +350,7 @@
                 showConfirmButton: false,
                 timer: 1500
               })
-                location.reload();
+              loaddata()
             } else {
                 alert("Có lỗi rồi!!!");
             }
@@ -359,6 +360,9 @@
         // console.log(data);
         xmlhttp.send(JSON.stringify(data));
     })
+
+
+
               
     document.getElementById('btdelete').addEventListener('click', function() {
           var r = confirm("Bạn có chắc muốn xóa không???");

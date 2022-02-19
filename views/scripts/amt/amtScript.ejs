@@ -39,7 +39,7 @@
                     <td>${item.Dept}</td>
                     <td>${item.Line}</td>
                     <td>${item.Shift}</td>
-                    <td><button class="btn btn-outline-success">Chi tiết</button</td>
+                    <td><button onclick="employeeDetail(${item.ID})" class="btn btn-outline-success">Chi tiết</button</td>
                 </tr>
                  `
                 );
@@ -49,15 +49,19 @@
         })
     }
 
+    employeeDetail = (id) => {
+        $("#employee_detail").modal('show');
+    }
+
 
     emloyeeOption = (id) => {
-        $("#employee_detail").modal('show')
+        $("#employee_change_info").modal('show')
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "/api/amt/getemployeedetail/" + id,
+            url: "/api/amt/getemployeeoption/" + id,
             type: "GET",
         }).done((data) => {
             $.each(data, (index, item) => {
@@ -115,8 +119,8 @@
 
     }
 
-    option_detail = () => {
-        $("#option_detail").modal("show");
+    handle_file = () => {
+        $("#handle_file").modal("show");
     }
 
     updload_file = () => {

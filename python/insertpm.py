@@ -35,7 +35,7 @@ myCursor=mydb.cursor()
 ds=[]   
 #filename='C:\\CMMS\\public\\sche\\nhtonkế hoạch bảo trì 2022.xlsx'
 
-filename='C:\\CMMS\\public\\sche\\'+sys.argv[1]
+filename='C:\\Users\\ngmai1\\Desktop\\cmms\\public\\sche\\'+sys.argv[1]
 ds=pd.read_excel(filename)
 import re
 
