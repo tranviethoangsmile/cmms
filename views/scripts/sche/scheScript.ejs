@@ -76,7 +76,7 @@ $(document).ready(() => {
     formm.addEventListener('submit', e => { e.preventDefault(); return false; })
 
     document.getElementById('submit').addEventListener('click', function () {
-      console.log('loading...')
+      $.notify('xử lý file có thể mất thời gian 1 phút.. vui lòng đợi.....')
       // document.getElementById("loadd").style.display = 'block';
       var form = document.getElementById('upload_formm');
       if (document.getElementById('filee').value != '') {
@@ -96,9 +96,9 @@ $(document).ready(() => {
             if (this.readyState == 4 && this.status == 200) {
               var data = this.responseText;
               if (data == "finishupm") {
-                alert("Tải file lên thành công!!!");
+                $.notify('tải file thành công', 'success')
                 document.getElementById("filee").value = "";
-                document.getElementById("id03").style.display = "none";
+                $("#id03").modal('hide');
                 loaddata();
               }
             }

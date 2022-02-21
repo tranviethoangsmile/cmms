@@ -110,7 +110,8 @@ module.exports = function (app, passport) {
 
 
 
-    // AMT START
+// ============================================AMT START=======================================//
+
 
     var amt_storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -132,6 +133,7 @@ module.exports = function (app, passport) {
         });
     })
 
+    // get data display on screen
     app.get('/api/amt/getamtdata', (req, res) => {
         connect_hrsystem.getConnection((err, data) => {
             if (err) throw err;
@@ -145,7 +147,52 @@ module.exports = function (app, passport) {
         })
     })
 
+    // get style detail
+    app.get('/api/amt/getstyledetail', (req,res) => {
+        connect_amt.getConnection((err, data) => {
+            if(err) throw err;
+            let sql_data = `SELECT DISTINCT STYLE_DETAIL FROM linebalancing.bundle_group_by_employee_detail b WHERE b.STYLE_DETAIL != 'NULL'`;
+            data.query(sql_data, (err, styleDetailList) => {
+                if(err) throw err;
+                data.release();
+                res.send(styleDetailList);
+            })
+        })
+    })
 
+// get employee detail by ID
+    app.get('/api/amt/getemployeedetail/:tagId', (req,res) => {
+        let id = req.params.tagId
+        connect_amt.getConnection((err,data) => {
+            if(err) throw err
+            let sql_data = `SELECT t1.ID, t1.Name, t1.Line, t1.StartDate, t1.Shift, t2.OPERATION_NAME, t2.TIME_TRAINING, t2.REDUCE_DATE, t2.NOTE FROM (SELECT a.ID, a.Name, a.Line, a.StartDate, a.Shift FROM ERPSYSTEM.setup_emplist a
+                WHERE a.ID = '${id}')t1
+                LEFT JOIN (SELECT * FROM amt.amt_tracking a WHERE a.ID = '${id}')t2
+                ON t2.ID = t1.ID`
+            data.query(sql_data, (err, employeeData) => {
+                if(err) throw err;
+                data.release();
+                res.send(employeeData);
+            })
+        }) 
+    })
+
+    // get operation name
+    app.get('/api/amt/getoperationname/:style', (req,res) => {
+        let STYLE_DETAIL = req.params.style;
+        console.log(STYLE_DETAIL);
+        connect_amt.getConnection((err, operationNameList) => {
+            if(err) throw err;
+            let sql_data = `SELECT DISTINCT OPERATION_NAME FROM linebalancing.bundle_group_by_employee_detail b WHERE b.STYLE_DETAIL != 'NULL' AND b.STYLE_DETAIL = '${STYLE_DETAIL}' AND b.OPERATION_NAME != 'null'`
+            operationNameList.query(sql_data, (err, operationList) => {
+               if(err) throw err;
+               operationNameList.release();
+               res.send(operationList);
+            })
+        })
+    })
+
+    // get employee detail then change info
     app.get('/api/amt/getemployeeoption/:tagId', (req, res) => {
         let today = new Date();
         let year = today.getFullYear();
@@ -166,6 +213,7 @@ module.exports = function (app, passport) {
         })
     })
 
+    // upload file
     app.post('/api/amt/uploadfiletagetstrainingtracking', function (req, res) {
         // var dt = datetime.create();
         // var format_date = dt.format("YmdHMS");
@@ -198,6 +246,7 @@ module.exports = function (app, passport) {
     });
 
 
+    // update employee detail
     app.post('/api/amt/updateemployeedetail', (req, res) => {
         connect_amt.getConnection((err, data) => {
             if (err) throw err;
@@ -230,9 +279,8 @@ module.exports = function (app, passport) {
 
 
 
-
-    // AMT END
-
+// ============================================AMT END=======================================//
+  
     app.get('/login', function (req, res) {
         res.render('login.ejs', { message: req.flash('loginMessage') });
     })

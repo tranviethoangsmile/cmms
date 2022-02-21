@@ -71,7 +71,7 @@ def update_wo():
         mydb.commit()
     # print(result)
 update_wo()
-schedule.every().saturday.at("16:35").do(update_wo)
+schedule.every().monday.at("9:21").do(update_wo)
 # schedule.every().day.at("12:00").do(update_wo)
 print(datetime.datetime.now())
 print('shedule start')
